@@ -1,0 +1,434 @@
+Metadata-Version: 2.4
+Name: trapsig
+Version: 0.1.0
+Summary: Leakage-safe, reproducible analysis of trapping/translocation time-series signals.
+Author: trapsig contributors
+License: UNLICENSED - to be decided by the project owner
+Keywords: signal-processing,time-series,reproducibility,cross-validation
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: numpy>=1.24
+Requires-Dist: scipy>=1.11
+Requires-Dist: scikit-learn>=1.3
+Requires-Dist: PyYAML>=6.0
+Requires-Dist: matplotlib>=3.7
+Provides-Extra: dev
+Requires-Dist: pytest>=7.4; extra == "dev"
+Requires-Dist: ruff>=0.5; extra == "dev"
+Requires-Dist: mypy>=1.10; extra == "dev"
+Provides-Extra: deep
+Requires-Dist: torch>=2.0; extra == "deep"
+Provides-Extra: explain-report
+Requires-Dist: shap>=0.44; extra == "explain-report"
+Requires-Dist: reportlab>=4.0; extra == "explain-report"
+Provides-Extra: full
+Requires-Dist: torch>=2.0; extra == "full"
+Requires-Dist: shap>=0.44; extra == "full"
+Requires-Dist: reportlab>=4.0; extra == "full"
+
+# trapsig
+
+Reproducible, leakage-safe classification of trapping/translocation time-series signals,
+implemented against the project design (`design/TECHNICAL_DESIGN_AND_DATA_AUDIT.md`).
+
+The pipeline takes raw recordings, detects events, extracts label-blind features and
+event windows, and trains a **hybrid** model: Model A (conventional ML on features),
+Model B (a compact 1D residual CNN on event windows), and a fixed convex blend of the two.
+Everything else in the design's deliverable list flows from that: leakage-safe grouped
+cross-validation, a unified metric engine, explainability with mandatory shortcut probes,
+conditional few-shot / semi-supervised / novelty / clustering analyses, figures, CSV
+rollups, and a PDF report.
+
+**Status: research code (0.1.0).** All demonstrations use clearly labelled SYNTHETIC data.
+On your own data every number is exploratory until an independent validation set exists.
+
+## One command
+
+```bash
+python3 -m pip install -e ".[dev]"          # core + Model A
+python3 -m pip install -e ".[full]"         # + torch (Model B / hybrid), shap (TreeSHAP), reportlab (PDF)
+
+# 1. Check your configuration and data, and see the estimated runtime. Processes nothing.
+trapsig run --config configs/custom_dat.yaml --dry-run
+
+# 2. Run everything: check, prepare, train, validate, explain, plot, report.
+trapsig run --config configs/custom_dat.yaml
+
+# Optional fast smoke test first (~minutes): 2 repeats, no permutations, few epochs.
+#   trapsig run --config configs/custom_dat.yaml --quick
+
+# Score new recordings with the models a finished run saved (sidecar-checked):
+#   trapsig predict --run runs/train_<ts> --model logreg --input-dir /path/to/new/dat
+trapsig run --config configs/custom_dat.yaml --quick
+```
+
+`trapsig run` calls the individual stages in order, so you never have to remember them:
+
+| Stage inside `run` | What it does | Main outputs |
+|---|---|---|
+| 1 preflight | 26 checks on configuration and data; nothing is processed | `preflight_report.{json,csv}`, `budget_estimate.json`, `metadata.{csv,json}` |
+| 2 prepare | manifest, SHA-256s, symlinks, grouped stratified repeated folds | `data/manifests/`, `data/symlinks/`, `metadata.{csv,json}` |
+| 3 train | Model A + Model B + prototype head + fusion head + hybrid, repeated grouped CV, baselines, bootstrap, label-shuffle nulls, **feature-group ablation and redundancy report** | `features.csv`, `predictions.csv`, `metrics.csv`, `model_comparison.csv`, `windows.csv`, `ablation.csv`, `feature_redundancy.csv`, `summary.json`, `checkpoints/`, `logs/`, `metadata.{csv,json}` |
+| 4 explain | exact linear SHAP / TreeSHAP, Grad-CAM, integrated gradients, occlusion, **baseline-only shortcut probe**, time-shift null | `explainability.json`, `attributions.npz`, `attributions_summary.csv` |
+| 4 advanced | few-shot prototypical, confidence-aware pseudo-labelling, novelty, clustering (all gated, off by default) | `advanced_analyses.json` |
+| 5 report | figures, one CSV per PDF section, PDF with results + limitations + information gaps | `figures/`, `report_*.csv`, `report.pdf` |
+
+Useful flags on `run`: `--model-set features|deep|hybrid`, `--no-pdf`, `--no-explain`,
+`--from-prepared DIR` (reuse an existing prepare run), `--no-stages` (train only).
+The individual commands `dry-run`, `prepare`, `events`, and `train` still exist and behave
+exactly as before; `run` is simply those plus the downstream stages.
+Set `TRAPSIG_DEBUG=1` to get a full traceback when a run fails, in addition to the one-line reason.
+
+### Every run writes its own split record
+
+The folds are shuffled and re-drawn on every run, so the split belongs to the run and not to the
+configuration. `metadata.csv` and `metadata.json` are therefore written into **every** run
+directory — `dry-run`, `prepare`, and `train` — and the console prints where they went.
+
+`metadata.csv` has one row per **source** file (files in the pool, files outside it, and files that
+were skipped), with the manifest identity fields, this run's per-file outcome, and the split:
+
+| Column | Meaning |
+|---|---|
+| `in_cv_pool` | whether the file entered the cross-validation pool |
+| `status`, `reason` | this run's outcome for the file (`ok`, `skipped`, `failed`) and why |
+| `n_events`, `n_windows`, `model_b_scored` | detected events, usable windows, CNN prediction |
+| `fold_rN` | the fold the file belongs to in repeat N |
+| `role_rN` | `test` — it is the held-out file when that fold is evaluated (`not_in_pool` otherwise) |
+| `trains_in_folds_rN` | the folds of repeat N whose training set the file belongs to |
+| `cnn_inner_val_rN` | the folds of repeat N whose inner validation split drew this file |
+
+`metadata.json` adds the run-level provenance: seed, config fingerprint, repeats x folds, class
+counts, grouping policy, an explicit statement that the split is re-randomised per run, the role
+convention, and (for a training run) the prepared run it read the split from. Neither file is ever
+silently overwritten.
+
+### The PDF has a CSV twin for every section
+
+`report.pdf` is the readable form; the same content is written as one CSV per section, in the same
+order: `report_data_landscape.csv` (§1), `report_methods.csv` (§2), `report_results.csv` (§3,
+model rows plus the gate G7 row and permutation columns), `report_figures.csv` (§4),
+`report_explainability.csv` (§5), `report_advanced.csv` (§6), `report_limitations.csv` (§7),
+`report_information_gaps.csv` (§8), `report_reproducibility.csv` (§9), `report_ablation.csv`
+(§10: feature groups, ablation variants, redundant pairs). Each section heading in the PDF names its
+twin, and the CSV keeps the full un-wrapped text of every cell — what wraps across lines on the page
+is one field in the CSV. Table cells in the PDF have hard boundaries (fixed column widths,
+52 + 60 + 60 mm in §7, §8 and §10): long text wraps inside its own cell and tall rows continue on
+the next page instead of being cut.
+
+### The compute budget is measured, not assumed
+
+`--dry-run` times one or two of **your** real recordings on **your** machine and times one
+CNN training batch at the window length your configuration will actually produce. It then
+reports collection, Model A, permutation-null, and Model B costs separately, each with the
+basis it was measured on, plus the resolved window length and the CNN parameter count. For
+135 twenty-second 1 MHz files this is typically dominated by collection (a few minutes),
+then by the CNN (see the caveat printed with every estimate).
+
+## The architecture
+
+```
+raw .dat (1 MHz, 20 s)
+   │  notch at the original rate → anti-aliased staged decimation → optional filter
+   ▼
+analysed signal (10 kHz) + rolling-median baseline + hysteresis events   [label-blind]
+   ├──► Model A: 90 label-blind features in 10 groups (noise, time, amp, event, ctx,
+   │       spec, tf, acf, shape, morph) — groups chosen by training.feature_groups
+   │       → logreg (C by inner grouped CV) + random forest + HistGradientBoosting
+   ├──► Model B: fixed-length windows centred on events, baseline-subtracted,
+   │       scaled by the TRAINING-fold robust scale
+   │       → stem(strided conv) → residual dilated conv blocks → GAP → linear
+   │       (conv → GAP → linear is what makes Grad-CAM mathematically valid)
+   │       trained with cross-entropy + a metric-learning term (supcon | prototypical)
+   │       ▼
+   │   ONE frozen GAP embedding per fold, read four ways:
+   │       ├─ softmax head ──────────────► cnn1d
+   │       ├─ prototypes from the fold's INNER-VALIDATION files ──► proto_cnn
+   │       ├─ logistic head on [handcrafted features, mean embedding],
+   │       │   fitted on those same inner-validation files ───────► fusion
+   │       └─ the embedding itself ──► few-shot, pseudo-labelling, novelty, clustering
+   └──► hybrid: fixed convex blend of Model A and cnn1d, model_a_weight in configuration
+            files Model B cannot score (no usable event) fall back to Model A and are flagged
+   ▼
+file-level decisions, aggregated over repeats → metrics, bootstrap CIs, permutation nulls
+   ▼
+feature-group ablation (same folds, same files) + redundancy report → PDF §10
+```
+
+The learning strategies are one architecture, not ten models: a single encoder per fold, one
+representation, and every downstream strategy reading it. `docs/LEARNING_STRATEGIES.md` is the
+audit — what is implemented, what flows between the components, what contributes to the final
+prediction, what is deliberately absent and why.
+
+Rules that make the numbers trustworthy:
+
+- **Splits are file-level** (each file is its own group; no replicate metadata exists).
+  Group disjointness is asserted for every repeat. No holdout, because there are no
+  replicates to hold out; every summary says so.
+- **Nothing crosses a fold boundary.** Imputation, scaling, logreg `C`, CNN early stopping,
+  temperature scaling, the class prototypes, the fusion head, and the pseudo-label thresholds are
+  all fitted inside training folds — the prototypes and the fusion head on the fold's
+  inner-validation files, which the encoder never trained on.
+- **A file is scored only where every repeat scored it.** If the fusion head or the prototype head
+  could not score a file in some repeat, that file is excluded from the model's metrics rather than
+  averaged in over the repeats that did score it, and the exclusion is reported in `summary.json`.
+- **Exactly one imbalance rule** is active, chosen by the recorded ratio (threshold 1.5).
+- **Model B is compared to Model A on the matched subset** of files Model B can score, and
+  gate G7 (`Model B beats or matches Model A`) is decided there with CI overlap assessed.
+  When the intervals overlap the report says the models are indistinguishable and prefers
+  Model A, per the design.
+- **Files are skipped, never dropped.** A recording that is non-finite or flat stays in
+  `features.csv` with its reason and is excluded from the models.
+- **Anything that cannot be computed is reported as such**, with a reason, never as a number.
+- **Features are validated, not accumulated.** The ablation refits the declared model on each group
+  alone and on everything minus one group, on the same folds as the headline CV, so the differences
+  are paired. Near-duplicate features are reported in `feature_redundancy.csv` and **never
+  dropped**: dropping a column on the pooled matrix would use test-fold information.
+
+### Four-branch deep architecture (opt-in, additive)
+
+`quad.enabled: true` (default **false**) trains one integrated model alongside — never instead of —
+Model A/B: a learned temporal branch (dilated residual CNN + attention + transformer), a learned
+spectral branch on a fixed STFT front end, self-supervised pretraining (contrastive + masked
+reconstruction, training folds only), and 38 engineered window features, fused by cross-branch
+attention with reported gate weights, with a softmax head and a prototypical few-shot head.
+Paired branch ablations (`quad.branch_ablation`), extended metrics (`metrics_extended.csv`),
+few-shot episodes with Wilson CIs (`fewshot_episodes.csv`), a 67-entry visualization registry
+(`viz_registry_index.csv`), and PDF sections 11–14 come with it. Full design, leakage contract and
+honest scope: [`docs/QUAD_ARCHITECTURE.md`](docs/QUAD_ARCHITECTURE.md). Every knob is documented in
+`configs/custom_dat.yaml`, including the sampling-rate menu (`sampling.rate_menu_hz`) that keeps
+acquisition rate and analysis rate distinct.
+
+### Round 3: raw per-file figures and scientific visualization coverage
+
+When figures are enabled, every discovered recording gets its own original-source full-recording
+waveform plot under `runs/<task>/figures/files/<actual-class-label>/<sample_id>_<filename>_raw.png`.
+Long traces use a display-only min/max envelope to preserve spikes without loading all plot points;
+source samples are not filtered or altered. `figures/files/raw_file_figures_index.csv` records
+successes and skipped/failed inputs. The additive registry now has 106 spec-tagged builders (173
+total entries), and the per-event measurements are exported to `events_table.csv`. The complete
+behavior, scientific caveats, prerequisites, and 168-item coverage interpretation are in
+[`docs/VISUALIZATION_ROUND3.md`](docs/VISUALIZATION_ROUND3.md).
+
+### Round 2: the configurable feature registry (opt-in depth, same defaults)
+
+Branch D's engineered vocabulary now comes from `src/trapsig/featreg.py`: **154 registered
+candidates** across 11 column families (time stats, energy/amplitude, envelope, dynamics,
+peaks/events/change-points, quality, spectral, time-frequency, entropy & nonlinear dynamics,
+AR/cepstral/MFCC/multitaper, SSA/EMD/VMD decomposition) plus learned representations as the 12th
+family (branches A–C), organised in three tiers — 57 mandatory, 76 recommended, 21 experimental.
+Select with `quad.feature_tiers` / `quad.feature_families`; the full registry with names,
+descriptions, units and parameters is exported per run to `feature_registry.csv`, and
+recording-level summaries (`_rec_mean`/`_rec_sd`) to `recording_feature_summary.csv`. Column
+selection is **training-fold only** (`quad.feature_select: variance`), and the legacy 38 ids stay
+an exact subset at tiers [1, 2]. Robustness add-ons, all default-off: `triplet_weight`,
+`lr_schedule` (cosine/step), `early_stopping_patience`, per-fold checkpoints under
+`checkpoints/`, the `open_set_msp_threshold` unknown-class diagnostic
+(`quad_open_set_flags.csv`), and Cohen's kappa + micro/macro/weighted averages in
+`metrics_extended.csv`. Details and the STFT-vs-wavelet trade-off table:
+[`docs/QUAD_ARCHITECTURE.md`](docs/QUAD_ARCHITECTURE.md) §11.
+
+## Deliverables (design §65)
+
+| Deliverable | Where |
+|---|---|
+| Modular Python project | `src/trapsig/`, one module per concern |
+| YAML configuration, strict and validated | `config.py`; unknown keys are rejected |
+| Data-audit + dry-run/preflight | `preflight.py` (P01–P26), `ingest.py`, `inspect-dat` |
+| Symlink dataset manager + master manifest | `symlinks.py`, `manifest.py` |
+| Leakage-safe grouped CV + valid resampling | `splits.py`, `resample.py` |
+| LPF / Gaussian / combined filtering | `filters.py` |
+| Baseline and detrending analysis | `events.py` (rolling median), features |
+| Event detection | `events.py` (hysteresis, ΔI/I₀ with I₀ source recorded) |
+| Signal-derived features | `features.py` |
+| Conventional ML baseline (Model A) | `train.py` |
+| Deep-learning model (Model B) | `deep.py` |
+| Hybrid combination | `hybrid.py` |
+| Representation / metric learning | out-of-fold GAP embeddings (`advanced.file_representation`), prototypical heads |
+| Few-shot learning | `advanced.few_shot_prototypical` (setting (b), K configurable, SKIPPED with reason when K is infeasible) |
+| Semi-supervised + confidence-aware pseudo-labelling | `advanced.semi_supervised` (inductive, τ and δ thresholds, skew rejection, ≤ 2 rounds, retrained from scratch) |
+| Optional clustering | `advanced.clustering_analysis` (bootstrap Jaccard stability; ARI/NMI as diagnostics only) |
+| Novelty / unknown-class detection | `advanced.novelty_detection` (honestly "not evaluable" without an unknown class; leave-one-class-out as a labelled diagnostic) |
+| Unified metric engine | `metrics.py` (applicability declared) |
+| Automated training logs | `logs/deep_training_log.jsonl` (per epoch: losses, metrics, LR, timings, batch, window length, parameters, device) |
+| Checkpoint management | `checkpoints/cnn1d_*_e<epoch>_val<score>.pt` with config fingerprint |
+| ML visualization | confusion, ROC, calibration, learning curves, model comparison with CIs, embedding PCA |
+| Scientific signal visualization | analysed trace with events, class-mean event window, band power by class |
+| Explainability framework + SHAP + temporal attribution | `explain.py`: exact linear SHAP, TreeSHAP, Grad-CAM, integrated gradients, occlusion |
+| Mandatory shortcut probes | baseline-only probe, time-shift null (`explain.shortcut_probes`) |
+| Model-comparison framework | `hybrid.build_comparison`, `model_comparison.csv`, gate G7 |
+| Statistical uncertainty | file-level bootstrap CIs, repeated CV, label-shuffle nulls |
+| CSV reporting | one CSV per PDF section (`report_*.csv`), plus `metrics.csv`, `predictions.csv`, `features.csv` |
+| PDF reporting | `report.py` → `report.pdf` |
+| Dataset landscape documentation | preflight report, `report.pdf` §1, `windows.csv`, `ignored_files.csv` |
+| Information-gap analysis | `report_information_gaps.csv`, `report.pdf` §8 |
+| Contribution analysis | per-feature mean |SHAP| per class, per-segment temporal attribution |
+| Per-run split metadata | `metadata.py` → `metadata.csv` + `metadata.json` in every run directory (dry-run, prepare, train) |
+| Reproducibility metadata | `config_used.yaml`, fingerprints, `capture_environment`, seeds recorded everywhere |
+| Limitations and safeguards | `report_limitations.csv`, `report.pdf` §7, and this README |
+
+## Scientific safeguards built in
+
+- **Grouped, stratified, repeated cross-validation.** Rows sharing a replicate or session
+  always fall on the same side of a split; this is asserted per repeat.
+- **File-level grouping requires explicit opt-in** (`allow_file_level_fallback`) because it
+  yields optimistic estimates. This dataset has no replicate metadata, so the opt-in is set
+  and every output repeats the caveat.
+- **Source files are never copied or modified.** Manifests reference originals by path and
+  SHA-256; symlinks are verified after creation.
+- **Mains notch before decimation**, and anti-alias suppression is measured, not assumed.
+- **Event detection is label-blind** and reports detected events, not molecular events.
+- **Explanations never choose models.** Explainability runs after the model is frozen.
+- **The baseline-only probe is the most important output of explainability.** If pre-event
+  baseline alone predicts the class, the model is reading an acquisition artefact.
+- **Test-data hygiene by construction.** Synthetic ground truth is written separately and the
+  pipeline never reads it.
+
+## Custom `.dat` data
+
+Your recordings are `.dat` files, one 20 s recording per file, with the class given by the
+name of the top-level folder that contains it. Folder names are never hardcoded: any folder
+name under `source_dir` becomes a class.
+
+```
+<source_dir>/
+    <class_1>/  recording_001.dat  ...
+    <class_2>/  recording_101.dat  ...
+```
+
+**Step 1. Identify the binary layout from one real file (read-only):**
+
+```bash
+trapsig inspect-dat --file "<source_dir>/<class_1>/recording_001.dat" --rate-hz 1000000 --duration-s 20
+```
+
+It lists every layout (dtype, byte order, columns, header size) the file size allows, with
+the first values of each. Pick the physically plausible one. The size narrows the choice but
+does not decide it, so this needs your judgement. Nothing is written.
+
+**Step 2.** Put the layout in `configs/custom_dat.yaml` under `data.dat`, and set
+`data.source_dir`, `sampling.original_hz`, and `expected_duration_s`.
+
+**Step 3.** `trapsig run --config configs/custom_dat.yaml --dry-run`, then without `--dry-run`.
+
+**Replicate IDs.** None exist for this dataset, so each file is its own group and estimates
+are optimistic. If replicate or session IDs appear later, add a metadata CSV
+(`file,class,replicate_id[,session_id]`), set `data.metadata_csv` and `data.label_from:
+metadata`, and set the fallback back to `false`. Nothing else changes.
+
+**Per-file assessment.** Every file is assessed individually: `per_file_summary.csv` keeps
+skipped recordings with their reason instead of dropping them, and `ignored_files.csv` lists
+files the glob did not match (your `.png` plots and extensionless files).
+
+**Model B windows.** A file whose events all fall too close to the recording edge yields no
+window; Model B reports it and the hybrid falls back to Model A for it, flagged in
+`predictions.csv` (`hybrid_source`). The label-noise rate (files with zero usable events) is
+reported, per the design.
+
+**Testing without your data.** The synthetic generator writes the same layout:
+
+```bash
+python3 -m trapsig.synthetic_cli --out data/CUSTOM_demo --format dat --class-folders \
+    --duration-s 0.5 --fs-hz 100000
+trapsig run --config configs/demo_custom_dat.yaml --quick
+```
+
+That configuration uses the file-level fallback on purpose, because synthetic files have no
+replicate IDs. Its results test the program; they say nothing about your data.
+
+## Repository layout
+
+```
+configs/     custom_dat.yaml (your data), demo_custom_dat.yaml (synthetic)
+docs/        METHODS.md (what each stage does and why), ARCHITECTURE.md
+src/trapsig/
+  config.py     typed strict YAML config; validate_config + validate_modelling
+  ingest.py     .dat/.npy/.csv readers with header and content checks
+  manifest.py   discovery, grouping, hashing, duplicates, manifest
+  symlinks.py   verified symlink split layout with manifest-only fallback
+  splits.py     grouped stratified repeated K-fold with leakage assertions
+  preflight.py  checks P01–P26
+  resample.py   staged anti-aliased integer decimation + verification
+  filters.py    LPF, Gaussian, notch; FilterSpec with figure labels
+  events.py     robust noise, rolling baseline, hysteresis detector, Ton/Toff
+  pipeline.py   per-recording order: notch → decimate → filter → baseline → events
+  features.py   label-blind per-file features
+  windows.py    event-window extraction; leakage-safe robust scaling
+  deep.py       Model B: 1D residual dilated CNN, training protocol, temperature scaling
+  hybrid.py     window→file aggregation, blend, comparison framework, gate G7
+  train.py      orchestration of Model A + Model B + hybrid
+  metadata.py   per-run split record: metadata.csv + metadata.json in every run directory
+  explain.py    SHAP / Grad-CAM / integrated gradients / occlusion / shortcut probes
+  advanced.py   few-shot, semi-supervised, novelty, clustering (gated)
+  viz.py        scientific and ML figures
+  report.py     the PDF and its per-section CSV twins
+  stages.py     post-training stages wired into the training process
+  metrics.py    metric engine with applicability
+  runs.py       run directories, environment capture, exclusive writes
+  synthetic.py  SYNTHETIC demonstration data with ground truth
+  cli.py        command-line interface, including `run`
+tests/       212 tests (unit, property-style, end-to-end on synthetic data)
+```
+
+## Development
+
+```bash
+make dev        # install with dev tools
+make check      # ruff + mypy + pytest
+```
+
+## Hyperparameters, inference, figures
+
+- `training.hpo` (`none|random|halving`) + `training.hpo_metric/hpo_n_iter/hpo_seed_offset` and
+  `deep.hpo_trials` + `deep.hpo_space_*` run a *nested* search inside each outer training fold;
+  every trial is a row of `hpo_trials.csv`, failures included, and `summary["hpo"]` aggregates it.
+- `training.save_models` (default true) writes each fitted Model A fold pipeline to `models/`
+  with a JSON sidecar; `trapsig predict` loads only through that sidecar.
+- `figures_index.csv` lists every figure category the run requested with its generation status
+  and reason; the data figures have CSV twins (`report_dataset_composition.csv`, ...).
+- `requirements.txt` and `environment.yml` pin the executed environment; reportlab, torch and
+  shap are optional and their absence is recorded, never silent.
+
+## What is deliberately not implemented
+
+- **Holdout test set and the test-access ledger.** No replicate or session metadata exists,
+  so there is nothing to hold out. Every number is cross-validated and labelled as such.
+- **A combiner fitted by nested CV of both models.** `deep.fusion: stack` gets the same thing
+  more cheaply and still leakage-safe: one logistic regression per (repeat, fold) on the fold's
+  inner-validation files, whose embeddings already exist. The pre-declared convex blend is kept
+  alongside it so both combinations are on the record.
+- **PDF/CDF and censoring-aware dwell-time estimators.** PSD and ACF enter as features.
+- **Baseline/detrending candidate comparison with synthetic-event recovery scoring.**
+- **Chunked processing.** Each recording is loaded in full (about 80 MB at 1 MHz); the memory
+  check P20 refuses to run if the budget is exceeded.
+- **FDTD simulation, deconvolution, free-energy analysis, volume or structure inference.**
+  Out of scope pending physical parameters (design §13).
+- **Self-supervised pretraining (masked reconstruction, SimCLR).** Its gate (enough unlabelled
+  windows from training groups) is not met by a 135-file labelled dataset, and each method
+  would have to beat its supervised counterpart to be worth the compute.
+- **Automatic feature selection on the pooled matrix** (RFE, Boruta, L1 pruning). Any selection
+  scored on the pooled features uses test-fold information; the ablation reports the evidence and
+  the selection stays a declared choice.
+- Generative augmentation, triplet mining, attention encoders, and multi-task heads: each is
+  listed with its reason in `docs/LEARNING_STRATEGIES.md` §5.
+
+## Limitations
+
+- Results on SYNTHETIC data validate code paths. They say nothing about any experiment.
+- With no replicate or session IDs, batch effects cannot be separated from the class label.
+  The baseline-only shortcut probe is the available guard; run it and read it before
+  believing a model.
+- File-level labels over event-level signals inject label noise that no model can fix. The
+  label-noise rate is reported for that reason.
+- Window length, and therefore Model B, depends on this pool's event-duration distribution.
+  Numbers are not comparable across datasets with different event durations.
+- The default configuration fails preflight on purpose until `source_dir` and labels are set.
+
+## License
+
+Not yet decided. The project owner must choose a license before any external distribution.
