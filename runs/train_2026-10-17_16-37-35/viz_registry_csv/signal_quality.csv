@@ -1,0 +1,7 @@
+class,signal,clip_fraction,flatline_fraction,nan_fraction,outlier_rate
+InVitro_WT_tau,0,5e-06,0.0,0.0,0.00074
+InVitro_WT_tau,1,5e-06,0.0,0.0,0.000785
+InVitro_WT_tau,2,5e-06,0.0,0.0,0.000855
+InVitro_tau+GSK,0,5e-06,0.0,0.0,0.00184
+InVitro_tau+GSK,1,5e-06,0.0,0.0,0.001525
+InVitro_tau+GSK,2,5e-06,7.5e-05,0.0,0.18503

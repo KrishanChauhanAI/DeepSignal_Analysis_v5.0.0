@@ -1,0 +1,279 @@
+{
+  "architecture_condition": "conv -> global average pooling -> single linear head, so Grad-CAM is mathematically valid (design R22); attributions are labelled gradcam, not CAM",
+  "enabled": true,
+  "methods": {
+    "baseline_only_probe": {
+      "balanced_accuracy_mean_over_repeats": 0.542,
+      "chance": 0.5,
+      "interpretation": "baseline alone does not predict above chance",
+      "n_files": 75,
+      "pre_event_samples": 25,
+      "probe": "event part of each window replaced by its own pre-event mean; baseline shape only",
+      "status": "computed"
+    },
+    "features": {
+      "models": {
+        "hgb": {
+          "method": "TreeSHAP (interventional, background = a spread of pool rows)",
+          "n_background": 50,
+          "top_features_by_class": {
+            "InVitro_WT_tau": [
+              [
+                "noise_log10_raw_std",
+                0.05734008401025228
+              ],
+              [
+                "noise_log10_sigma",
+                0.05734008401025228
+              ]
+            ],
+            "InVitro_tau+GSK": [
+              [
+                "noise_log10_raw_std",
+                0.16763135580497754
+              ],
+              [
+                "noise_log10_sigma",
+                0.16763135580497754
+              ]
+            ]
+          }
+        },
+        "logreg": {
+          "base_value": [
+            1.1424160452005578
+          ],
+          "binary_coefficient_expanded": true,
+          "mean_abs_phi": {
+            "InVitro_WT_tau": 0.21873113411513814,
+            "InVitro_tau+GSK": 0.21873113411513814
+          },
+          "method": "exact linear SHAP (coefficients x centred, standardised features)",
+          "phi_shape": [
+            135,
+            2,
+            90
+          ],
+          "top_features_by_class": {
+            "InVitro_WT_tau": [
+              [
+                "noise_raw_level",
+                1.250937118126406
+              ],
+              [
+                "time_frac_above_mean",
+                1.0405405565798498
+              ],
+              [
+                "event_dip_median",
+                0.8771425591900073
+              ],
+              [
+                "event_has_any",
+                0.6638579874874964
+              ],
+              [
+                "tf_wav_l1_frac",
+                0.5955980331123337
+              ],
+              [
+                "tf_flux_mean",
+                0.5951996232616907
+              ],
+              [
+                "event_log10_dur_median",
+                0.5544958818466255
+              ],
+              [
+                "amp_log10_peak",
+                0.545119702708595
+              ],
+              [
+                "time_perm_entropy_norm",
+                0.5294795219500928
+              ],
+              [
+                "morph_turning_point_rate",
+                0.48340421755152846
+              ],
+              [
+                "spec_log10_spread_hz",
+                0.45472010447492384
+              ],
+              [
+                "acf_10ms",
+                0.44419756875689176
+              ],
+              [
+                "spec_log10_peak_hz",
+                0.43326492058568844
+              ],
+              [
+                "ctx_first_onset_frac",
+                0.4261280946052599
+              ],
+              [
+                "ctx_log10_abs_i0",
+                0.4225995953364488
+              ]
+            ],
+            "InVitro_tau+GSK": [
+              [
+                "noise_raw_level",
+                1.250937118126406
+              ],
+              [
+                "time_frac_above_mean",
+                1.0405405565798498
+              ],
+              [
+                "event_dip_median",
+                0.8771425591900073
+              ],
+              [
+                "event_has_any",
+                0.6638579874874964
+              ],
+              [
+                "tf_wav_l1_frac",
+                0.5955980331123337
+              ],
+              [
+                "tf_flux_mean",
+                0.5951996232616907
+              ],
+              [
+                "event_log10_dur_median",
+                0.5544958818466255
+              ],
+              [
+                "amp_log10_peak",
+                0.545119702708595
+              ],
+              [
+                "time_perm_entropy_norm",
+                0.5294795219500928
+              ],
+              [
+                "morph_turning_point_rate",
+                0.48340421755152846
+              ],
+              [
+                "spec_log10_spread_hz",
+                0.45472010447492384
+              ],
+              [
+                "acf_10ms",
+                0.44419756875689176
+              ],
+              [
+                "spec_log10_peak_hz",
+                0.43326492058568844
+              ],
+              [
+                "ctx_first_onset_frac",
+                0.4261280946052599
+              ],
+              [
+                "ctx_log10_abs_i0",
+                0.4225995953364488
+              ]
+            ]
+          }
+        },
+        "rf": {
+          "method": "TreeSHAP (interventional, background = a spread of pool rows)",
+          "n_background": 50,
+          "top_features_by_class": {
+            "InVitro_WT_tau": [
+              [
+                "noise_log10_sigma",
+                0.005421335857516236
+              ],
+              [
+                "noise_log10_raw_std",
+                0.00542133576149515
+              ]
+            ],
+            "InVitro_tau+GSK": [
+              [
+                "noise_log10_raw_std",
+                0.0029123271392589366
+              ],
+              [
+                "noise_log10_sigma",
+                0.0029123271388287117
+              ]
+            ]
+          }
+        }
+      },
+      "note": "fitted on the full pool for attribution only",
+      "shap_installed": true
+    },
+    "temporal": {
+      "computed": [
+        "gradcam",
+        "integrated_gradients",
+        "occlusion"
+      ],
+      "explanation_model": "fitted on the full pool for attribution only; no performance number in this report comes from it",
+      "files": {
+        "attributions": "attributions.npz",
+        "summary": "attributions_summary.csv"
+      },
+      "n_parameters": 31682,
+      "n_windows_explained": 20,
+      "window_length_samples": 100
+    },
+    "time_shift_null": {
+      "interpretation": "attribution does not reliably track the shifted event: the model may be keyed to window position",
+      "moves_with_event_fraction": 0.4,
+      "per_window": [
+        {
+          "correlation_before_after": 0.4449145075685192,
+          "moves_with_event": false,
+          "peak_after": 64,
+          "peak_before": 64,
+          "peak_moved": 0,
+          "shift_samples": 12
+        },
+        {
+          "correlation_before_after": 0.15818759071334795,
+          "moves_with_event": true,
+          "peak_after": 20,
+          "peak_before": 8,
+          "peak_moved": 12,
+          "shift_samples": 12
+        },
+        {
+          "correlation_before_after": 0.823329001031895,
+          "moves_with_event": false,
+          "peak_after": 12,
+          "peak_before": 8,
+          "peak_moved": 4,
+          "shift_samples": 12
+        },
+        {
+          "correlation_before_after": 0.7556456145797598,
+          "moves_with_event": true,
+          "peak_after": 12,
+          "peak_before": 0,
+          "peak_moved": 12,
+          "shift_samples": 12
+        },
+        {
+          "correlation_before_after": 0.6133859354168429,
+          "moves_with_event": false,
+          "peak_after": 64,
+          "peak_before": 64,
+          "peak_moved": 0,
+          "shift_samples": 12
+        }
+      ],
+      "shift_samples": 12
+    }
+  },
+  "shap_available": true,
+  "torch_available": true
+}

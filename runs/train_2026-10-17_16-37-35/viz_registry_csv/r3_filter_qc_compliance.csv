@@ -1,0 +1,7 @@
+sample_id,class,finite,length_samples,flatline
+c4de5f492bc76186,InVitro_WT_tau,True,200000,False
+ece1386140d9feb3,InVitro_WT_tau,True,200000,False
+be509f6ad0d449aa,InVitro_WT_tau,True,200000,False
+87faede677b3fe14,InVitro_tau+GSK,True,200000,False
+fd4cddbd17124fc5,InVitro_tau+GSK,True,200000,False
+178d697a32a19393,InVitro_tau+GSK,True,200000,False

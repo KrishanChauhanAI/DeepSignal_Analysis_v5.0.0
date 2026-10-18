@@ -1,0 +1,2728 @@
+{
+  "ablation": {
+    "baseline_balanced_accuracy_mean": 0.7196654611211573,
+    "feature_groups_available": [
+      "acf",
+      "amp",
+      "ctx",
+      "event",
+      "morph",
+      "noise",
+      "shape",
+      "spec",
+      "tf",
+      "time"
+    ],
+    "interpretation": "a group whose 'only:' score is near the all-groups score carries most of the signal; a group whose 'without:' score is near the all-groups score adds little. Differences are on the same folds, so they are paired comparisons, but they are not independent tests: no p-value is claimed here",
+    "mode": "both",
+    "model": "logreg",
+    "n_features_total": 90,
+    "protocol": "same folds, same files, same model settings as the main cross-validation; only the feature columns change",
+    "rows": [
+      {
+        "balanced_accuracy_mean": 0.7196654611211573,
+        "balanced_accuracy_sd": 0.0221289080143602,
+        "delta_vs_all": null,
+        "groups_used": "acf|amp|ctx|event|morph|noise|shape|spec|tf|time",
+        "kind": "baseline",
+        "n_features": 90,
+        "reason": "",
+        "status": "computed",
+        "variant": "all_groups"
+      },
+      {
+        "balanced_accuracy_mean": 0.6274638336347197,
+        "balanced_accuracy_sd": 0.014166402097546002,
+        "delta_vs_all": -0.09220162748643757,
+        "groups_used": "noise",
+        "kind": "group_only",
+        "n_features": 3,
+        "reason": "",
+        "status": "computed",
+        "variant": "only:noise"
+      },
+      {
+        "balanced_accuracy_mean": 0.5616636528028933,
+        "balanced_accuracy_sd": 0.014117220501521558,
+        "delta_vs_all": -0.15800180831826394,
+        "groups_used": "time",
+        "kind": "group_only",
+        "n_features": 9,
+        "reason": "",
+        "status": "computed",
+        "variant": "only:time"
+      },
+      {
+        "balanced_accuracy_mean": 0.49656419529837253,
+        "balanced_accuracy_sd": 0.011414897140160165,
+        "delta_vs_all": -0.22310126582278472,
+        "groups_used": "amp",
+        "kind": "group_only",
+        "n_features": 9,
+        "reason": "",
+        "status": "computed",
+        "variant": "only:amp"
+      },
+      {
+        "balanced_accuracy_mean": 0.5548598553345389,
+        "balanced_accuracy_sd": 0.016090674937261858,
+        "delta_vs_all": -0.1648056057866184,
+        "groups_used": "event",
+        "kind": "group_only",
+        "n_features": 15,
+        "reason": "",
+        "status": "computed",
+        "variant": "only:event"
+      },
+      {
+        "balanced_accuracy_mean": 0.6530741410488246,
+        "balanced_accuracy_sd": 0.03625469547964036,
+        "delta_vs_all": -0.0665913200723327,
+        "groups_used": "ctx",
+        "kind": "group_only",
+        "n_features": 16,
+        "reason": "",
+        "status": "computed",
+        "variant": "only:ctx"
+      },
+      {
+        "balanced_accuracy_mean": 0.72000452079566,
+        "balanced_accuracy_sd": 0.05033692052333646,
+        "delta_vs_all": 0.00033905967450276187,
+        "groups_used": "spec",
+        "kind": "group_only",
+        "n_features": 13,
+        "reason": "",
+        "status": "computed",
+        "variant": "only:spec"
+      },
+      {
+        "balanced_accuracy_mean": 0.5264466546112117,
+        "balanced_accuracy_sd": 0.023683533327136,
+        "delta_vs_all": -0.1932188065099456,
+        "groups_used": "tf",
+        "kind": "group_only",
+        "n_features": 12,
+        "reason": "",
+        "status": "computed",
+        "variant": "only:tf"
+      },
+      {
+        "balanced_accuracy_mean": 0.5185804701627486,
+        "balanced_accuracy_sd": 0.024559615103017247,
+        "delta_vs_all": -0.2010849909584087,
+        "groups_used": "acf",
+        "kind": "group_only",
+        "n_features": 3,
+        "reason": "",
+        "status": "computed",
+        "variant": "only:acf"
+      },
+      {
+        "balanced_accuracy_mean": 0.4911392405063292,
+        "balanced_accuracy_sd": 0.003466598465222589,
+        "delta_vs_all": -0.22852622061482808,
+        "groups_used": "shape",
+        "kind": "group_only",
+        "n_features": 3,
+        "reason": "",
+        "status": "computed",
+        "variant": "only:shape"
+      },
+      {
+        "balanced_accuracy_mean": 0.5413878842676312,
+        "balanced_accuracy_sd": 0.014565848222226238,
+        "delta_vs_all": -0.17827757685352608,
+        "groups_used": "morph",
+        "kind": "group_only",
+        "n_features": 7,
+        "reason": "",
+        "status": "computed",
+        "variant": "only:morph"
+      },
+      {
+        "balanced_accuracy_mean": 0.6753164556962025,
+        "balanced_accuracy_sd": 0.0329599218008433,
+        "delta_vs_all": -0.04434900542495479,
+        "groups_used": "acf|amp|ctx|event|morph|shape|spec|tf|time",
+        "kind": "leave_one_out",
+        "n_features": 87,
+        "reason": "",
+        "status": "computed",
+        "variant": "without:noise"
+      },
+      {
+        "balanced_accuracy_mean": 0.651130198915009,
+        "balanced_accuracy_sd": 0.024431570358538164,
+        "delta_vs_all": -0.06853526220614825,
+        "groups_used": "acf|amp|ctx|event|morph|noise|shape|spec|tf",
+        "kind": "leave_one_out",
+        "n_features": 81,
+        "reason": "",
+        "status": "computed",
+        "variant": "without:time"
+      },
+      {
+        "balanced_accuracy_mean": 0.7056735985533453,
+        "balanced_accuracy_sd": 0.014768547550882707,
+        "delta_vs_all": -0.01399186256781193,
+        "groups_used": "acf|ctx|event|morph|noise|shape|spec|tf|time",
+        "kind": "leave_one_out",
+        "n_features": 81,
+        "reason": "",
+        "status": "computed",
+        "variant": "without:amp"
+      },
+      {
+        "balanced_accuracy_mean": 0.6939195298372514,
+        "balanced_accuracy_sd": 0.018551518915063597,
+        "delta_vs_all": -0.0257459312839059,
+        "groups_used": "acf|amp|ctx|morph|noise|shape|spec|tf|time",
+        "kind": "leave_one_out",
+        "n_features": 75,
+        "reason": "",
+        "status": "computed",
+        "variant": "without:event"
+      },
+      {
+        "balanced_accuracy_mean": 0.7181735985533454,
+        "balanced_accuracy_sd": 0.010064673583208252,
+        "delta_vs_all": -0.0014918625678118635,
+        "groups_used": "acf|amp|event|morph|noise|shape|spec|tf|time",
+        "kind": "leave_one_out",
+        "n_features": 74,
+        "reason": "",
+        "status": "computed",
+        "variant": "without:ctx"
+      },
+      {
+        "balanced_accuracy_mean": 0.716613924050633,
+        "balanced_accuracy_sd": 0.04715439908398741,
+        "delta_vs_all": -0.0030515370705243017,
+        "groups_used": "acf|amp|ctx|event|morph|noise|shape|tf|time",
+        "kind": "leave_one_out",
+        "n_features": 77,
+        "reason": "",
+        "status": "computed",
+        "variant": "without:spec"
+      },
+      {
+        "balanced_accuracy_mean": 0.7354430379746836,
+        "balanced_accuracy_sd": 0.021249452866558913,
+        "delta_vs_all": 0.01577757685352632,
+        "groups_used": "acf|amp|ctx|event|morph|noise|shape|spec|time",
+        "kind": "leave_one_out",
+        "n_features": 78,
+        "reason": "",
+        "status": "computed",
+        "variant": "without:tf"
+      },
+      {
+        "balanced_accuracy_mean": 0.7196654611211573,
+        "balanced_accuracy_sd": 0.017695212245960795,
+        "delta_vs_all": 0.0,
+        "groups_used": "amp|ctx|event|morph|noise|shape|spec|tf|time",
+        "kind": "leave_one_out",
+        "n_features": 87,
+        "reason": "",
+        "status": "computed",
+        "variant": "without:acf"
+      },
+      {
+        "balanced_accuracy_mean": 0.7166139240506328,
+        "balanced_accuracy_sd": 0.01909427500737891,
+        "delta_vs_all": -0.0030515370705244127,
+        "groups_used": "acf|amp|ctx|event|morph|noise|spec|tf|time",
+        "kind": "leave_one_out",
+        "n_features": 87,
+        "reason": "",
+        "status": "computed",
+        "variant": "without:shape"
+      },
+      {
+        "balanced_accuracy_mean": 0.7262884267631103,
+        "balanced_accuracy_sd": 0.025020495614174375,
+        "delta_vs_all": 0.0066229656419530825,
+        "groups_used": "acf|amp|ctx|event|noise|shape|spec|tf|time",
+        "kind": "leave_one_out",
+        "n_features": 83,
+        "reason": "",
+        "status": "computed",
+        "variant": "without:morph"
+      }
+    ],
+    "status": "computed",
+    "tuning": "declared hyperparameters, no nested search: a feature-subset difference must not be confounded by tuning noise, and 21 variants x a search budget would dominate the run"
+  },
+  "analysis_rate_hz": 10000.0,
+  "class_counts_used": {
+    "InVitro_WT_tau": 56,
+    "InVitro_tau+GSK": 79
+  },
+  "class_weight": null,
+  "comparison": {
+    "matched_subset": {
+      "gate_G7": {
+        "ci_overlap": false,
+        "gate": "G7",
+        "metric": "balanced_accuracy",
+        "model_a": {
+          "ci95": [
+            0.7548935091277891,
+            0.9340641801075268
+          ],
+          "name": "hgb",
+          "value": 0.8540000000000001
+        },
+        "model_b": {
+          "ci95": [
+            0.517844742063492,
+            0.726042620369564
+          ],
+          "name": "cnn1d",
+          "value": 0.59
+        },
+        "n_files_matched_subset": 75,
+        "reason": "95% intervals do not overlap and Model A is higher",
+        "verdict": "Model A beats Model B"
+      },
+      "model_a_on_model_b_subset": {
+        "best_model_a": "hgb",
+        "best_value": 0.8540000000000001,
+        "bootstrap_ci95": [
+          0.7548935091277891,
+          0.9340641801075268
+        ],
+        "per_model_balanced_accuracy": {
+          "hgb": {
+            "mean": 0.8540000000000001,
+            "sd": 0.011401754250991361
+          },
+          "logreg": {
+            "mean": 0.716,
+            "sd": 0.03507135583350039
+          },
+          "rf": {
+            "mean": 0.772,
+            "sd": 0.008366600265340762
+          }
+        }
+      },
+      "model_b": {
+        "bootstrap_ci95": [
+          0.517844742063492,
+          0.726042620369564
+        ],
+        "value": 0.59
+      },
+      "n_files": 75
+    },
+    "model_set": "hybrid",
+    "models_evaluated": [
+      "dummy_majority",
+      "dummy_stratified",
+      "logreg",
+      "rf",
+      "hgb",
+      "cnn1d",
+      "proto_cnn",
+      "fusion",
+      "hybrid"
+    ],
+    "n_files_by_model": {
+      "cnn1d": 75,
+      "dummy_majority": 135,
+      "dummy_stratified": 135,
+      "fusion": 75,
+      "hgb": 135,
+      "hybrid": 135,
+      "logreg": 135,
+      "proto_cnn": 75,
+      "rf": 135
+    },
+    "table": [
+      {
+        "ci95_hi": 0.5,
+        "ci95_lo": 0.5,
+        "mean": 0.5,
+        "metric": "balanced_accuracy",
+        "model": "dummy_majority",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.0,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.3691588785046729,
+        "metric": "macro_f1",
+        "model": "dummy_majority",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.0,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.5851851851851851,
+        "metric": "accuracy",
+        "model": "dummy_majority",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.0,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.6788179390029873,
+        "metric": "log_loss",
+        "model": "dummy_majority",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.0,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.5851851851851851,
+        "metric": "micro_f1",
+        "model": "dummy_majority",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.0,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.0,
+        "metric": "mcc",
+        "model": "dummy_majority",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.0,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.0,
+        "metric": "cohen_kappa",
+        "model": "dummy_majority",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.0,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.48779385171790246,
+        "metric": "roc_auc_ovr_macro",
+        "model": "dummy_majority",
+        "n_files": 135,
+        "reason": "",
+        "sd": 6.206335383118183e-17,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.4892857142857142,
+        "metric": "balanced_accuracy",
+        "model": "dummy_stratified",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.05162333709490574,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.4883528061459696,
+        "metric": "macro_f1",
+        "model": "dummy_stratified",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.05180423301448569,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.5081481481481482,
+        "metric": "accuracy",
+        "model": "dummy_stratified",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.05458409904278679,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.6788179390029873,
+        "metric": "log_loss",
+        "model": "dummy_stratified",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.0,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.5081481481481482,
+        "metric": "micro_f1",
+        "model": "dummy_stratified",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.05458409904278679,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": -0.02111254766765165,
+        "metric": "mcc",
+        "model": "dummy_stratified",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.10331308273465337,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": -0.020924506302903833,
+        "metric": "cohen_kappa",
+        "model": "dummy_stratified",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.10283571063219853,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.48779385171790246,
+        "metric": "roc_auc_ovr_macro",
+        "model": "dummy_stratified",
+        "n_files": 135,
+        "reason": "",
+        "sd": 6.206335383118183e-17,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": 0.8214364482170657,
+        "ci95_lo": 0.6774597451204439,
+        "mean": 0.7196654611211573,
+        "metric": "balanced_accuracy",
+        "model": "logreg",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.0221289080143602,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.7235764122527863,
+        "metric": "macro_f1",
+        "model": "logreg",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.02188855709345036,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.7437037037037038,
+        "metric": "accuracy",
+        "model": "logreg",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.015360326928390894,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.6368581614485791,
+        "metric": "log_loss",
+        "model": "logreg",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.07886593027312333,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.7437037037037038,
+        "metric": "micro_f1",
+        "model": "logreg",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.015360326928390894,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.46526098345346006,
+        "metric": "mcc",
+        "model": "logreg",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.03299364170865809,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.4537871473360432,
+        "metric": "cohen_kappa",
+        "model": "logreg",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.03915085032426816,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.7806962025316457,
+        "metric": "roc_auc_ovr_macro",
+        "model": "logreg",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.013347261601831348,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": 0.9226365546218488,
+        "ci95_lo": 0.8008412172685714,
+        "mean": 0.8535488245931283,
+        "metric": "balanced_accuracy",
+        "model": "rf",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.02368965405433187,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.86048309683676,
+        "metric": "macro_f1",
+        "model": "rf",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.022376070164806864,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.8681481481481482,
+        "metric": "accuracy",
+        "model": "rf",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.01987615979999816,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.25574660907642943,
+        "metric": "log_loss",
+        "model": "rf",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.00969427680275536,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.8681481481481482,
+        "metric": "micro_f1",
+        "model": "rf",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.01987615979999816,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.7288981884819506,
+        "metric": "mcc",
+        "model": "rf",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.040683495211102774,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.722273091072297,
+        "metric": "cohen_kappa",
+        "model": "rf",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.04379881441961315,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.9655063291139241,
+        "metric": "roc_auc_ovr_macro",
+        "model": "rf",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.006368046588552075,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": 0.9624527034133812,
+        "ci95_lo": 0.8616654772524531,
+        "mean": 0.9104656419529837,
+        "metric": "balanced_accuracy",
+        "model": "hgb",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.008265687955999189,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.9113152805033975,
+        "metric": "macro_f1",
+        "model": "hgb",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.008580515456383754,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.914074074074074,
+        "metric": "accuracy",
+        "model": "hgb",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.008445743889623256,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.4154380849970704,
+        "metric": "log_loss",
+        "model": "hgb",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.042286556515033165,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.914074074074074,
+        "metric": "micro_f1",
+        "model": "hgb",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.008445743889623256,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.8229310252192841,
+        "metric": "mcc",
+        "model": "hgb",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.017208352542062988,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.8226585072210767,
+        "metric": "cohen_kappa",
+        "model": "hgb",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.017163921513542242,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.9701627486437612,
+        "metric": "roc_auc_ovr_macro",
+        "model": "hgb",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.0026553662125837806,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": 0.726042620369564,
+        "ci95_lo": 0.517844742063492,
+        "mean": 0.59,
+        "metric": "balanced_accuracy",
+        "model": "cnn1d",
+        "n_files": 75,
+        "reason": "",
+        "sd": 0.06363961030678925,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.5847500426743505,
+        "metric": "macro_f1",
+        "model": "cnn1d",
+        "n_files": 75,
+        "reason": "",
+        "sd": 0.07353309992131675,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.6853333333333333,
+        "metric": "accuracy",
+        "model": "cnn1d",
+        "n_files": 75,
+        "reason": "",
+        "sd": 0.04279148409568324,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.5725394511886601,
+        "metric": "log_loss",
+        "model": "cnn1d",
+        "n_files": 75,
+        "reason": "",
+        "sd": 0.04233155570820738,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.6853333333333333,
+        "metric": "micro_f1",
+        "model": "cnn1d",
+        "n_files": 75,
+        "reason": "",
+        "sd": 0.04279148409568324,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.21502771054471603,
+        "metric": "mcc",
+        "model": "cnn1d",
+        "n_files": 75,
+        "reason": "",
+        "sd": 0.13144780544602738,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.1987331583377746,
+        "metric": "cohen_kappa",
+        "model": "cnn1d",
+        "n_files": 75,
+        "reason": "",
+        "sd": 0.13144635229728904,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.7268799999999999,
+        "metric": "roc_auc_ovr_macro",
+        "model": "cnn1d",
+        "n_files": 75,
+        "reason": "",
+        "sd": 0.03919836731293798,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": 0.824579081632653,
+        "ci95_lo": 0.6059652575263413,
+        "mean": 0.648,
+        "metric": "balanced_accuracy",
+        "model": "proto_cnn",
+        "n_files": 75,
+        "reason": "",
+        "sd": 0.03114482300479481,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.6443285119492713,
+        "metric": "macro_f1",
+        "model": "proto_cnn",
+        "n_files": 75,
+        "reason": "",
+        "sd": 0.03257212040174912,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.6799999999999999,
+        "metric": "accuracy",
+        "model": "proto_cnn",
+        "n_files": 75,
+        "reason": "",
+        "sd": 0.03887301263230203,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.5978342191302847,
+        "metric": "log_loss",
+        "model": "proto_cnn",
+        "n_files": 75,
+        "reason": "",
+        "sd": 0.02867883700069813,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.6799999999999999,
+        "metric": "micro_f1",
+        "model": "proto_cnn",
+        "n_files": 75,
+        "reason": "",
+        "sd": 0.03887301263230203,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.2952632892183137,
+        "metric": "mcc",
+        "model": "proto_cnn",
+        "n_files": 75,
+        "reason": "",
+        "sd": 0.06202943613378719,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.29230288495160456,
+        "metric": "cohen_kappa",
+        "model": "proto_cnn",
+        "n_files": 75,
+        "reason": "",
+        "sd": 0.06272763472960716,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.7118399999999999,
+        "metric": "roc_auc_ovr_macro",
+        "model": "proto_cnn",
+        "n_files": 75,
+        "reason": "",
+        "sd": 0.043471001828805346,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": 0.7308114035087719,
+        "ci95_lo": 0.5437163994504797,
+        "mean": 0.618,
+        "metric": "balanced_accuracy",
+        "model": "fusion",
+        "n_files": 75,
+        "reason": "",
+        "sd": 0.06572670690061988,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.617485119145974,
+        "metric": "macro_f1",
+        "model": "fusion",
+        "n_files": 75,
+        "reason": "",
+        "sd": 0.0816171563967549,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.7146666666666667,
+        "metric": "accuracy",
+        "model": "fusion",
+        "n_files": 75,
+        "reason": "",
+        "sd": 0.04770278351999553,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 1.3263651513906471,
+        "metric": "log_loss",
+        "model": "fusion",
+        "n_files": 75,
+        "reason": "",
+        "sd": 0.2640502889826087,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.7146666666666667,
+        "metric": "micro_f1",
+        "model": "fusion",
+        "n_files": 75,
+        "reason": "",
+        "sd": 0.04770278351999553,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.29025991966929476,
+        "metric": "mcc",
+        "model": "fusion",
+        "n_files": 75,
+        "reason": "",
+        "sd": 0.14883495815073677,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.26546825715078637,
+        "metric": "cohen_kappa",
+        "model": "fusion",
+        "n_files": 75,
+        "reason": "",
+        "sd": 0.14349178551768757,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.62336,
+        "metric": "roc_auc_ovr_macro",
+        "model": "fusion",
+        "n_files": 75,
+        "reason": "",
+        "sd": 0.06651652426277249,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": 0.9251157705288021,
+        "ci95_lo": 0.803263951061397,
+        "mean": 0.8635171790235082,
+        "metric": "balanced_accuracy",
+        "model": "hybrid",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.023568726040231837,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.8692016030278935,
+        "metric": "macro_f1",
+        "model": "hybrid",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.022464781833813084,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.8755555555555556,
+        "metric": "accuracy",
+        "model": "hybrid",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.02121158676040939,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.33759347223552105,
+        "metric": "log_loss",
+        "model": "hybrid",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.01203671195384877,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.8755555555555556,
+        "metric": "micro_f1",
+        "model": "hybrid",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.02121158676040939,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.7441270214206945,
+        "metric": "mcc",
+        "model": "hybrid",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.04463715276613909,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.7392281574182282,
+        "metric": "cohen_kappa",
+        "model": "hybrid",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.04478869776257316,
+        "status": "computed"
+      },
+      {
+        "ci95_hi": null,
+        "ci95_lo": null,
+        "mean": 0.9556962025316456,
+        "metric": "roc_auc_ovr_macro",
+        "model": "hybrid",
+        "n_files": 135,
+        "reason": "",
+        "sd": 0.0034835070089110592,
+        "status": "computed"
+      }
+    ],
+    "window_ms": 10.0,
+    "window_ms_source": "auto"
+  },
+  "config_fingerprint": "7da5ffdaffc35258976d4a0af199792ece7d2b2cfe3701f764724491f941c176",
+  "deep": {
+    "aggregation": "mean_proba",
+    "architecture": "stem(strided conv) -> residual dilated conv blocks -> GAP -> linear",
+    "best_epoch_per_fold": [
+      7,
+      1,
+      2,
+      0,
+      9,
+      4,
+      4,
+      0,
+      0,
+      0,
+      1,
+      3,
+      2,
+      1,
+      10,
+      1,
+      1,
+      3,
+      2,
+      11,
+      4,
+      9,
+      0,
+      4,
+      6
+    ],
+    "checkpoints_dir": "runs/train_2026-10-17_16-37-35/checkpoints",
+    "dependency": {
+      "available": true,
+      "device": "cuda",
+      "torch_version": "2.13.0+cu129"
+    },
+    "enabled": true,
+    "epochs_run_per_fold": [
+      16,
+      10,
+      11,
+      9,
+      18,
+      13,
+      13,
+      9,
+      9,
+      9,
+      10,
+      12,
+      11,
+      10,
+      19,
+      10,
+      10,
+      12,
+      11,
+      20,
+      13,
+      18,
+      9,
+      13,
+      15
+    ],
+    "event_duration_stats_ms": {
+      "max_ms": 47.70000000000074,
+      "median_ms": 2.2999999999999687,
+      "n_events": 4140.0,
+      "p25_ms": 1.5000000000000568,
+      "p75_ms": 4.100000000000048,
+      "p95_ms": 9.300000000000086
+    },
+    "fusion_explanation": "probability blend and stacked head, both reported",
+    "fusion_rule": "both",
+    "mean_fold_seconds": 2.5,
+    "metric_loss": "supcon",
+    "metric_loss_weight": 0.2,
+    "metric_temperature": 0.1,
+    "n_events_edge_excluded": 1,
+    "n_files_with_windows": 75,
+    "n_files_without_windows": 60,
+    "n_folds_trained": 25,
+    "n_parameters": 31682,
+    "n_prototyped_files": 75,
+    "n_windows": 868,
+    "notes": [
+      "60 of 135 files produced no usable event window; Model B does not score them and the hybrid falls back to Model A for those files",
+      "label-noise rate (files with zero usable events): 0.444",
+      "torch.manual_seed set; deterministic algorithms enabled (warn_only)",
+      "torch.manual_seed set; deterministic algorithms enabled (warn_only)"
+    ],
+    "proto_distance": "cosine",
+    "prototypical_head": true,
+    "receptive_field_ms": 23.1,
+    "receptive_field_samples": 231,
+    "representation_learning": "supervised contrastive auxiliary loss on the GAP embedding",
+    "select_metric": "macro_f1",
+    "signal_cache_bytes": 108017280,
+    "signal_cache_dir": "runs/train_2026-10-17_16-37-35/cache/analysis",
+    "temperature_mean": 2.3001795325297745,
+    "total_train_seconds": 62.6,
+    "training_log": "runs/train_2026-10-17_16-37-35/logs/deep_training_log.jsonl",
+    "window_length_samples": 100,
+    "window_ms": 10.0,
+    "window_ms_source": "auto",
+    "window_rate_hz": 10000.0
+  },
+  "design_notes": {
+    "aggregation": "window -> file by mean_proba, declared before evaluation",
+    "bootstrap": "file-level only; a hierarchical bootstrap needs replicate groups",
+    "class_weighting": "none (imbalance below the design threshold of 1.5)",
+    "fusion_note": "fitted per repeat and fold",
+    "fusion_rule": "both",
+    "holdout": "none (no replicates to hold out)",
+    "hybrid_combination": "fixed convex blend, Model A weight 0.5",
+    "imputation": "median, fitted within each training fold",
+    "matched_subset": "not applicable",
+    "representation_flow": "one 1D ConvNet encoder is fitted per outer fold; its global-average-pooled embedding is the single learned representation of the run and is consumed by (1) the softmax head -> cnn1d, (2) the nearest-prototype head -> proto_cnn, (3) the per-fold linear fusion head on handcrafted features + mean embedding -> fusion, (4) the probability blend with the best Model A -> hybrid, and (5) the conditional analyses: few-shot prototypes, semi-supervised pseudo-labels, novelty detection, clustering, and the file-level explanation map. Nothing downstream re-learns a representation, and no strategy is evaluated on files that contributed to the encoder, the prototypes, the fusion head, or the scaler.",
+    "split_unit": "file (each file is its own group; no replicate or session metadata)",
+    "tuning": "logreg C chosen by inner grouped CV within each outer training fold; the CNN early-stops and temperature-scales on a validation split carved from the outer training fold by file group",
+    "window_scaling": "robust median/IQR fitted on each fold's training windows only"
+  },
+  "downstream": {
+    "csv": [
+      "runs/train_2026-10-17_16-37-35/report_data_landscape.csv",
+      "runs/train_2026-10-17_16-37-35/report_methods.csv",
+      "runs/train_2026-10-17_16-37-35/report_results.csv",
+      "runs/train_2026-10-17_16-37-35/report_figures.csv",
+      "runs/train_2026-10-17_16-37-35/report_explainability.csv",
+      "runs/train_2026-10-17_16-37-35/report_advanced.csv",
+      "runs/train_2026-10-17_16-37-35/report_limitations.csv",
+      "runs/train_2026-10-17_16-37-35/report_information_gaps.csv",
+      "runs/train_2026-10-17_16-37-35/report_reproducibility.csv",
+      "runs/train_2026-10-17_16-37-35/report_ablation.csv",
+      "runs/train_2026-10-17_16-37-35/report_sampling.csv",
+      "runs/train_2026-10-17_16-37-35/report_extended_metrics.csv",
+      "runs/train_2026-10-17_16-37-35/report_quad.csv",
+      "runs/train_2026-10-17_16-37-35/report_viz_registry.csv",
+      "runs/train_2026-10-17_16-37-35/report_models.csv"
+    ],
+    "explain": {
+      "enabled": true,
+      "methods": [
+        "temporal",
+        "time_shift_null",
+        "baseline_only_probe",
+        "features"
+      ],
+      "shap_available": true,
+      "torch_available": true
+    },
+    "figure_status_counts": {
+      "generated": 19,
+      "not requested": 4,
+      "skipped": 1
+    },
+    "figures_index": "runs/train_2026-10-17_16-37-35/figures_index.csv",
+    "n_figures": 61,
+    "pdf": {
+      "path": "runs/train_2026-10-17_16-37-35/report.pdf",
+      "status": "written"
+    },
+    "stages_requested": [
+      "explain",
+      "figures",
+      "viz_registry",
+      "csv",
+      "pdf"
+    ],
+    "stages_run": [
+      "explain",
+      "figures",
+      "viz_registry",
+      "csv",
+      "pdf"
+    ],
+    "viz_registry": {
+      "by_category": {
+        "A": {
+          "entries": 15,
+          "generated": 15
+        },
+        "B": {
+          "entries": 12,
+          "generated": 12
+        },
+        "C": {
+          "entries": 10,
+          "generated": 8,
+          "not_available": 2
+        },
+        "D": {
+          "entries": 31,
+          "generated": 25,
+          "skipped": 6
+        },
+        "E": {
+          "entries": 28,
+          "generated": 16,
+          "skipped": 12
+        },
+        "F": {
+          "entries": 12,
+          "generated": 5,
+          "skipped": 7
+        },
+        "G": {
+          "entries": 2,
+          "generated": 2
+        },
+        "K": {
+          "entries": 15,
+          "generated": 15
+        },
+        "M": {
+          "entries": 8,
+          "generated": 2,
+          "not_available": 2,
+          "skipped": 4
+        },
+        "Q": {
+          "entries": 12,
+          "generated": 12
+        },
+        "S": {
+          "entries": 6,
+          "generated": 5,
+          "skipped": 1
+        },
+        "T": {
+          "entries": 22,
+          "generated": 7,
+          "skipped": 15
+        }
+      },
+      "counts": {
+        "generated": 124,
+        "not_available": 4,
+        "skipped": 45
+      },
+      "csv_twins": 26,
+      "entries": 173,
+      "index": "runs/train_2026-10-17_16-37-35/viz_registry_index.csv",
+      "png_dir": "runs/train_2026-10-17_16-37-35/viz_registry"
+    }
+  },
+  "evaluation": {
+    "definitions": {
+      "brier_multiclass": "mean over files of sum_c (p_c - 1[y=c])^2",
+      "cohens_kappa": "chance-corrected agreement (sklearn cohen_kappa_score); empty when the prediction set is degenerate",
+      "ece": "sum_b (n_b/n)|acc_b - conf_b| over equal-width bins of the max probability",
+      "mcc_multiclass": "Matthews correlation from the multiclass confusion matrix",
+      "mce": "max_b |acc_b - conf_b| over the same bins",
+      "pr_auc_ovr": "one-vs-rest average precision; None when the class is absent or universal",
+      "precision_macro/recall_macro/f1_macro": "unweighted mean of the per-class scores",
+      "precision_micro/recall_micro/f1_micro": "multiclass micro averages; identical to accuracy",
+      "precision_weighted/recall_weighted/f1_weighted": "per-class scores weighted by support",
+      "specificity": "TN/(TN+FP) one-vs-rest; None when the subset holds no negative file",
+      "topk_accuracy": "fraction of files whose true label is among the k largest probabilities"
+    },
+    "per_model": {
+      "cnn1d": {
+        "brier": 0.35043,
+        "cohens_kappa": 0.266667,
+        "ece": 0.062414,
+        "mcc": 0.282843,
+        "mce": 0.083432,
+        "n_files": 75,
+        "status": "computed"
+      },
+      "dummy_majority": {
+        "brier": 0.485712,
+        "cohens_kappa": 0.0,
+        "ece": 0.0,
+        "mcc": 0.0,
+        "mce": 0.0,
+        "n_files": 135,
+        "status": "computed"
+      },
+      "fusion": {
+        "brier": 0.37303,
+        "cohens_kappa": 0.329412,
+        "ece": 0.110489,
+        "mcc": 0.38829,
+        "mce": 0.129588,
+        "n_files": 75,
+        "status": "computed"
+      },
+      "hgb": {
+        "brier": 0.117539,
+        "cohens_kappa": 0.831728,
+        "ece": 0.04692,
+        "mcc": 0.831825,
+        "mce": 0.257505,
+        "n_files": 135,
+        "status": "computed"
+      },
+      "hybrid": {
+        "brier": 0.186357,
+        "cohens_kappa": 0.750693,
+        "ece": 0.130451,
+        "mcc": 0.756594,
+        "mce": 0.190178,
+        "n_files": 135,
+        "status": "computed"
+      },
+      "logreg": {
+        "brier": 0.369224,
+        "cohens_kappa": 0.515681,
+        "ece": 0.115778,
+        "mcc": 0.520856,
+        "mce": 0.201923,
+        "n_files": 135,
+        "status": "computed"
+      },
+      "proto_cnn": {
+        "brier": 0.373338,
+        "cohens_kappa": 0.423077,
+        "ece": 0.145733,
+        "mcc": 0.425922,
+        "mce": 0.244012,
+        "n_files": 75,
+        "status": "computed"
+      },
+      "rf": {
+        "brier": 0.158409,
+        "cohens_kappa": 0.749362,
+        "ece": 0.057173,
+        "mcc": 0.758729,
+        "mce": 0.1638,
+        "n_files": 135,
+        "status": "computed"
+      }
+    }
+  },
+  "feature_redundancy": {
+    "n_pairs_flagged": 31,
+    "pairs": [
+      {
+        "feature_a": "event_n",
+        "feature_b": "event_rate_per_min",
+        "n_files_used": 135,
+        "spearman": 1.0,
+        "verdict": "redundant at this threshold"
+      },
+      {
+        "feature_a": "time_hjorth_mobility",
+        "feature_b": "acf_0p1ms",
+        "n_files_used": 135,
+        "spearman": -0.999995,
+        "verdict": "redundant at this threshold"
+      },
+      {
+        "feature_a": "amp_abs_p99_over_sigma",
+        "feature_b": "amp_dynamic_range_db",
+        "n_files_used": 135,
+        "spearman": 0.999995,
+        "verdict": "redundant at this threshold"
+      },
+      {
+        "feature_a": "amp_log10_rms",
+        "feature_b": "spec_log10_total",
+        "n_files_used": 135,
+        "spearman": 0.999644,
+        "verdict": "redundant at this threshold"
+      },
+      {
+        "feature_a": "spec_log10_band_1000_5000Hz",
+        "feature_b": "tf_wav_log10_l2",
+        "n_files_used": 135,
+        "spearman": 0.998381,
+        "verdict": "redundant at this threshold"
+      },
+      {
+        "feature_a": "spec_log10_band_100_1000Hz",
+        "feature_b": "tf_wav_log10_l4",
+        "n_files_used": 135,
+        "spearman": 0.996825,
+        "verdict": "redundant at this threshold"
+      },
+      {
+        "feature_a": "time_hjorth_complexity",
+        "feature_b": "spec_log10_centroid_hz",
+        "n_files_used": 135,
+        "spearman": -0.996634,
+        "verdict": "redundant at this threshold"
+      },
+      {
+        "feature_a": "spec_log10_band_1000_5000Hz",
+        "feature_b": "tf_wav_log10_l1",
+        "n_files_used": 135,
+        "spearman": 0.996113,
+        "verdict": "redundant at this threshold"
+      },
+      {
+        "feature_a": "spec_log10_centroid_hz",
+        "feature_b": "spec_log10_rolloff85_hz",
+        "n_files_used": 135,
+        "spearman": 0.994037,
+        "verdict": "redundant at this threshold"
+      },
+      {
+        "feature_a": "amp_abs_p99_over_sigma",
+        "feature_b": "shape_frac_beyond_3sigma",
+        "n_files_used": 135,
+        "spearman": 0.993677,
+        "verdict": "redundant at this threshold"
+      },
+      {
+        "feature_a": "amp_dynamic_range_db",
+        "feature_b": "shape_frac_beyond_3sigma",
+        "n_files_used": 135,
+        "spearman": 0.993668,
+        "verdict": "redundant at this threshold"
+      },
+      {
+        "feature_a": "amp_log10_peak",
+        "feature_b": "amp_log10_p2p",
+        "n_files_used": 135,
+        "spearman": 0.993054,
+        "verdict": "redundant at this threshold"
+      },
+      {
+        "feature_a": "tf_wav_log10_l1",
+        "feature_b": "tf_wav_log10_l2",
+        "n_files_used": 135,
+        "spearman": 0.992967,
+        "verdict": "redundant at this threshold"
+      },
+      {
+        "feature_a": "amp_log10_rms",
+        "feature_b": "tf_wav_log10_l3",
+        "n_files_used": 135,
+        "spearman": 0.989884,
+        "verdict": "redundant at this threshold"
+      },
+      {
+        "feature_a": "spec_log10_total",
+        "feature_b": "tf_wav_log10_l3",
+        "n_files_used": 135,
+        "spearman": 0.989884,
+        "verdict": "redundant at this threshold"
+      },
+      {
+        "feature_a": "amp_log10_rms",
+        "feature_b": "spec_log10_band_100_1000Hz",
+        "n_files_used": 135,
+        "spearman": 0.989664,
+        "verdict": "redundant at this threshold"
+      },
+      {
+        "feature_a": "time_hjorth_complexity",
+        "feature_b": "spec_log10_rolloff85_hz",
+        "n_files_used": 135,
+        "spearman": -0.98913,
+        "verdict": "redundant at this threshold"
+      },
+      {
+        "feature_a": "spec_log10_band_100_1000Hz",
+        "feature_b": "spec_log10_total",
+        "n_files_used": 135,
+        "spearman": 0.988986,
+        "verdict": "redundant at this threshold"
+      },
+      {
+        "feature_a": "tf_wav_log10_l2",
+        "feature_b": "tf_wav_log10_l3",
+        "n_files_used": 135,
+        "spearman": 0.98845,
+        "verdict": "redundant at this threshold"
+      },
+      {
+        "feature_a": "tf_wav_log10_l3",
+        "feature_b": "tf_wav_log10_l4",
+        "n_files_used": 135,
+        "spearman": 0.987601,
+        "verdict": "redundant at this threshold"
+      },
+      {
+        "feature_a": "time_zcr_per_sample",
+        "feature_b": "time_line_length_norm",
+        "n_files_used": 135,
+        "spearman": 0.987133,
+        "verdict": "redundant at this threshold"
+      },
+      {
+        "feature_a": "amp_log10_rms",
+        "feature_b": "tf_wav_log10_l4",
+        "n_files_used": 135,
+        "spearman": 0.987001,
+        "verdict": "redundant at this threshold"
+      },
+      {
+        "feature_a": "spec_log10_total",
+        "feature_b": "tf_wav_log10_l4",
+        "n_files_used": 135,
+        "spearman": 0.986201,
+        "verdict": "redundant at this threshold"
+      },
+      {
+        "feature_a": "spec_log10_band_1000_5000Hz",
+        "feature_b": "tf_wav_log10_l3",
+        "n_files_used": 135,
+        "spearman": 0.98445,
+        "verdict": "redundant at this threshold"
+      },
+      {
+        "feature_a": "spec_log10_band_100_1000Hz",
+        "feature_b": "tf_wav_log10_l3",
+        "n_files_used": 135,
+        "spearman": 0.983802,
+        "verdict": "redundant at this threshold"
+      },
+      {
+        "feature_a": "time_hjorth_mobility",
+        "feature_b": "spec_log10_centroid_hz",
+        "n_files_used": 135,
+        "spearman": 0.983133,
+        "verdict": "redundant at this threshold"
+      },
+      {
+        "feature_a": "spec_log10_centroid_hz",
+        "feature_b": "acf_0p1ms",
+        "n_files_used": 135,
+        "spearman": -0.983124,
+        "verdict": "redundant at this threshold"
+      },
+      {
+        "feature_a": "time_hjorth_mobility",
+        "feature_b": "spec_log10_rolloff85_hz",
+        "n_files_used": 135,
+        "spearman": 0.981094,
+        "verdict": "redundant at this threshold"
+      },
+      {
+        "feature_a": "spec_log10_rolloff85_hz",
+        "feature_b": "acf_0p1ms",
+        "n_files_used": 135,
+        "spearman": -0.981085,
+        "verdict": "redundant at this threshold"
+      },
+      {
+        "feature_a": "noise_raw_level",
+        "feature_b": "ctx_log10_abs_i0",
+        "n_files_used": 135,
+        "spearman": 0.981041,
+        "verdict": "redundant at this threshold"
+      },
+      {
+        "feature_a": "spec_log10_band_10_100Hz",
+        "feature_b": "spec_log10_band_100_1000Hz",
+        "n_files_used": 135,
+        "spearman": 0.980758,
+        "verdict": "redundant at this threshold"
+      }
+    ],
+    "policy": "flagged pairs are reported in feature_redundancy.csv and never dropped: dropping columns on the pooled matrix would use test-fold information",
+    "threshold": 0.98
+  },
+  "features": {
+    "computed": {
+      "acf": 3,
+      "amp": 9,
+      "ctx": 16,
+      "event": 15,
+      "morph": 7,
+      "noise": 3,
+      "shape": 3,
+      "spec": 13,
+      "tf": 12,
+      "time": 9
+    },
+    "descriptions": {
+      "acf": "normalised autocorrelation of the residual at the configured lags",
+      "amp": "amplitude domain: RMS, peak, peak-to-peak, crest factor, percentiles, dynamic range",
+      "ctx": "context: inter-event intervals, burstiness, onset distribution, rate drift, amplitude-duration coupling, baseline stability, reference level",
+      "event": "event statistics: count, rate, duration, dip depth, amplitude",
+      "morph": "morphology: turning points, event rise/fall, area-to-peak, sharpness, self-similarity to this recording's mean event waveform",
+      "noise": "robust residual sigma, raw level and spread",
+      "shape": "distribution shape: skewness, excess kurtosis, tail fraction",
+      "spec": "frequency domain: Welch band powers, slope, peak, centroid, spread, entropy, roll-off, harmonicity",
+      "tf": "time-frequency: STFT flux, per-band energy drift, frame entropy, db2 wavelet levels",
+      "time": "temporal pattern: zero crossings, Hjorth, line length, Teager energy, permutation entropy, segment variability, drift"
+    },
+    "n_features": 90,
+    "requested": [
+      "all"
+    ]
+  },
+  "features_dropped_all_nan": [],
+  "filter_mode": "none",
+  "hpo": {
+    "higher_is_better": true,
+    "method": "none",
+    "metric": "balanced_accuracy",
+    "n_trials": 0,
+    "objective": "mean inner grouped score inside each outer training fold; the outer test fold never influences the setting used to predict it",
+    "per_model": {},
+    "reason": "training.hpo is 'none': logreg C comes from its exact grid over training.lr_c_grid inside each training fold, and rf/hgb keep the declared n_estimators and max_iter; deep.hpo_trials is 0, so Model B keeps its declared learning rate, dropout and weight decay (each trial would be a full training run, so the budget is the user's decision)",
+    "status": "not run"
+  },
+  "imbalance_ratio": 1.4107142857142858,
+  "inner_splits": 3,
+  "model_set": "hybrid",
+  "models": {
+    "cnn1d": {
+      "aggregated": {
+        "accuracy": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.7066666666666667
+        },
+        "balanced_accuracy": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.62
+        },
+        "balanced_accuracy_bootstrap_ci95": {
+          "hi": 0.726042620369564,
+          "lo": 0.517844742063492,
+          "method": "file-level bootstrap of aggregated predictions (no replicate groups)",
+          "n_resamples": 1000
+        },
+        "cohen_kappa": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.2666666666666667
+        },
+        "log_loss": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.5146478546607739
+        },
+        "macro_f1": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.625
+        },
+        "mcc": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.282842712474619
+        },
+        "micro_f1": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.7066666666666667
+        },
+        "roc_auc_ovr_macro": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.7952
+        }
+      },
+      "evaluated_on": "files with at least one usable event window",
+      "kind": "deep",
+      "n_files_evaluated": 75,
+      "n_windows": 868,
+      "per_repeat": {
+        "accuracy": {
+          "mean": 0.6853333333333333,
+          "n_repeats": 5,
+          "sd": 0.04279148409568324
+        },
+        "balanced_accuracy": {
+          "mean": 0.59,
+          "n_repeats": 5,
+          "sd": 0.06363961030678925
+        },
+        "cohen_kappa": {
+          "mean": 0.1987331583377746,
+          "n_repeats": 5,
+          "sd": 0.13144635229728904
+        },
+        "log_loss": {
+          "mean": 0.5725394511886601,
+          "n_repeats": 5,
+          "sd": 0.04233155570820738
+        },
+        "macro_f1": {
+          "mean": 0.5847500426743505,
+          "n_repeats": 5,
+          "sd": 0.07353309992131675
+        },
+        "mcc": {
+          "mean": 0.21502771054471603,
+          "n_repeats": 5,
+          "sd": 0.13144780544602738
+        },
+        "micro_f1": {
+          "mean": 0.6853333333333333,
+          "n_repeats": 5,
+          "sd": 0.04279148409568324
+        },
+        "roc_auc_ovr_macro": {
+          "mean": 0.7268799999999999,
+          "n_repeats": 5,
+          "sd": 0.03919836731293798
+        }
+      },
+      "permutation": {
+        "n_permutations": 0,
+        "observed_balanced_accuracy_mean_over_repeats": 0.59,
+        "reason": "deep.n_permutations is 0; each CNN permutation costs one full repeated cross-validation on CPU. Raise it if a Model B null is required.",
+        "status": "not run"
+      },
+      "temperature_mean": 2.3001795325297745,
+      "windows_per_file_mean": 11.573333333333334
+    },
+    "dummy_majority": {
+      "aggregated": {
+        "accuracy": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.5851851851851851
+        },
+        "balanced_accuracy": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.5
+        },
+        "balanced_accuracy_bootstrap_ci95": {
+          "hi": 0.5,
+          "lo": 0.5,
+          "method": "file-level bootstrap of aggregated predictions (no replicate groups)",
+          "n_resamples": 1000
+        },
+        "cohen_kappa": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.0
+        },
+        "log_loss": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.6787946340851259
+        },
+        "macro_f1": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.3691588785046729
+        },
+        "mcc": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.0
+        },
+        "micro_f1": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.5851851851851851
+        },
+        "roc_auc_ovr_macro": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.4749095840867993
+        }
+      },
+      "evaluated_on": "all usable files",
+      "kind": "baseline",
+      "n_files_evaluated": 135,
+      "per_repeat": {
+        "accuracy": {
+          "mean": 0.5851851851851851,
+          "n_repeats": 5,
+          "sd": 0.0
+        },
+        "balanced_accuracy": {
+          "mean": 0.5,
+          "n_repeats": 5,
+          "sd": 0.0
+        },
+        "cohen_kappa": {
+          "mean": 0.0,
+          "n_repeats": 5,
+          "sd": 0.0
+        },
+        "log_loss": {
+          "mean": 0.6788179390029873,
+          "n_repeats": 5,
+          "sd": 0.0
+        },
+        "macro_f1": {
+          "mean": 0.3691588785046729,
+          "n_repeats": 5,
+          "sd": 0.0
+        },
+        "mcc": {
+          "mean": 0.0,
+          "n_repeats": 5,
+          "sd": 0.0
+        },
+        "micro_f1": {
+          "mean": 0.5851851851851851,
+          "n_repeats": 5,
+          "sd": 0.0
+        },
+        "roc_auc_ovr_macro": {
+          "mean": 0.48779385171790246,
+          "n_repeats": 5,
+          "sd": 6.206335383118183e-17
+        }
+      }
+    },
+    "dummy_stratified": {
+      "aggregated": {
+        "reason": "random baseline; reported per repeat only",
+        "status": "not_applicable"
+      },
+      "evaluated_on": "all usable files",
+      "kind": "baseline",
+      "n_files_evaluated": 135,
+      "per_repeat": {
+        "accuracy": {
+          "mean": 0.5081481481481482,
+          "n_repeats": 5,
+          "sd": 0.05458409904278679
+        },
+        "balanced_accuracy": {
+          "mean": 0.4892857142857142,
+          "n_repeats": 5,
+          "sd": 0.05162333709490574
+        },
+        "cohen_kappa": {
+          "mean": -0.020924506302903833,
+          "n_repeats": 5,
+          "sd": 0.10283571063219853
+        },
+        "log_loss": {
+          "mean": 0.6788179390029873,
+          "n_repeats": 5,
+          "sd": 0.0
+        },
+        "macro_f1": {
+          "mean": 0.4883528061459696,
+          "n_repeats": 5,
+          "sd": 0.05180423301448569
+        },
+        "mcc": {
+          "mean": -0.02111254766765165,
+          "n_repeats": 5,
+          "sd": 0.10331308273465337
+        },
+        "micro_f1": {
+          "mean": 0.5081481481481482,
+          "n_repeats": 5,
+          "sd": 0.05458409904278679
+        },
+        "roc_auc_ovr_macro": {
+          "mean": 0.48779385171790246,
+          "n_repeats": 5,
+          "sd": 6.206335383118183e-17
+        }
+      }
+    },
+    "fusion": {
+      "aggregated": {
+        "accuracy": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.7466666666666667
+        },
+        "balanced_accuracy": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.64
+        },
+        "balanced_accuracy_bootstrap_ci95": {
+          "hi": 0.7308114035087719,
+          "lo": 0.5437163994504797,
+          "method": "file-level bootstrap of aggregated predictions (no replicate groups)",
+          "n_resamples": 1000
+        },
+        "cohen_kappa": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.3294117647058824
+        },
+        "log_loss": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.5798733378679708
+        },
+        "macro_f1": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.6459627329192547
+        },
+        "mcc": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.3882901373576604
+        },
+        "micro_f1": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.7466666666666667
+        },
+        "roc_auc_ovr_macro": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.8079999999999999
+        }
+      },
+      "evaluated_on": "files with at least one usable event window",
+      "fitted_on": "inner-validation files of the same fold only",
+      "head": "logistic regression on handcrafted features + mean embedding",
+      "kind": "fusion",
+      "n_embedding": 32,
+      "n_files": 75,
+      "n_files_evaluated": 75,
+      "n_handcrafted": 90,
+      "n_inputs": 122,
+      "n_val_file_fits": 282,
+      "per_repeat": {
+        "accuracy": {
+          "mean": 0.7146666666666667,
+          "n_repeats": 5,
+          "sd": 0.04770278351999553
+        },
+        "balanced_accuracy": {
+          "mean": 0.618,
+          "n_repeats": 5,
+          "sd": 0.06572670690061988
+        },
+        "cohen_kappa": {
+          "mean": 0.26546825715078637,
+          "n_repeats": 5,
+          "sd": 0.14349178551768757
+        },
+        "log_loss": {
+          "mean": 1.3263651513906471,
+          "n_repeats": 5,
+          "sd": 0.2640502889826087
+        },
+        "macro_f1": {
+          "mean": 0.617485119145974,
+          "n_repeats": 5,
+          "sd": 0.0816171563967549
+        },
+        "mcc": {
+          "mean": 0.29025991966929476,
+          "n_repeats": 5,
+          "sd": 0.14883495815073677
+        },
+        "micro_f1": {
+          "mean": 0.7146666666666667,
+          "n_repeats": 5,
+          "sd": 0.04770278351999553
+        },
+        "roc_auc_ovr_macro": {
+          "mean": 0.62336,
+          "n_repeats": 5,
+          "sd": 0.06651652426277249
+        }
+      }
+    },
+    "hgb": {
+      "aggregated": {
+        "accuracy": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.9185185185185185
+        },
+        "balanced_accuracy": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.9147830018083183
+        },
+        "balanced_accuracy_bootstrap_ci95": {
+          "hi": 0.9624527034133812,
+          "lo": 0.8616654772524531,
+          "method": "file-level bootstrap of aggregated predictions (no replicate groups)",
+          "n_resamples": 1000
+        },
+        "cohen_kappa": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.831728045325779
+        },
+        "log_loss": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.24597617996868465
+        },
+        "macro_f1": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.915859255481897
+        },
+        "mcc": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.8318253795764546
+        },
+        "micro_f1": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.9185185185185185
+        },
+        "roc_auc_ovr_macro": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.9789783001808318
+        }
+      },
+      "evaluated_on": "all usable files",
+      "kind": "feature",
+      "n_files_evaluated": 135,
+      "per_repeat": {
+        "accuracy": {
+          "mean": 0.914074074074074,
+          "n_repeats": 5,
+          "sd": 0.008445743889623256
+        },
+        "balanced_accuracy": {
+          "mean": 0.9104656419529837,
+          "n_repeats": 5,
+          "sd": 0.008265687955999189
+        },
+        "cohen_kappa": {
+          "mean": 0.8226585072210767,
+          "n_repeats": 5,
+          "sd": 0.017163921513542242
+        },
+        "log_loss": {
+          "mean": 0.4154380849970704,
+          "n_repeats": 5,
+          "sd": 0.042286556515033165
+        },
+        "macro_f1": {
+          "mean": 0.9113152805033975,
+          "n_repeats": 5,
+          "sd": 0.008580515456383754
+        },
+        "mcc": {
+          "mean": 0.8229310252192841,
+          "n_repeats": 5,
+          "sd": 0.017208352542062988
+        },
+        "micro_f1": {
+          "mean": 0.914074074074074,
+          "n_repeats": 5,
+          "sd": 0.008445743889623256
+        },
+        "roc_auc_ovr_macro": {
+          "mean": 0.9701627486437612,
+          "n_repeats": 5,
+          "sd": 0.0026553662125837806
+        }
+      },
+      "permutation": {
+        "n_permutations": 20,
+        "null_mean": 0.5095829566003615,
+        "null_p95": 0.5633024412296563,
+        "observed_balanced_accuracy_mean_over_repeats": 0.9104656419529837,
+        "p_value": 0.047619047619047616,
+        "smallest_attainable_p": 0.047619047619047616
+      }
+    },
+    "hybrid": {
+      "aggregated": {
+        "accuracy": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.8814814814814815
+        },
+        "balanced_accuracy": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.8675406871609403
+        },
+        "balanced_accuracy_bootstrap_ci95": {
+          "hi": 0.9251157705288021,
+          "lo": 0.803263951061397,
+          "method": "file-level bootstrap of aggregated predictions (no replicate groups)",
+          "n_resamples": 1000
+        },
+        "cohen_kappa": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.7506925207756232
+        },
+        "log_loss": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.32780040293191043
+        },
+        "macro_f1": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.8748841519925857
+        },
+        "mcc": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.756593721054547
+        },
+        "micro_f1": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.8814814814814815
+        },
+        "roc_auc_ovr_macro": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.9663200723327305
+        }
+      },
+      "evaluated_on": "all usable files",
+      "fusion_rule": "blend",
+      "kind": "ensemble",
+      "model_a_weight": 0.5,
+      "n_files_evaluated": 135,
+      "per_repeat": {
+        "accuracy": {
+          "mean": 0.8755555555555556,
+          "n_repeats": 5,
+          "sd": 0.02121158676040939
+        },
+        "balanced_accuracy": {
+          "mean": 0.8635171790235082,
+          "n_repeats": 5,
+          "sd": 0.023568726040231837
+        },
+        "cohen_kappa": {
+          "mean": 0.7392281574182282,
+          "n_repeats": 5,
+          "sd": 0.04478869776257316
+        },
+        "log_loss": {
+          "mean": 0.33759347223552105,
+          "n_repeats": 5,
+          "sd": 0.01203671195384877
+        },
+        "macro_f1": {
+          "mean": 0.8692016030278935,
+          "n_repeats": 5,
+          "sd": 0.022464781833813084
+        },
+        "mcc": {
+          "mean": 0.7441270214206945,
+          "n_repeats": 5,
+          "sd": 0.04463715276613909
+        },
+        "micro_f1": {
+          "mean": 0.8755555555555556,
+          "n_repeats": 5,
+          "sd": 0.02121158676040939
+        },
+        "roc_auc_ovr_macro": {
+          "mean": 0.9556962025316456,
+          "n_repeats": 5,
+          "sd": 0.0034835070089110592
+        }
+      },
+      "permutation": {
+        "reason": "the ensemble has no free parameters, so its null is implied by the nulls of Model A and Model B; running it would double the cost without adding evidence",
+        "status": "not run"
+      }
+    },
+    "logreg": {
+      "aggregated": {
+        "accuracy": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.7703703703703704
+        },
+        "balanced_accuracy": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.7518083182640145
+        },
+        "balanced_accuracy_bootstrap_ci95": {
+          "hi": 0.8214364482170657,
+          "lo": 0.6774597451204439,
+          "method": "file-level bootstrap of aggregated predictions (no replicate groups)",
+          "n_resamples": 1000
+        },
+        "cohen_kappa": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.515681055433399
+        },
+        "log_loss": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.5528882779148568
+        },
+        "macro_f1": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.756700191849311
+        },
+        "mcc": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.5208556293270293
+        },
+        "micro_f1": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.7703703703703704
+        },
+        "roc_auc_ovr_macro": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.7922694394213381
+        }
+      },
+      "evaluated_on": "all usable files",
+      "kind": "feature",
+      "n_files_evaluated": 135,
+      "per_repeat": {
+        "accuracy": {
+          "mean": 0.7437037037037038,
+          "n_repeats": 5,
+          "sd": 0.015360326928390894
+        },
+        "balanced_accuracy": {
+          "mean": 0.7196654611211573,
+          "n_repeats": 5,
+          "sd": 0.0221289080143602
+        },
+        "cohen_kappa": {
+          "mean": 0.4537871473360432,
+          "n_repeats": 5,
+          "sd": 0.03915085032426816
+        },
+        "log_loss": {
+          "mean": 0.6368581614485791,
+          "n_repeats": 5,
+          "sd": 0.07886593027312333
+        },
+        "macro_f1": {
+          "mean": 0.7235764122527863,
+          "n_repeats": 5,
+          "sd": 0.02188855709345036
+        },
+        "mcc": {
+          "mean": 0.46526098345346006,
+          "n_repeats": 5,
+          "sd": 0.03299364170865809
+        },
+        "micro_f1": {
+          "mean": 0.7437037037037038,
+          "n_repeats": 5,
+          "sd": 0.015360326928390894
+        },
+        "roc_auc_ovr_macro": {
+          "mean": 0.7806962025316457,
+          "n_repeats": 5,
+          "sd": 0.013347261601831348
+        }
+      },
+      "permutation": {
+        "n_permutations": 20,
+        "null_mean": 0.4900271247739602,
+        "null_p95": 0.5412929475587703,
+        "observed_balanced_accuracy_mean_over_repeats": 0.7196654611211573,
+        "p_value": 0.047619047619047616,
+        "smallest_attainable_p": 0.047619047619047616
+      }
+    },
+    "proto_cnn": {
+      "aggregated": {
+        "accuracy": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.7333333333333333
+        },
+        "balanced_accuracy": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.72
+        },
+        "balanced_accuracy_bootstrap_ci95": {
+          "hi": 0.824579081632653,
+          "lo": 0.6059652575263413,
+          "method": "file-level bootstrap of aggregated predictions (no replicate groups)",
+          "n_resamples": 1000
+        },
+        "cohen_kappa": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.423076923076923
+        },
+        "log_loss": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.5593063997849985
+        },
+        "macro_f1": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.7106481481481481
+        },
+        "mcc": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.4259217009643015
+        },
+        "micro_f1": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.7333333333333333
+        },
+        "roc_auc_ovr_macro": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.8208
+        }
+      },
+      "evaluated_on": "files with at least one usable event window",
+      "head": "nearest class prototype on the L2-normalised GAP embedding",
+      "kind": "prototype",
+      "metric_loss": "supcon",
+      "metric_loss_weight": 0.2,
+      "metric_temperature": 0.1,
+      "n_files": 75,
+      "n_files_evaluated": 75,
+      "per_repeat": {
+        "accuracy": {
+          "mean": 0.6799999999999999,
+          "n_repeats": 5,
+          "sd": 0.03887301263230203
+        },
+        "balanced_accuracy": {
+          "mean": 0.648,
+          "n_repeats": 5,
+          "sd": 0.03114482300479481
+        },
+        "cohen_kappa": {
+          "mean": 0.29230288495160456,
+          "n_repeats": 5,
+          "sd": 0.06272763472960716
+        },
+        "log_loss": {
+          "mean": 0.5978342191302847,
+          "n_repeats": 5,
+          "sd": 0.02867883700069813
+        },
+        "macro_f1": {
+          "mean": 0.6443285119492713,
+          "n_repeats": 5,
+          "sd": 0.03257212040174912
+        },
+        "mcc": {
+          "mean": 0.2952632892183137,
+          "n_repeats": 5,
+          "sd": 0.06202943613378719
+        },
+        "micro_f1": {
+          "mean": 0.6799999999999999,
+          "n_repeats": 5,
+          "sd": 0.03887301263230203
+        },
+        "roc_auc_ovr_macro": {
+          "mean": 0.7118399999999999,
+          "n_repeats": 5,
+          "sd": 0.043471001828805346
+        }
+      },
+      "proto_distance": "cosine",
+      "prototypes_from": "inner-validation files of the same fold"
+    },
+    "rf": {
+      "aggregated": {
+        "accuracy": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.8814814814814815
+        },
+        "balanced_accuracy": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.8649412296564196
+        },
+        "balanced_accuracy_bootstrap_ci95": {
+          "hi": 0.9226365546218488,
+          "lo": 0.8008412172685714,
+          "method": "file-level bootstrap of aggregated predictions (no replicate groups)",
+          "n_resamples": 1000
+        },
+        "cohen_kappa": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.7493618008818752
+        },
+        "log_loss": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.2531305280276986
+        },
+        "macro_f1": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.8739495798319328
+        },
+        "mcc": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.7587287952482921
+        },
+        "micro_f1": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.8814814814814815
+        },
+        "roc_auc_ovr_macro": {
+          "reason": "",
+          "status": "computed",
+          "value": 0.9676763110307415
+        }
+      },
+      "evaluated_on": "all usable files",
+      "kind": "feature",
+      "n_files_evaluated": 135,
+      "per_repeat": {
+        "accuracy": {
+          "mean": 0.8681481481481482,
+          "n_repeats": 5,
+          "sd": 0.01987615979999816
+        },
+        "balanced_accuracy": {
+          "mean": 0.8535488245931283,
+          "n_repeats": 5,
+          "sd": 0.02368965405433187
+        },
+        "cohen_kappa": {
+          "mean": 0.722273091072297,
+          "n_repeats": 5,
+          "sd": 0.04379881441961315
+        },
+        "log_loss": {
+          "mean": 0.25574660907642943,
+          "n_repeats": 5,
+          "sd": 0.00969427680275536
+        },
+        "macro_f1": {
+          "mean": 0.86048309683676,
+          "n_repeats": 5,
+          "sd": 0.022376070164806864
+        },
+        "mcc": {
+          "mean": 0.7288981884819506,
+          "n_repeats": 5,
+          "sd": 0.040683495211102774
+        },
+        "micro_f1": {
+          "mean": 0.8681481481481482,
+          "n_repeats": 5,
+          "sd": 0.01987615979999816
+        },
+        "roc_auc_ovr_macro": {
+          "mean": 0.9655063291139241,
+          "n_repeats": 5,
+          "sd": 0.006368046588552075
+        }
+      },
+      "permutation": {
+        "n_permutations": 20,
+        "null_mean": 0.49473440325497287,
+        "null_p95": 0.5673598553345388,
+        "observed_balanced_accuracy_mean_over_repeats": 0.8535488245931283,
+        "p_value": 0.047619047619047616,
+        "smallest_attainable_p": 0.047619047619047616
+      }
+    }
+  },
+  "n_features": 90,
+  "n_files_skipped_or_failed": 0,
+  "n_files_used": 135,
+  "n_pool_files": 135,
+  "n_repeats": 5,
+  "n_splits": 5,
+  "prepared_run": "runs/train_2026-10-17_16-37-35/training_2026-10-17_16-37-35",
+  "quad": null,
+  "saved_models": {
+    "dir": "models",
+    "fold_tags": [
+      "r0f0",
+      "r0f1",
+      "r0f2",
+      "r0f3",
+      "r0f4",
+      "r1f0",
+      "r1f1",
+      "r1f2",
+      "r1f3",
+      "r1f4",
+      "r2f0",
+      "r2f1",
+      "r2f2",
+      "r2f3",
+      "r2f4",
+      "r3f0",
+      "r3f1",
+      "r3f2",
+      "r3f3",
+      "r3f4",
+      "r4f0",
+      "r4f1",
+      "r4f2",
+      "r4f3",
+      "r4f4"
+    ],
+    "models": [
+      "hgb",
+      "logreg",
+      "rf"
+    ],
+    "n": 75,
+    "note": "one fitted pipeline per (repeat, outer fold); `trapsig predict` averages their probabilities over new files"
+  },
+  "seed": 42,
+  "skipped_or_failed": [],
+  "trapsig_version": "0.1.0",
+  "viz_registry": {
+    "by_category": {
+      "A": {
+        "entries": 15,
+        "generated": 15
+      },
+      "B": {
+        "entries": 12,
+        "generated": 12
+      },
+      "C": {
+        "entries": 10,
+        "generated": 8,
+        "not_available": 2
+      },
+      "D": {
+        "entries": 31,
+        "generated": 25,
+        "skipped": 6
+      },
+      "E": {
+        "entries": 28,
+        "generated": 16,
+        "skipped": 12
+      },
+      "F": {
+        "entries": 12,
+        "generated": 5,
+        "skipped": 7
+      },
+      "G": {
+        "entries": 2,
+        "generated": 2
+      },
+      "K": {
+        "entries": 15,
+        "generated": 15
+      },
+      "M": {
+        "entries": 8,
+        "generated": 2,
+        "not_available": 2,
+        "skipped": 4
+      },
+      "Q": {
+        "entries": 12,
+        "generated": 12
+      },
+      "S": {
+        "entries": 6,
+        "generated": 5,
+        "skipped": 1
+      },
+      "T": {
+        "entries": 22,
+        "generated": 7,
+        "skipped": 15
+      }
+    },
+    "counts": {
+      "generated": 124,
+      "not_available": 4,
+      "skipped": 45
+    },
+    "csv_twins": 26,
+    "entries": 173,
+    "index": "runs/train_2026-10-17_16-37-35/viz_registry_index.csv",
+    "png_dir": "runs/train_2026-10-17_16-37-35/viz_registry"
+  }
+}

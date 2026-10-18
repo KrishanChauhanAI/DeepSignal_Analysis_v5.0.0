@@ -1,0 +1,25 @@
+category,figure,file,status,reason,csv_twin,description
+dataset_composition,dataset_composition,runs/train_2026-10-17_16-37-35/figures/dataset_composition.png,generated,,runs/train_2026-10-17_16-37-35/report_dataset_composition.csv,"files and detected events per class, and the imbalance ratio that decides whether class weights are used"
+signal_examples,signal_178d697a32a19393,runs/train_2026-10-17_16-37-35/figures/signal_178d697a32a19393.png,generated,,,"analysed trace, rolling-median baseline and detected events, per example file"
+class_mean_window,class_mean_event_window,runs/train_2026-10-17_16-37-35/figures/class_mean_event_window.png,generated,,,mean event window per class at the analysis rate
+psd_by_class,psd_by_class,runs/train_2026-10-17_16-37-35/figures/psd_by_class.png,generated,,,mean Welch band power per class
+feature_distributions,feature_distributions,runs/train_2026-10-17_16-37-35/figures/feature_distributions.png,generated,,runs/train_2026-10-17_16-37-35/report_feature_distributions.csv,"per-class distribution of the most separated features, by domain"
+missing_values,missing_values,runs/train_2026-10-17_16-37-35/figures/missing_values.png,generated,,runs/train_2026-10-17_16-37-35/report_missing_values.csv,"which features and which files carry NaN, i.e. where a domain was undefined"
+feature_correlation,feature_correlation,runs/train_2026-10-17_16-37-35/figures/feature_correlation.png,generated,,runs/train_2026-10-17_16-37-35/report_feature_correlation.csv,"|Spearman| between features, with the declared redundancy pairs marked"
+deep_learning_curves,learning_curves,runs/train_2026-10-17_16-37-35/figures/learning_curves.png,generated,,,training and validation loss per fold for the deep encoder
+confusion,confusion_hybrid,runs/train_2026-10-17_16-37-35/figures/confusion_hybrid.png,generated,,,"confusion matrix per model, on that model's evaluation mask"
+roc,roc_hybrid,runs/train_2026-10-17_16-37-35/figures/roc_hybrid.png,generated,,,one-vs-rest ROC per model from out-of-fold probabilities
+calibration,calibration_hybrid,runs/train_2026-10-17_16-37-35/figures/calibration_hybrid.png,generated,,,reliability diagram per model
+model_comparison,model_comparison_with_bootstrap_intervals,runs/train_2026-10-17_16-37-35/figures/model_comparison_with_bootstrap_intervals.png,generated,,,primary metric per model with bootstrap intervals
+embedding,out_of_fold_embedding_pca,runs/train_2026-10-17_16-37-35/figures/embedding_pca.png,generated,,,PCA of the out-of-fold learned representation
+attribution,attribution_window_82,runs/train_2026-10-17_16-37-35/figures/attribution_window_82.png,generated,,,"temporal attribution of explained windows (Grad-CAM, integrated gradients, occlusion)"
+feature_importance,model_a_feature_importance,runs/train_2026-10-17_16-37-35/figures/model_a_feature_importance.png,generated,,,mean |SHAP| per class for the Model A classifiers
+ablation,ablation_feature_domains,runs/train_2026-10-17_16-37-35/figures/ablation_feature_domains.png,generated,,runs/train_2026-10-17_16-37-35/ablation.csv,primary metric per feature-subset variant against the all-groups baseline
+hpo,hpo_trials,,skipped,the data this figure needs is absent or degenerate on this run,,"every trial of every nested search, failures included"
+error_analysis,error_analysis_hybrid,runs/train_2026-10-17_16-37-35/figures/error_analysis_hybrid.png,generated,,runs/train_2026-10-17_16-37-35/report_error_analysis_hybrid.csv,"per-file error rate across repeats, the errors only, and confidence of correct versus wrong calls"
+pr_curves,pr_hybrid,runs/train_2026-10-17_16-37-35/figures/pr_hybrid.png,generated,,,one-vs-rest precision-recall curves with average precision per class
+quad_gates,quad_fusion_gates,,not requested,quad.enabled is false: the four-branch model did not run,,mean cross-branch fusion gate weight: which representation carried the call
+shot_curve,fewshot_shot_curve,,not requested,quad.enabled is false: the four-branch model did not run,,"one-shot/few-shot episode accuracy versus support shots, with intervals"
+branch_ablation,quad_branch_ablation,,not requested,quad.enabled is false: the four-branch model did not run,,fused four-branch model versus each branch-ablated variant
+quad_embedding,quad_embedding_pca,,not requested,quad.enabled is false: the four-branch model did not run,,"PCA and t-SNE of the shared four-branch embedding, coloured by class"
+raw_per_file,raw_file_waveforms,runs/train_2026-10-17_16-37-35/figures/files,generated,,runs/train_2026-10-17_16-37-35/figures/files/raw_file_figures_index.csv,per-file raw overview figures: 135/135

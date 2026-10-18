@@ -1,0 +1,7 @@
+class,sample_id,extreme_fraction,minmax_fraction
+InVitro_WT_tau,c4de5f492bc76186,5e-06,1e-05
+InVitro_WT_tau,ece1386140d9feb3,5e-06,1e-05
+InVitro_WT_tau,be509f6ad0d449aa,0.0,1e-05
+InVitro_tau+GSK,87faede677b3fe14,0.0,1e-05
+InVitro_tau+GSK,fd4cddbd17124fc5,0.0,1e-05
+InVitro_tau+GSK,178d697a32a19393,0.026535,1e-05

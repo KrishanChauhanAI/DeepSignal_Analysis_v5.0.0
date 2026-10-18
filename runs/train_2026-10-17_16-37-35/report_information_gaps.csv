@@ -1,0 +1,6 @@
+id,gap,why_it_matters,what_would_close_it
+1,Replicate or session identifiers,"Without them, leakage between files of one recording session cannot be ruled out and variance cannot be partitioned",A metadata CSV giving session_id and replicate_id per file
+2,Ground-truth event annotations,"Detected events are threshold crossings, not verified trapping events; sensitivity and specificity of detection are unknown","A manually annotated subset of files, even 10 per class"
+3,An unknown or out-of-class set,"Novelty detection cannot be evaluated, only diagnosed by leave-one-class-out","Recordings of a third condition, or buffer-only controls"
+4,Instrument and acquisition metadata,"Batch effects cannot be modelled or removed, and units cannot be converted to physical current","Per-file acquisition date, amplifier gain, and a calibration factor"
+5,Independent validation data,Cross-validated numbers on this pool cannot confirm performance on new recordings,"A second, separately acquired dataset"

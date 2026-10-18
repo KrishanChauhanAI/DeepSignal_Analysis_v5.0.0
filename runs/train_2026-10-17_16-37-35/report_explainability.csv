@@ -1,0 +1,21 @@
+section_item,value
+architecture_condition,"conv -> global average pooling -> single linear head, so Grad-CAM is mathematically valid (design R22); attributions are labelled gradcam, not CAM"
+temporal.n_windows_explained,20
+temporal.computed,"[""gradcam"", ""integrated_gradients"", ""occlusion""]"
+temporal.window_length_samples,100
+temporal.explanation_model,fitted on the full pool for attribution only; no performance number in this report comes from it
+baseline_only_probe.status,computed
+baseline_only_probe.probe,event part of each window replaced by its own pre-event mean; baseline shape only
+baseline_only_probe.balanced_accuracy_mean_over_repeats,0.542
+baseline_only_probe.n_files,75
+baseline_only_probe.chance,0.5
+baseline_only_probe.interpretation,baseline alone does not predict above chance
+time_shift_null.shift_samples,12
+time_shift_null.moves_with_event_fraction,0.4
+time_shift_null.interpretation,attribution does not reliably track the shifted event: the model may be keyed to window position
+features.logreg.class_InVitro_WT_tau,noise_raw_level (1.25); time_frac_above_mean (1.04); event_dip_median (0.877); event_has_any (0.664); tf_wav_l1_frac (0.596); tf_flux_mean (0.595); event_log10_dur_median (0.554); amp_log10_peak (0.545)
+features.logreg.class_InVitro_tau+GSK,noise_raw_level (1.25); time_frac_above_mean (1.04); event_dip_median (0.877); event_has_any (0.664); tf_wav_l1_frac (0.596); tf_flux_mean (0.595); event_log10_dur_median (0.554); amp_log10_peak (0.545)
+features.rf.class_InVitro_WT_tau,noise_log10_sigma (0.00542); noise_log10_raw_std (0.00542)
+features.rf.class_InVitro_tau+GSK,noise_log10_raw_std (0.00291); noise_log10_sigma (0.00291)
+features.hgb.class_InVitro_WT_tau,noise_log10_raw_std (0.0573); noise_log10_sigma (0.0573)
+features.hgb.class_InVitro_tau+GSK,noise_log10_raw_std (0.168); noise_log10_sigma (0.168)

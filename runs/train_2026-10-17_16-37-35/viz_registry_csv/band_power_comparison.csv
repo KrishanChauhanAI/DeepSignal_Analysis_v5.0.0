@@ -1,0 +1,9 @@
+class,band,log10_power
+InVitro_WT_tau,1-10,7.2695
+InVitro_WT_tau,10-100,8.2868
+InVitro_WT_tau,100-1000,8.9659
+InVitro_WT_tau,1000-5000,9.4636
+InVitro_tau+GSK,1-10,10.9472
+InVitro_tau+GSK,10-100,11.2967
+InVitro_tau+GSK,100-1000,11.2139
+InVitro_tau+GSK,1000-5000,11.4107

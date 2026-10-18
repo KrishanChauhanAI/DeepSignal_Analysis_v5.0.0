@@ -1,0 +1,27 @@
+{
+  "cpu_count": 128,
+  "git": {
+    "available": false,
+    "reason": "not a git repository"
+  },
+  "gpu": {
+    "nvidia_smi": true,
+    "torch_installed": true
+  },
+  "machine": "x86_64",
+  "memory_available_bytes": 527126732800,
+  "memory_total_bytes": 540598108160,
+  "packages": {
+    "PyYAML": "6.0.3",
+    "matplotlib": "3.11.2",
+    "numpy": "2.4.6",
+    "pandas": "3.0.6",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.17.1",
+    "trapsig": "0.1.0"
+  },
+  "platform": "Linux-5.15.0-173-generic-x86_64-with-glibc2.39",
+  "python": "3.11.17",
+  "python_executable": "/data/envs1/bin/python3",
+  "timestamp_local": "2026-10-17T16:37:42"
+}

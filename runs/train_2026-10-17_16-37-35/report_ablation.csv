@@ -1,0 +1,70 @@
+row_type,name,kind,groups_used,n_features,balanced_accuracy_mean,balanced_accuracy_sd,delta_vs_all,spearman,n_files_used,status,reason
+feature_group,noise,declared group,,3,,,,,,computed,"robust residual sigma, raw level and spread"
+feature_group,time,declared group,,9,,,,,,computed,"temporal pattern: zero crossings, Hjorth, line length, Teager energy, permutation entropy, segment variability, drift"
+feature_group,amp,declared group,,9,,,,,,computed,"amplitude domain: RMS, peak, peak-to-peak, crest factor, percentiles, dynamic range"
+feature_group,event,declared group,,15,,,,,,computed,"event statistics: count, rate, duration, dip depth, amplitude"
+feature_group,ctx,declared group,,16,,,,,,computed,"context: inter-event intervals, burstiness, onset distribution, rate drift, amplitude-duration coupling, baseline stability, reference level"
+feature_group,spec,declared group,,13,,,,,,computed,"frequency domain: Welch band powers, slope, peak, centroid, spread, entropy, roll-off, harmonicity"
+feature_group,tf,declared group,,12,,,,,,computed,"time-frequency: STFT flux, per-band energy drift, frame entropy, db2 wavelet levels"
+feature_group,acf,declared group,,3,,,,,,computed,normalised autocorrelation of the residual at the configured lags
+feature_group,shape,declared group,,3,,,,,,computed,"distribution shape: skewness, excess kurtosis, tail fraction"
+feature_group,morph,declared group,,7,,,,,,computed,"morphology: turning points, event rise/fall, area-to-peak, sharpness, self-similarity to this recording's mean event waveform"
+note,ablation.mode,,,,,,,,,computed,both
+note,ablation.model,,,,,,,,,,logreg
+note,ablation.protocol,,,,,,,,,,"same folds, same files, same model settings as the main cross-validation; only the feature columns change"
+ablation,all_groups,baseline,acf|amp|ctx|event|morph|noise|shape|spec|tf|time,90,0.7196654611211573,0.0221289080143602,,,,computed,
+ablation,only:noise,group_only,noise,3,0.6274638336347197,0.014166402097546002,-0.09220162748643757,,,computed,
+ablation,only:time,group_only,time,9,0.5616636528028933,0.014117220501521558,-0.15800180831826394,,,computed,
+ablation,only:amp,group_only,amp,9,0.49656419529837253,0.011414897140160165,-0.22310126582278472,,,computed,
+ablation,only:event,group_only,event,15,0.5548598553345389,0.016090674937261858,-0.1648056057866184,,,computed,
+ablation,only:ctx,group_only,ctx,16,0.6530741410488246,0.03625469547964036,-0.0665913200723327,,,computed,
+ablation,only:spec,group_only,spec,13,0.72000452079566,0.05033692052333646,0.00033905967450276187,,,computed,
+ablation,only:tf,group_only,tf,12,0.5264466546112117,0.023683533327136,-0.1932188065099456,,,computed,
+ablation,only:acf,group_only,acf,3,0.5185804701627486,0.024559615103017247,-0.2010849909584087,,,computed,
+ablation,only:shape,group_only,shape,3,0.4911392405063292,0.003466598465222589,-0.22852622061482808,,,computed,
+ablation,only:morph,group_only,morph,7,0.5413878842676312,0.014565848222226238,-0.17827757685352608,,,computed,
+ablation,without:noise,leave_one_out,acf|amp|ctx|event|morph|shape|spec|tf|time,87,0.6753164556962025,0.0329599218008433,-0.04434900542495479,,,computed,
+ablation,without:time,leave_one_out,acf|amp|ctx|event|morph|noise|shape|spec|tf,81,0.651130198915009,0.024431570358538164,-0.06853526220614825,,,computed,
+ablation,without:amp,leave_one_out,acf|ctx|event|morph|noise|shape|spec|tf|time,81,0.7056735985533453,0.014768547550882707,-0.01399186256781193,,,computed,
+ablation,without:event,leave_one_out,acf|amp|ctx|morph|noise|shape|spec|tf|time,75,0.6939195298372514,0.018551518915063597,-0.0257459312839059,,,computed,
+ablation,without:ctx,leave_one_out,acf|amp|event|morph|noise|shape|spec|tf|time,74,0.7181735985533454,0.010064673583208252,-0.0014918625678118635,,,computed,
+ablation,without:spec,leave_one_out,acf|amp|ctx|event|morph|noise|shape|tf|time,77,0.716613924050633,0.04715439908398741,-0.0030515370705243017,,,computed,
+ablation,without:tf,leave_one_out,acf|amp|ctx|event|morph|noise|shape|spec|time,78,0.7354430379746836,0.021249452866558913,0.01577757685352632,,,computed,
+ablation,without:acf,leave_one_out,amp|ctx|event|morph|noise|shape|spec|tf|time,87,0.7196654611211573,0.017695212245960795,0.0,,,computed,
+ablation,without:shape,leave_one_out,acf|amp|ctx|event|morph|noise|spec|tf|time,87,0.7166139240506328,0.01909427500737891,-0.0030515370705244127,,,computed,
+ablation,without:morph,leave_one_out,acf|amp|ctx|event|noise|shape|spec|tf|time,83,0.7262884267631103,0.025020495614174375,0.0066229656419530825,,,computed,
+note,ablation.interpretation,,,,,,,,,,"a group whose 'only:' score is near the all-groups score carries most of the signal; a group whose 'without:' score is near the all-groups score adds little. Differences are on the same folds, so they are paired comparisons, but they are not independent tests: no p-value is claimed here"
+note,redundancy.threshold,,,,,,,,,,0.98
+note,redundancy.n_pairs_flagged,,,,,,,,,,31
+note,redundancy.policy,,,,,,,,,,flagged pairs are reported in feature_redundancy.csv and never dropped: dropping columns on the pooled matrix would use test-fold information
+redundant_pair,event_n <-> event_rate_per_min,|Spearman| on the pooled files,,,,,,1.0,135,flagged,redundant at this threshold
+redundant_pair,time_hjorth_mobility <-> acf_0p1ms,|Spearman| on the pooled files,,,,,,-0.999995,135,flagged,redundant at this threshold
+redundant_pair,amp_abs_p99_over_sigma <-> amp_dynamic_range_db,|Spearman| on the pooled files,,,,,,0.999995,135,flagged,redundant at this threshold
+redundant_pair,amp_log10_rms <-> spec_log10_total,|Spearman| on the pooled files,,,,,,0.999644,135,flagged,redundant at this threshold
+redundant_pair,spec_log10_band_1000_5000Hz <-> tf_wav_log10_l2,|Spearman| on the pooled files,,,,,,0.998381,135,flagged,redundant at this threshold
+redundant_pair,spec_log10_band_100_1000Hz <-> tf_wav_log10_l4,|Spearman| on the pooled files,,,,,,0.996825,135,flagged,redundant at this threshold
+redundant_pair,time_hjorth_complexity <-> spec_log10_centroid_hz,|Spearman| on the pooled files,,,,,,-0.996634,135,flagged,redundant at this threshold
+redundant_pair,spec_log10_band_1000_5000Hz <-> tf_wav_log10_l1,|Spearman| on the pooled files,,,,,,0.996113,135,flagged,redundant at this threshold
+redundant_pair,spec_log10_centroid_hz <-> spec_log10_rolloff85_hz,|Spearman| on the pooled files,,,,,,0.994037,135,flagged,redundant at this threshold
+redundant_pair,amp_abs_p99_over_sigma <-> shape_frac_beyond_3sigma,|Spearman| on the pooled files,,,,,,0.993677,135,flagged,redundant at this threshold
+redundant_pair,amp_dynamic_range_db <-> shape_frac_beyond_3sigma,|Spearman| on the pooled files,,,,,,0.993668,135,flagged,redundant at this threshold
+redundant_pair,amp_log10_peak <-> amp_log10_p2p,|Spearman| on the pooled files,,,,,,0.993054,135,flagged,redundant at this threshold
+redundant_pair,tf_wav_log10_l1 <-> tf_wav_log10_l2,|Spearman| on the pooled files,,,,,,0.992967,135,flagged,redundant at this threshold
+redundant_pair,amp_log10_rms <-> tf_wav_log10_l3,|Spearman| on the pooled files,,,,,,0.989884,135,flagged,redundant at this threshold
+redundant_pair,spec_log10_total <-> tf_wav_log10_l3,|Spearman| on the pooled files,,,,,,0.989884,135,flagged,redundant at this threshold
+redundant_pair,amp_log10_rms <-> spec_log10_band_100_1000Hz,|Spearman| on the pooled files,,,,,,0.989664,135,flagged,redundant at this threshold
+redundant_pair,time_hjorth_complexity <-> spec_log10_rolloff85_hz,|Spearman| on the pooled files,,,,,,-0.98913,135,flagged,redundant at this threshold
+redundant_pair,spec_log10_band_100_1000Hz <-> spec_log10_total,|Spearman| on the pooled files,,,,,,0.988986,135,flagged,redundant at this threshold
+redundant_pair,tf_wav_log10_l2 <-> tf_wav_log10_l3,|Spearman| on the pooled files,,,,,,0.98845,135,flagged,redundant at this threshold
+redundant_pair,tf_wav_log10_l3 <-> tf_wav_log10_l4,|Spearman| on the pooled files,,,,,,0.987601,135,flagged,redundant at this threshold
+redundant_pair,time_zcr_per_sample <-> time_line_length_norm,|Spearman| on the pooled files,,,,,,0.987133,135,flagged,redundant at this threshold
+redundant_pair,amp_log10_rms <-> tf_wav_log10_l4,|Spearman| on the pooled files,,,,,,0.987001,135,flagged,redundant at this threshold
+redundant_pair,spec_log10_total <-> tf_wav_log10_l4,|Spearman| on the pooled files,,,,,,0.986201,135,flagged,redundant at this threshold
+redundant_pair,spec_log10_band_1000_5000Hz <-> tf_wav_log10_l3,|Spearman| on the pooled files,,,,,,0.98445,135,flagged,redundant at this threshold
+redundant_pair,spec_log10_band_100_1000Hz <-> tf_wav_log10_l3,|Spearman| on the pooled files,,,,,,0.983802,135,flagged,redundant at this threshold
+redundant_pair,time_hjorth_mobility <-> spec_log10_centroid_hz,|Spearman| on the pooled files,,,,,,0.983133,135,flagged,redundant at this threshold
+redundant_pair,spec_log10_centroid_hz <-> acf_0p1ms,|Spearman| on the pooled files,,,,,,-0.983124,135,flagged,redundant at this threshold
+redundant_pair,time_hjorth_mobility <-> spec_log10_rolloff85_hz,|Spearman| on the pooled files,,,,,,0.981094,135,flagged,redundant at this threshold
+redundant_pair,spec_log10_rolloff85_hz <-> acf_0p1ms,|Spearman| on the pooled files,,,,,,-0.981085,135,flagged,redundant at this threshold
+redundant_pair,noise_raw_level <-> ctx_log10_abs_i0,|Spearman| on the pooled files,,,,,,0.981041,135,flagged,redundant at this threshold
+redundant_pair,spec_log10_band_10_100Hz <-> spec_log10_band_100_1000Hz,|Spearman| on the pooled files,,,,,,0.980758,135,flagged,redundant at this threshold

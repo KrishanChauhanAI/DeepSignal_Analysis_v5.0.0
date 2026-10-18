@@ -1,0 +1,174 @@
+id,category,title,status,spec,reason,file,csv_twin,prereq,params
+raw_waveform,A,raw analysed waveform,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/raw_waveform.png,,one analysed recording,fs from configuration
+segmented_windows,A,consecutive segments of a recording,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/segmented_windows.png,,recording >= 64 samples,6 segments
+class_overlay,A,overlaid recordings per class,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/class_overlay.png,,signals per class,3 per class
+rolling_mean_var,A,rolling mean and variance,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/rolling_mean_var.png,,recording >= 200 samples,auto window
+amplitude_histogram,A,amplitude distribution,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/amplitude_histogram.png,,one recording,80 bins
+amplitude_boxplot,A,amplitude spread per class,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/amplitude_boxplot.png,,signals per class,
+amplitude_qq,A,Q-Q plot against normal,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/amplitude_qq.png,,recording >= 32 samples,scipy.probplot
+first_difference,A,first difference,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/first_difference.png,,recording,
+second_difference,A,second difference,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/second_difference.png,,recording,
+autocorrelation,A,autocorrelation with CI bounds,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/autocorrelation.png,,recording >= 64 samples,lags <= 200
+partial_autocorrelation,A,partial autocorrelation,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/partial_autocorrelation.png,,recording >= 64 samples,"statsmodels optional, ACF fallback documented"
+lag_plot,A,lag-1 scatter,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/lag_plot.png,,recording,
+peak_locations,A,detected peaks,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/peak_locations.png,,recording,height 0.6 max
+hilbert_envelope,A,Hilbert envelope,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/hilbert_envelope.png,,recording >= 64 samples,
+changepoints,A,rolling-mean change points,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/changepoints.png,,recording >= 200 samples,3x MAD rule
+fft_magnitude,B,FFT magnitude,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/fft_magnitude.png,,recording >= 64,
+fft_phase,B,FFT phase at significant bins,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/fft_phase.png,,recording >= 64,1e-3 max threshold
+psd_periodogram,B,periodogram,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/psd_periodogram.png,,recording >= 64,scipy periodogram
+welch_psd,B,Welch PSD,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/welch_psd.png,,recording >= 256,nperseg <= 1024
+multitaper_psd,B,multitaper PSD,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/multitaper_psd.png,,recording >= 256,"NW=3, K=5 dpss"
+dominant_frequency,B,dominant frequencies,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/dominant_frequency.png,,recording >= 64,top 8 bins
+harmonics,B,harmonic series at f0,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/harmonics.png,,f0 > 0,8 harmonics
+spectral_centroid_bw,B,centroid vs bandwidth,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/spectral_centroid_bw.png,runs/train_2026-10-17_16-37-35/viz_registry_csv/spectral_centroid_bw.csv,signals per class,
+spectral_rolloff,B,85% spectral roll-off,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/spectral_rolloff.png,,signals per class,
+spectral_flatness,B,spectral flatness,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/spectral_flatness.png,,signals per class,
+spectral_entropy,B,spectral entropy,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/spectral_entropy.png,,signals per class,
+band_power_comparison,B,band power per class,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/band_power_comparison.png,runs/train_2026-10-17_16-37-35/viz_registry_csv/band_power_comparison.csv,signals per class,"1-10,10-100,100-1k,1k-5k Hz"
+stft_spectrogram,C,STFT magnitude spectrogram,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/stft_spectrogram.png,,recording >= 256,nperseg <= 256
+log_spectrogram,C,log-magnitude spectrogram,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/log_spectrogram.png,,recording >= 256,
+wavelet_scalogram,C,Morlet scalogram,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/wavelet_scalogram.png,,recording >= 128,widths 2..60
+wavelet_coefficients,C,wavelet coefficients at 3 scales,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/wavelet_coefficients.png,,recording >= 128,"w=4,12,32"
+wavelet_packet_energy,C,wavelet energy per scale,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/wavelet_packet_energy.png,runs/train_2026-10-17_16-37-35/viz_registry_csv/wavelet_packet_energy.csv,recording >= 256,
+time_varying_bandpower,C,time-varying band power,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/time_varying_bandpower.png,,recording >= 512,3 bands
+spectral_flux,C,spectral flux,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/spectral_flux.png,,recording >= 256,
+instantaneous_frequency,C,Hilbert instantaneous frequency,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/instantaneous_frequency.png,,recording >= 128,
+emd_components,C,EMD intrinsic modes,not_available,,optional dependency not shipped: optional EMD dependency (not shipped),,,optional EMD dependency (not shipped),
+vmd_components,C,VMD components,not_available,,optional dependency not shipped: optional VMD dependency (not shipped),,,optional VMD dependency (not shipped),
+sample_entropy_summary,D,sample entropy per class,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/sample_entropy_summary.png,runs/train_2026-10-17_16-37-35/viz_registry_csv/sample_entropy_summary.csv,signals per class,"m=2, r=0.2 sd"
+permutation_entropy,D,permutation entropy per class,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/permutation_entropy.png,,signals per class,order 3
+multiscale_entropy,D,multiscale entropy,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/multiscale_entropy.png,runs/train_2026-10-17_16-37-35/viz_registry_csv/multiscale_entropy.csv,signals per class,scales 1..16
+recurrence_plot,D,recurrence plot,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/recurrence_plot.png,,recording >= 200,eps = 90th percentile
+recurrence_quantification,D,recurrence quantification,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/recurrence_quantification.png,runs/train_2026-10-17_16-37-35/viz_registry_csv/recurrence_quantification.csv,recording >= 200,"RR, DET, Lmax"
+phase_space,D,phase-space reconstruction,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/phase_space.png,,recording >= 60,lag 10
+fractal_dimension,D,fractal dimension per class,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/fractal_dimension.png,,signals per class,log-log slope
+dfa_plot,D,detrended fluctuation analysis,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/dfa_plot.png,runs/train_2026-10-17_16-37-35/viz_registry_csv/dfa_plot.csv,recording >= 512,dyadic windows
+symbolic_complexity,D,symbolic word diversity,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/symbolic_complexity.png,,signals per class,quartile alphabet
+class_counts,E,class counts,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/class_counts.png,runs/train_2026-10-17_16-37-35/viz_registry_csv/class_counts.csv,manifest rows,
+class_duration,E,recording duration per class,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/class_duration.png,runs/train_2026-10-17_16-37-35/viz_registry_csv/class_duration.csv,signals per class,
+signal_quality,E,clipping / flat-line / outlier diagnostics,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/signal_quality.png,runs/train_2026-10-17_16-37-35/viz_registry_csv/signal_quality.csv,signals per class,
+classwise_waveforms,E,representative waveform per class,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/classwise_waveforms.png,,signals per class,
+classwise_psd,E,class-wise Welch PSD,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/classwise_psd.png,,signals per class,
+feature_correlation_matrix,E,|Spearman| feature matrix,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/feature_correlation_matrix.png,,feature matrix,top 40 features
+feature_importance_plot,E,feature importance (SHAP),generated,,,runs/train_2026-10-17_16-37-35/viz_registry/feature_importance_plot.png,,explainability enabled,top 15
+feature_redundancy,E,redundant pairs,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/feature_redundancy.png,runs/train_2026-10-17_16-37-35/viz_registry_csv/feature_redundancy.csv,redundancy pairs computed,top 20
+feature_distributions,E,feature distributions by class,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/feature_distributions.png,,feature matrix,<=4 per domain
+train_val_loss,F,training/validation loss curves,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/train_val_loss.png,runs/train_2026-10-17_16-37-35/viz_registry_csv/train_val_loss.csv,deep or quad logs,
+metric_curves,F,validation metric curves,skipped,,prerequisite not met on this run: deep or quad logs,,,deep or quad logs,
+confusion_matrix,F,confusion matrix,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/confusion_matrix.png,,aggregated predictions,
+roc_curve,F,one-vs-rest ROC,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/roc_curve.png,,finite probabilities,
+pr_curve,F,one-vs-rest precision-recall,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/pr_curve.png,,finite probabilities,
+calibration_plot,F,reliability diagram,generated,,,runs/train_2026-10-17_16-37-35/viz_registry/calibration_plot.png,,finite probabilities,
+embedding_umap_tsne,F,t-SNE of the shared embedding,skipped,,prerequisite not met on this run: embeddings >= 5 files,,,embeddings >= 5 files,sklearn TSNE
+embedding_pca,F,PCA of the shared embedding,skipped,,prerequisite not met on this run: embeddings >= 4 files,,,embeddings >= 4 files,sklearn PCA
+branch_ablation,F,branch ablation of the fusion,skipped,,prerequisite not met on this run: quad + ablation variants scored,,,quad + ablation variants scored,
+fusion_contribution,F,fusion gate contribution per branch,skipped,,prerequisite not met on this run: quad gates,,,quad gates,
+fewshot_episode_curve,F,episode accuracy per shot,skipped,,prerequisite not met on this run: few-shot episodes,,,few-shot episodes,
+shot_performance,F,shot curve with Wilson intervals,skipped,,prerequisite not met on this run: few-shot episodes,,,few-shot episodes,
+r3_zoomed_segments,K,raw signal zoomed representative segments,generated,2,,runs/train_2026-10-17_16-37-35/viz_registry/r3_zoomed_segments.png,,cached signal per class,"strongest deviation, display only"
+r3_baseline_noise_band,K,per-file baseline and robust noise band,generated,3,,runs/train_2026-10-17_16-37-35/viz_registry/r3_baseline_noise_band.png,,cached signal per class,rolling median 0.5 s; +/-3 robust sigma
+r3_filter_overlays,K,raw vs Butterworth and Gaussian overlay,generated,4,,runs/train_2026-10-17_16-37-35/viz_registry/r3_filter_overlays.png,,cached signal,configured filter or explicitly labelled fallback
+r3_rolling_median_windows,K,rolling-median window comparison,generated,6,,runs/train_2026-10-17_16-37-35/viz_registry/r3_rolling_median_windows.png,,cached signal,1/10/100 ms display windows
+r3_multirate_lpf,K,multirate Butterworth LPF comparison,generated,7,,runs/train_2026-10-17_16-37-35/viz_registry/r3_multirate_lpf.png,,integer-achievable sampling menu rates,same signal and time prefix
+r3_multirate_gaussian,K,multirate Gaussian comparison,generated,8,,runs/train_2026-10-17_16-37-35/viz_registry/r3_multirate_gaussian.png,,integer-achievable sampling menu rates,same signal and time prefix
+r3_filter_bode,K,anti-alias and conditioning filter Bode responses,generated,9,,runs/train_2026-10-17_16-37-35/viz_registry/r3_filter_bode.png,runs/train_2026-10-17_16-37-35/viz_registry_csv/r3_filter_bode.csv,configured or designable decimation/filter response,SOS frequency response
+r3_edge_artifacts,K,filter boundary and edge artefact zoom,generated,11,,runs/train_2026-10-17_16-37-35/viz_registry/r3_edge_artifacts.png,,cached signal,start/end; zero-phase and padding noted
+r3_transient_preservation,K,short/medium/long event preservation,generated,12,,runs/train_2026-10-17_16-37-35/viz_registry/r3_transient_preservation.png,runs/train_2026-10-17_16-37-35/viz_registry_csv/r3_transient_preservation.csv,at least three detected events in cached signals,amplitude retention quantified
+r3_filter_validation_composite,K,four-panel filter validation composite,generated,13,,runs/train_2026-10-17_16-37-35/viz_registry/r3_filter_validation_composite.png,,signal >=256 samples,"transient, PSD, response, diagnostics"
+r3_filter_qc_compliance,K,sampling/filter QC compliance by file,generated,14,,runs/train_2026-10-17_16-37-35/viz_registry/r3_filter_qc_compliance.png,runs/train_2026-10-17_16-37-35/viz_registry_csv/r3_filter_qc_compliance.csv,cached signals,finite/length/rate/HF/flatline proxy checks
+r3_detrend_constant,K,constant mean-centering comparison,generated,15,,runs/train_2026-10-17_16-37-35/viz_registry/r3_detrend_constant.png,,cached signal,full trace
+r3_detrend_linear,K,linear detrending comparison,generated,16,,runs/train_2026-10-17_16-37-35/viz_registry/r3_detrend_linear.png,,cached signal,least-squares trend
+r3_detrend_rolling,K,rolling-median baseline comparison,generated,17,,runs/train_2026-10-17_16-37-35/viz_registry/r3_detrend_rolling.png,,cached signal,0.5 s robust median
+r3_detrend_metrics,K,baseline method quantitative comparison,generated,18,,runs/train_2026-10-17_16-37-35/viz_registry/r3_detrend_metrics.png,,cached signal; events optional,"variance, smoothness, ACF, event amplitude"
+r3_qc_dashboard,Q,file-level QC dashboard,generated,19,,runs/train_2026-10-17_16-37-35/viz_registry/r3_qc_dashboard.png,,metadata.csv,"duration, sampling rate, size, samples"
+r3_nonfinite_summary,Q,NaN/Inf per-file summary,generated,20,,runs/train_2026-10-17_16-37-35/viz_registry/r3_nonfinite_summary.png,runs/train_2026-10-17_16-37-35/viz_registry_csv/r3_nonfinite_summary.csv,cached analysed signals,raw ingest errors remain in metadata
+r3_clipping_outliers,Q,outlier and observed-extrema indicators,generated,21,,runs/train_2026-10-17_16-37-35/viz_registry/r3_clipping_outliers.png,runs/train_2026-10-17_16-37-35/viz_registry_csv/r3_clipping_outliers.csv,cached signals,no amplifier rail claim without rail metadata
+r3_drift_quality,Q,baseline drift and SNR per-file scatter,generated,22,,runs/train_2026-10-17_16-37-35/viz_registry/r3_drift_quality.png,runs/train_2026-10-17_16-37-35/viz_registry_csv/r3_drift_quality.csv,cached signals,robust drift and SNR proxies
+r3_quality_by_class,Q,class-wise signal quality comparison,generated,23,,runs/train_2026-10-17_16-37-35/viz_registry/r3_quality_by_class.png,,multiple cached files/classes,no class-causality claim
+r3_flagged_files,Q,flagged files and status chart,generated,24,,runs/train_2026-10-17_16-37-35/viz_registry/r3_flagged_files.png,,metadata.csv,skipped rows retained
+r3_snr_noise,Q,MAD noise floor and SNR proxy,generated,25,,runs/train_2026-10-17_16-37-35/viz_registry/r3_snr_noise.png,runs/train_2026-10-17_16-37-35/viz_registry_csv/r3_snr_noise.csv,cached signals,dynamic range / robust sigma
+r3_event_density,Q,event rate and occupancy audit,generated,26,,runs/train_2026-10-17_16-37-35/viz_registry/r3_event_density.png,runs/train_2026-10-17_16-37-35/viz_registry_csv/r3_event_density.csv,event table + metadata.csv,"detector output, not truth"
+r3_class_counts,Q,recording counts by actual class,generated,27,,runs/train_2026-10-17_16-37-35/viz_registry/r3_class_counts.png,runs/train_2026-10-17_16-37-35/viz_registry_csv/r3_class_counts.csv,metadata.csv,independent files
+r3_window_counts,Q,window counts by class,generated,28,,runs/train_2026-10-17_16-37-35/viz_registry/r3_window_counts.png,runs/train_2026-10-17_16-37-35/viz_registry_csv/r3_window_counts.csv,metadata n_windows,counts from persisted window metadata
+r3_event_counts,Q,event counts by class,generated,29,,runs/train_2026-10-17_16-37-35/viz_registry/r3_event_counts.png,runs/train_2026-10-17_16-37-35/viz_registry_csv/r3_event_counts.csv,event table,detected events
+r3_split_availability,Q,class availability by split,generated,30,,runs/train_2026-10-17_16-37-35/viz_registry/r3_split_availability.png,,metadata split labels,uses recorded split field
+r3_window_timeline,S,event/window segmentation timeline,generated,31,,runs/train_2026-10-17_16-37-35/viz_registry/r3_window_timeline.png,runs/train_2026-10-17_16-37-35/viz_registry_csv/r3_window_timeline.csv,events and configured window length,illustrative stride marked
+r3_split_feature_drift,S,feature distribution by recorded split,generated,32,,runs/train_2026-10-17_16-37-35/viz_registry/r3_split_feature_drift.png,,>=2 split labels and file feature,descriptive only
+r3_group_overlap,S,group-overlap audit heatmap,generated,33,,runs/train_2026-10-17_16-37-35/viz_registry/r3_group_overlap.png,,group ids and split/fold metadata,exact assignment semantics shown
+r3_temporal_split,S,temporal split and embargo timeline,skipped,34,prerequisite not met on this run: acquisition timestamps and split intervals,,,acquisition timestamps and split intervals,no filesystem timestamp substitution
+r3_duplicate_audit,S,exact and near-duplicate audit,generated,35,,runs/train_2026-10-17_16-37-35/viz_registry/r3_duplicate_audit.png,,file hashes; cached signals for correlation,hash definitive for byte-identical files only
+r3_leakage_dashboard,S,leakage/preprocessing audit dashboard,generated,36,,runs/train_2026-10-17_16-37-35/viz_registry/r3_leakage_dashboard.png,,run context,protocol/evidence distinction
+r3_psd_multirate,D,PSD before/after multirate resampling,generated,38,,runs/train_2026-10-17_16-37-35/viz_registry/r3_psd_multirate.png,,integer-achievable rate menu,Nyquist marked per trace
+r3_classwise_psd_ci,D,class mean PSD with between-file SD,generated,39,,runs/train_2026-10-17_16-37-35/viz_registry/r3_classwise_psd_ci.png,,>=2 recordings in classes,SD not CI
+r3_dark_1khz_psd,D,dark-colour 1 kHz baseline PSD,skipped,40,prerequisite not met on this run: analysis_rate_hz exactly 1000,,,analysis_rate_hz exactly 1000,sub-500 Hz view
+r3_spectral_feature_summary,D,integrated spectral feature comparison,generated,41,,runs/train_2026-10-17_16-37-35/viz_registry/r3_spectral_feature_summary.png,,spectral engineered columns,file-level means
+r3_acf_decay,D,class ACF decay curves,generated,43,,runs/train_2026-10-17_16-37-35/viz_registry/r3_acf_decay.png,runs/train_2026-10-17_16-37-35/viz_registry_csv/r3_acf_decay.csv,cached signals >=64 samples,mean +/- between-file SD
+r3_acf_characteristics,D,selected-lag ACF comparison,generated,44,,runs/train_2026-10-17_16-37-35/viz_registry/r3_acf_characteristics.png,runs/train_2026-10-17_16-37-35/viz_registry_csv/r3_acf_characteristics.csv,cached signals,1/10/100 ms lags
+r3_acf_model,D,single-exponential ACF diagnostic fit,skipped,45,prerequisite not met on this run: positive ACF range,,,positive ACF range,one model only; no unjustified model selection
+r3_phase_space,D,delayed-current phase-space plot,generated,46,,runs/train_2026-10-17_16-37-35/viz_registry/r3_phase_space.png,,cached signal,display decimated to 10k points
+r3_temporal_trend,D,feature vs acquisition-time trend,skipped,48,prerequisite not met on this run: explicit acquisition timestamps + features,,,explicit acquisition timestamps + features,filesystem times are not substituted
+r3_event_overview,E,event detection full-recording overview,generated,49,,runs/train_2026-10-17_16-37-35/viz_registry/r3_event_overview.png,,cached signal,display thresholds are illustrative robust-sigma lines
+r3_annotated_event,E,annotated individual translocation event,skipped,50,prerequisite not met on this run: event table and matching cached signal,,,event table and matching cached signal,I0/DeltaI/relative amplitude/dwell/polarity
+r3_event_change_point,E,event internal change-point diagnostic,skipped,51,prerequisite not met on this run: event duration >=8 samples,,,event duration >=8 samples,exploratory single-mean change
+r3_event_noise_context,E,event amplitude and background noise context,skipped,52,prerequisite not met on this run: annotated event prerequisites,,,annotated event prerequisites,robust background band
+r3_event_score_noise,E,event score vs background proxy,generated,53,,runs/train_2026-10-17_16-37-35/viz_registry/r3_event_score_noise.png,,event rows + cached noise,false-positive rate needs annotated negatives
+r3_event_sensitivity_composite,E,event sensitivity composite,skipped,54,prerequisite not met on this run: detector parameter grid and event identity matching,,,detector parameter grid and event identity matching,not computed by current run
+r3_dwell_distribution,E,event dwell-time PDF/KDE and inset,generated,55,,runs/train_2026-10-17_16-37-35/viz_registry/r3_dwell_distribution.png,,detected event table,linear/log duration + amplitude inset
+r3_toff_distribution,E,inter-event Toff distribution,skipped,58,prerequisite not met on this run: >=2 events in a recording,,,>=2 events in a recording,only within-recording intervals
+r3_on_off_trace,E,binary event ON/OFF state trace,generated,59,,runs/train_2026-10-17_16-37-35/viz_registry/r3_on_off_trace.png,,event table and cached signal,first 10 s displayed
+r3_event_amplitude_duration,E,event amplitude vs dwell,generated,60,,runs/train_2026-10-17_16-37-35/viz_registry/r3_event_amplitude_duration.png,,event table,event detector outputs
+r3_event_snr_duration,E,event proxy SNR vs dwell,generated,61,,runs/train_2026-10-17_16-37-35/viz_registry/r3_event_snr_duration.png,,event table and noise estimate,SNR proxy definition explicit
+r3_event_amplitude_snr,E,event amplitude vs proxy SNR,generated,62,,runs/train_2026-10-17_16-37-35/viz_registry/r3_event_amplitude_snr.png,,event table and noise estimate,amplitude / robust MAD
+r3_detector_sensitivity,E,threshold/parameter sensitivity curves,skipped,63,prerequisite not met on this run: detector sweep artifact,,,detector sweep artifact,not computed by base pipeline
+r3_detection_parameter_heatmap,E,detection parameter outcome heatmap,skipped,64,prerequisite not met on this run: parameter-grid detection outcomes,,,parameter-grid detection outcomes,not computed by base pipeline
+r3_borderline_event_robustness,E,borderline event stability,skipped,65,prerequisite not met on this run: event identity matched across perturbations,,,event identity matched across perturbations,not computed by base pipeline
+r3_truth_onset,E,synthetic truth vs detected onset,skipped,66,prerequisite not met on this run: synthetic event ground-truth table,,,synthetic event ground-truth table,not inferred from real data
+r3_truth_offset,E,synthetic truth vs detected offset,skipped,67,prerequisite not met on this run: synthetic event ground-truth table,,,synthetic event ground-truth table,not inferred from real data
+r3_truth_duration_error,E,synthetic truth duration error,skipped,68,prerequisite not met on this run: synthetic true/detected event pairs,,,synthetic true/detected event pairs,not generated in current run
+r3_truth_pr_curve,E,synthetic detector precision-recall,skipped,69,prerequisite not met on this run: synthetic event ground truth over detector thresholds,,,synthetic event ground truth over detector thresholds,not generated in current run
+r3_amplitude_pdf_rates,D,amplitude PDF at achievable menu rates,generated,70,,runs/train_2026-10-17_16-37-35/viz_registry/r3_amplitude_pdf_rates.png,,>=3 achievable rates preferred,histogram + KDE; no untested parametric fit
+r3_ecdf,D,empirical amplitude and dwell ECDF,generated,71,,runs/train_2026-10-17_16-37-35/viz_registry/r3_ecdf.png,,cached signals; events optional,exact empirical CDF
+r3_delta_i_distributions,D,absolute and normalized Delta-I distributions,generated,73,,runs/train_2026-10-17_16-37-35/viz_registry/r3_delta_i_distributions.png,,event table,per-event I0 source included
+r3_rms_distributions,D,raw and normalized RMS comparison,generated,75,,runs/train_2026-10-17_16-37-35/viz_registry/r3_rms_distributions.png,,cached signals,normalized by absolute median residual
+r3_rms_trajectory,D,window RMS trajectory,generated,77,,runs/train_2026-10-17_16-37-35/viz_registry/r3_rms_trajectory.png,,cached signal,10 ms windows
+r3_feature_violins,D,feature violin distributions,generated,78,,runs/train_2026-10-17_16-37-35/viz_registry/r3_feature_violins.png,,file-level feature matrix,"selected features, each independent file one row"
+r3_feature_raincloud,D,feature raincloud summaries,generated,79,,runs/train_2026-10-17_16-37-35/viz_registry/r3_feature_raincloud.png,,file-level feature matrix,violin + quartile summary; no inferential p-value labels
+r3_feature_beeswarm,D,feature individual-point comparison,generated,80,,runs/train_2026-10-17_16-37-35/viz_registry/r3_feature_beeswarm.png,,file-level feature matrix,"points are files, not SHAP"
+r3_feature_boxplots,D,class-wise engineered feature boxplots,generated,81,,runs/train_2026-10-17_16-37-35/viz_registry/r3_feature_boxplots.png,,file-level feature matrix,up to four selected physical features
+r3_feature_histograms,D,class-wise feature histograms,generated,82,,runs/train_2026-10-17_16-37-35/viz_registry/r3_feature_histograms.png,,file-level feature matrix,up to four selected physical features
+r3_group_stats,D,group-aware feature tests and effect sizes,skipped,83,prerequisite not met on this run: file-level feature and >=2 classes,,,file-level feature and >=2 classes,Mann-Whitney + BH; group bootstrap not claimed
+r3_concentration,D,feature vs concentration,skipped,85,prerequisite not met on this run: concentration metadata and RMS-like feature,,,concentration metadata and RMS-like feature,no synthetic concentration
+r3_molecular_volume,D,feature vs calibrated molecular volume,skipped,86,prerequisite not met on this run: independent calibrated volume metadata/forward model,,,independent calibrated volume metadata/forward model,not available unless supplied
+r3_pca,M,2D PCA feature projection,generated,87,,runs/train_2026-10-17_16-37-35/viz_registry/r3_pca.png,,>=3 files and >=2 finite feature columns,visualization-only fit; seed 0
+r3_tsne,M,2D t-SNE feature embedding,generated,89,,runs/train_2026-10-17_16-37-35/viz_registry/r3_tsne.png,,>=5 files,exploratory local structure; seed 0
+r3_umap,M,2D UMAP feature embedding,not_available,91,optional dependency not shipped: umap-learn installed and >=5 files,,,umap-learn installed and >=5 files,exploratory; seed 0
+r3_pacmap,M,2D PaCMAP embedding,not_available,93,optional dependency not shipped: pacmap installed and >=5 files,,,pacmap installed and >=5 files,exploratory; seed 0
+r3_embedding_distances,M,within vs between-class embedding distances,skipped,97,prerequisite not met on this run: learned embeddings + aligned sample identities,,,learned embeddings + aligned sample identities,not wired to class-sample ids
+r3_kmeans,M,K-means cluster projection and external alignment,skipped,100,prerequisite not met on this run: >=4 file feature rows,,,>=4 file feature rows,k-means fit is unsupervised; labels used post hoc
+r3_dendrogram,M,hierarchical clustering dendrogram,skipped,102,prerequisite not met on this run: >=3 file-level feature rows,,,>=3 file-level feature rows,average linkage
+r3_outlier_waveforms,M,outlier waveform inspection,skipped,104,prerequisite not met on this run: prediction errors or explicit outlier score,,,prediction errors or explicit outlier score,misclassified signals only
+r3_learning_curves,T,training/validation learning curves,generated,105,,runs/train_2026-10-17_16-37-35/viz_registry/r3_learning_curves.png,,training history logged,per available neural model
+r3_lr_schedule,T,learning rate by epoch,generated,107,,runs/train_2026-10-17_16-37-35/viz_registry/r3_lr_schedule.png,,history includes optimizer learning rate,no scheduler reconstruction
+r3_runtime,T,reported model runtime summary,skipped,108,prerequisite not met on this run: runtime metric present in summary,,,runtime metric present in summary,no inferred memory/GPU telemetry
+r3_metric_comparison,T,per-class and aggregate metrics,generated,111,,runs/train_2026-10-17_16-37-35/viz_registry/r3_metric_comparison.png,,file predictions,counts from evaluated rows
+r3_label_trace,T,predicted vs reference label traceability,generated,112,,runs/train_2026-10-17_16-37-35/viz_registry/r3_label_trace.png,,file predictions and identifiers,errors traceable by sample id
+r3_error_waveforms,T,misclassified waveform inspection,skipped,113,prerequisite not met on this run: at least one misclassified file with cached signal,,,at least one misclassified file with cached signal,representative errors
+r3_model_error_overlap,T,model versus baseline error overlap,skipped,114,prerequisite not met on this run: >=2 prediction models,,,>=2 prediction models,paired support size reported
+r3_probability_uncertainty,T,probability error and entropy distributions,skipped,115,prerequisite not met on this run: class probabilities,,,class probabilities,closed-set predictive uncertainty
+r3_roc,T,one-vs-rest ROC curves,generated,116,,runs/train_2026-10-17_16-37-35/viz_registry/r3_roc.png,,probabilities and >=2 classes represented,aggregate point predictions; no fold CI
+r3_precision_recall,T,one-vs-rest precision-recall curves,generated,117,,runs/train_2026-10-17_16-37-35/viz_registry/r3_precision_recall.png,,probabilities and positive/negative rows,prevalence context in data; no fold CI
+r3_calibration,T,top-label calibration diagram,generated,118,,runs/train_2026-10-17_16-37-35/viz_registry/r3_calibration.png,,class probabilities,Brier + reliability curve
+r3_repeat_stability,T,repeat-level stability/error bars,skipped,120,prerequisite not met on this run: repeated CV summary,,,repeated CV summary,repeats are not external cohorts
+r3_ablation,T,recorded ablation comparison,skipped,127,prerequisite not met on this run: ablation results artifact,,,ablation results artifact,only variants actually executed
+r3_model_leaderboard,T,actual-run model leaderboard,skipped,132,prerequisite not met on this run: model comparison results,,,model comparison results,unevaluated foundation models omitted
+r3_fewshot_episode_distribution,T,few-shot episode performance distribution,skipped,137,prerequisite not met on this run: episode-level metrics,,,episode-level metrics,closed-set only
+r3_feature_importance,T,reported handcrafted feature importance,skipped,146,prerequisite not met on this run: explanation artifact has numeric feature importance,,,explanation artifact has numeric feature importance,only values as recorded
+r3_shap_global,T,SHAP global summary,skipped,148,prerequisite not met on this run: SHAP values + feature alignment,,,SHAP values + feature alignment,not available in registry context
+r3_shap_beeswarm,T,SHAP global/class beeswarm,skipped,149,prerequisite not met on this run: aligned per-row SHAP values,,,aligned per-row SHAP values,not available in registry context
+r3_shap_dependence,T,SHAP feature dependence,skipped,150,prerequisite not met on this run: aligned per-row SHAP values,,,aligned per-row SHAP values,not available in registry context
+r3_temporal_attribution,T,temporal attribution overlay,skipped,151,prerequisite not met on this run: temporal attribution arrays,,,temporal attribution arrays,saved separately; context path not wired
+r3_attribution_stability,T,attribution stability,skipped,155,prerequisite not met on this run: multiple comparable attribution runs/augmentations,,,multiple comparable attribution runs/augmentations,not available on single run
+r3_scaling_curve,T,dataset scale vs performance/runtime,skipped,164,prerequisite not met on this run: multiple dataset-size runs with common config,,,multiple dataset-size runs with common config,not a single-run quantity
+r3_lineage_diagram,G,end-to-end processing lineage diagram,generated,166,,runs/train_2026-10-17_16-37-35/viz_registry/r3_lineage_diagram.png,,always available,fixed pipeline stages
+r3_kpi_dashboard,G,run KPI dashboard,generated,168,,runs/train_2026-10-17_16-37-35/viz_registry/r3_kpi_dashboard.png,,summary.json,consolidated run metrics/config fingerprint

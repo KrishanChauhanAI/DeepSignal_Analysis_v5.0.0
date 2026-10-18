@@ -1,0 +1,233 @@
+model,metric,class,value,n,note
+dummy_majority,support,InVitro_WT_tau,56,135,
+dummy_majority,errors,InVitro_WT_tau,56,135,false negatives in the one-vs-rest reading
+dummy_majority,specificity,InVitro_WT_tau,1.0,135,
+dummy_majority,pr_auc_ovr,InVitro_WT_tau,0.402426,135,average precision; curve area by trapezoid over 6 operating points
+dummy_majority,support,InVitro_tau+GSK,79,135,
+dummy_majority,errors,InVitro_tau+GSK,0,135,false negatives in the one-vs-rest reading
+dummy_majority,specificity,InVitro_tau+GSK,0.0,135,
+dummy_majority,pr_auc_ovr,InVitro_tau+GSK,0.56967,135,average precision; curve area by trapezoid over 7 operating points
+dummy_majority,mcc_multiclass,,0.0,135,
+dummy_majority,brier_multiclass,,0.485712,135,"mean squared distance to the one-hot label (0 perfect, 2 worst)"
+dummy_majority,ece,,0.0,135,"expected calibration error, 10 equal-width max-probability bins, weighted by bin count"
+dummy_majority,mce,,0.0,135,maximum calibration error over the same bins
+dummy_majority,roc_auc_ovr,,,135,"undefined here: y should be a 1d array, got an array of shape (135, 2) instead."
+dummy_majority,precision,InVitro_WT_tau,0.0,135,
+dummy_majority,recall,InVitro_WT_tau,0.0,135,
+dummy_majority,f1-score,InVitro_WT_tau,0.0,135,
+dummy_majority,precision,InVitro_tau+GSK,0.585185,135,
+dummy_majority,recall,InVitro_tau+GSK,1.0,135,
+dummy_majority,f1-score,InVitro_tau+GSK,0.738318,135,
+dummy_majority,cohens_kappa,,0.0,135,
+dummy_majority,precision_macro,,0.292593,135,
+dummy_majority,recall_macro,,0.5,135,
+dummy_majority,f1-score_macro,,0.369159,135,
+dummy_majority,precision_weighted,,0.342442,135,
+dummy_majority,recall_weighted,,0.585185,135,
+dummy_majority,f1-score_weighted,,0.432053,135,
+dummy_majority,precision_micro,,0.585185,135,multiclass micro averages equal accuracy
+dummy_majority,recall_micro,,0.585185,135,multiclass micro averages equal accuracy
+dummy_majority,f1-score_micro,,0.585185,135,multiclass micro averages equal accuracy
+logreg,support,InVitro_WT_tau,56,135,
+logreg,errors,InVitro_WT_tau,20,135,false negatives in the one-vs-rest reading
+logreg,specificity,InVitro_WT_tau,0.860759,135,
+logreg,pr_auc_ovr,InVitro_WT_tau,0.657161,135,average precision; curve area by trapezoid over 136 operating points
+logreg,support,InVitro_tau+GSK,79,135,
+logreg,errors,InVitro_tau+GSK,11,135,false negatives in the one-vs-rest reading
+logreg,specificity,InVitro_tau+GSK,0.642857,135,
+logreg,pr_auc_ovr,InVitro_tau+GSK,0.845837,135,average precision; curve area by trapezoid over 136 operating points
+logreg,mcc_multiclass,,0.520856,135,
+logreg,brier_multiclass,,0.369224,135,"mean squared distance to the one-hot label (0 perfect, 2 worst)"
+logreg,ece,,0.115778,135,"expected calibration error, 10 equal-width max-probability bins, weighted by bin count"
+logreg,mce,,0.201923,135,maximum calibration error over the same bins
+logreg,roc_auc_ovr,,,135,"undefined here: y should be a 1d array, got an array of shape (135, 2) instead."
+logreg,precision,InVitro_WT_tau,0.765957,135,
+logreg,recall,InVitro_WT_tau,0.642857,135,
+logreg,f1-score,InVitro_WT_tau,0.699029,135,
+logreg,precision,InVitro_tau+GSK,0.772727,135,
+logreg,recall,InVitro_tau+GSK,0.860759,135,
+logreg,f1-score,InVitro_tau+GSK,0.814371,135,
+logreg,cohens_kappa,,0.515681,135,
+logreg,precision_macro,,0.769342,135,
+logreg,recall_macro,,0.751808,135,
+logreg,f1-score_macro,,0.7567,135,
+logreg,precision_weighted,,0.769919,135,
+logreg,recall_weighted,,0.77037,135,
+logreg,f1-score_weighted,,0.766526,135,
+logreg,precision_micro,,0.77037,135,multiclass micro averages equal accuracy
+logreg,recall_micro,,0.77037,135,multiclass micro averages equal accuracy
+logreg,f1-score_micro,,0.77037,135,multiclass micro averages equal accuracy
+rf,support,InVitro_WT_tau,56,135,
+rf,errors,InVitro_WT_tau,13,135,false negatives in the one-vs-rest reading
+rf,specificity,InVitro_WT_tau,0.962025,135,
+rf,pr_auc_ovr,InVitro_WT_tau,0.957879,135,average precision; curve area by trapezoid over 127 operating points
+rf,support,InVitro_tau+GSK,79,135,
+rf,errors,InVitro_tau+GSK,3,135,false negatives in the one-vs-rest reading
+rf,specificity,InVitro_tau+GSK,0.767857,135,
+rf,pr_auc_ovr,InVitro_tau+GSK,0.978301,135,average precision; curve area by trapezoid over 126 operating points
+rf,mcc_multiclass,,0.758729,135,
+rf,brier_multiclass,,0.158409,135,"mean squared distance to the one-hot label (0 perfect, 2 worst)"
+rf,ece,,0.057173,135,"expected calibration error, 10 equal-width max-probability bins, weighted by bin count"
+rf,mce,,0.1638,135,maximum calibration error over the same bins
+rf,roc_auc_ovr,,,135,"undefined here: y should be a 1d array, got an array of shape (135, 2) instead."
+rf,precision,InVitro_WT_tau,0.934783,135,
+rf,recall,InVitro_WT_tau,0.767857,135,
+rf,f1-score,InVitro_WT_tau,0.843137,135,
+rf,precision,InVitro_tau+GSK,0.853933,135,
+rf,recall,InVitro_tau+GSK,0.962025,135,
+rf,f1-score,InVitro_tau+GSK,0.904762,135,
+rf,cohens_kappa,,0.749362,135,
+rf,precision_macro,,0.894358,135,
+rf,recall_macro,,0.864941,135,
+rf,f1-score_macro,,0.87395,135,
+rf,precision_weighted,,0.88747,135,
+rf,recall_weighted,,0.881481,135,
+rf,f1-score_weighted,,0.879199,135,
+rf,precision_micro,,0.881481,135,multiclass micro averages equal accuracy
+rf,recall_micro,,0.881481,135,multiclass micro averages equal accuracy
+rf,f1-score_micro,,0.881481,135,multiclass micro averages equal accuracy
+hgb,support,InVitro_WT_tau,56,135,
+hgb,errors,InVitro_WT_tau,6,135,false negatives in the one-vs-rest reading
+hgb,specificity,InVitro_WT_tau,0.936709,135,
+hgb,pr_auc_ovr,InVitro_WT_tau,0.970557,135,average precision; curve area by trapezoid over 136 operating points
+hgb,support,InVitro_tau+GSK,79,135,
+hgb,errors,InVitro_tau+GSK,5,135,false negatives in the one-vs-rest reading
+hgb,specificity,InVitro_tau+GSK,0.892857,135,
+hgb,pr_auc_ovr,InVitro_tau+GSK,0.986325,135,average precision; curve area by trapezoid over 136 operating points
+hgb,mcc_multiclass,,0.831825,135,
+hgb,brier_multiclass,,0.117539,135,"mean squared distance to the one-hot label (0 perfect, 2 worst)"
+hgb,ece,,0.04692,135,"expected calibration error, 10 equal-width max-probability bins, weighted by bin count"
+hgb,mce,,0.257505,135,maximum calibration error over the same bins
+hgb,roc_auc_ovr,,,135,"undefined here: y should be a 1d array, got an array of shape (135, 2) instead."
+hgb,precision,InVitro_WT_tau,0.909091,135,
+hgb,recall,InVitro_WT_tau,0.892857,135,
+hgb,f1-score,InVitro_WT_tau,0.900901,135,
+hgb,precision,InVitro_tau+GSK,0.925,135,
+hgb,recall,InVitro_tau+GSK,0.936709,135,
+hgb,f1-score,InVitro_tau+GSK,0.930818,135,
+hgb,cohens_kappa,,0.831728,135,
+hgb,precision_macro,,0.917045,135,
+hgb,recall_macro,,0.914783,135,
+hgb,f1-score_macro,,0.915859,135,
+hgb,precision_weighted,,0.918401,135,
+hgb,recall_weighted,,0.918519,135,
+hgb,f1-score_weighted,,0.918408,135,
+hgb,precision_micro,,0.918519,135,multiclass micro averages equal accuracy
+hgb,recall_micro,,0.918519,135,multiclass micro averages equal accuracy
+hgb,f1-score_micro,,0.918519,135,multiclass micro averages equal accuracy
+cnn1d,support,InVitro_WT_tau,25,75,
+cnn1d,errors,InVitro_WT_tau,16,75,false negatives in the one-vs-rest reading
+cnn1d,specificity,InVitro_WT_tau,0.88,75,
+cnn1d,pr_auc_ovr,InVitro_WT_tau,0.580405,75,average precision; curve area by trapezoid over 76 operating points
+cnn1d,support,InVitro_tau+GSK,50,75,
+cnn1d,errors,InVitro_tau+GSK,6,75,false negatives in the one-vs-rest reading
+cnn1d,specificity,InVitro_tau+GSK,0.36,75,
+cnn1d,pr_auc_ovr,InVitro_tau+GSK,0.903153,75,average precision; curve area by trapezoid over 76 operating points
+cnn1d,mcc_multiclass,,0.282843,75,
+cnn1d,brier_multiclass,,0.35043,75,"mean squared distance to the one-hot label (0 perfect, 2 worst)"
+cnn1d,ece,,0.062414,75,"expected calibration error, 10 equal-width max-probability bins, weighted by bin count"
+cnn1d,mce,,0.083432,75,maximum calibration error over the same bins
+cnn1d,roc_auc_ovr,,,75,"undefined here: y should be a 1d array, got an array of shape (75, 2) instead."
+cnn1d,precision,InVitro_WT_tau,0.6,75,
+cnn1d,recall,InVitro_WT_tau,0.36,75,
+cnn1d,f1-score,InVitro_WT_tau,0.45,75,
+cnn1d,precision,InVitro_tau+GSK,0.733333,75,
+cnn1d,recall,InVitro_tau+GSK,0.88,75,
+cnn1d,f1-score,InVitro_tau+GSK,0.8,75,
+cnn1d,cohens_kappa,,0.266667,75,
+cnn1d,precision_macro,,0.666667,75,
+cnn1d,recall_macro,,0.62,75,
+cnn1d,f1-score_macro,,0.625,75,
+cnn1d,precision_weighted,,0.688889,75,
+cnn1d,recall_weighted,,0.706667,75,
+cnn1d,f1-score_weighted,,0.683333,75,
+cnn1d,precision_micro,,0.706667,75,multiclass micro averages equal accuracy
+cnn1d,recall_micro,,0.706667,75,multiclass micro averages equal accuracy
+cnn1d,f1-score_micro,,0.706667,75,multiclass micro averages equal accuracy
+proto_cnn,support,InVitro_WT_tau,25,75,
+proto_cnn,errors,InVitro_WT_tau,8,75,false negatives in the one-vs-rest reading
+proto_cnn,specificity,InVitro_WT_tau,0.76,75,
+proto_cnn,pr_auc_ovr,InVitro_WT_tau,0.641594,75,average precision; curve area by trapezoid over 76 operating points
+proto_cnn,support,InVitro_tau+GSK,50,75,
+proto_cnn,errors,InVitro_tau+GSK,12,75,false negatives in the one-vs-rest reading
+proto_cnn,specificity,InVitro_tau+GSK,0.68,75,
+proto_cnn,pr_auc_ovr,InVitro_tau+GSK,0.917604,75,average precision; curve area by trapezoid over 76 operating points
+proto_cnn,mcc_multiclass,,0.425922,75,
+proto_cnn,brier_multiclass,,0.373338,75,"mean squared distance to the one-hot label (0 perfect, 2 worst)"
+proto_cnn,ece,,0.145733,75,"expected calibration error, 10 equal-width max-probability bins, weighted by bin count"
+proto_cnn,mce,,0.244012,75,maximum calibration error over the same bins
+proto_cnn,roc_auc_ovr,,,75,"undefined here: y should be a 1d array, got an array of shape (75, 2) instead."
+proto_cnn,precision,InVitro_WT_tau,0.586207,75,
+proto_cnn,recall,InVitro_WT_tau,0.68,75,
+proto_cnn,f1-score,InVitro_WT_tau,0.62963,75,
+proto_cnn,precision,InVitro_tau+GSK,0.826087,75,
+proto_cnn,recall,InVitro_tau+GSK,0.76,75,
+proto_cnn,f1-score,InVitro_tau+GSK,0.791667,75,
+proto_cnn,cohens_kappa,,0.423077,75,
+proto_cnn,precision_macro,,0.706147,75,
+proto_cnn,recall_macro,,0.72,75,
+proto_cnn,f1-score_macro,,0.710648,75,
+proto_cnn,precision_weighted,,0.746127,75,
+proto_cnn,recall_weighted,,0.733333,75,
+proto_cnn,f1-score_weighted,,0.737654,75,
+proto_cnn,precision_micro,,0.733333,75,multiclass micro averages equal accuracy
+proto_cnn,recall_micro,,0.733333,75,multiclass micro averages equal accuracy
+proto_cnn,f1-score_micro,,0.733333,75,multiclass micro averages equal accuracy
+fusion,support,InVitro_WT_tau,25,75,
+fusion,errors,InVitro_WT_tau,17,75,false negatives in the one-vs-rest reading
+fusion,specificity,InVitro_WT_tau,0.96,75,
+fusion,pr_auc_ovr,InVitro_WT_tau,0.706728,75,average precision; curve area by trapezoid over 76 operating points
+fusion,support,InVitro_tau+GSK,50,75,
+fusion,errors,InVitro_tau+GSK,2,75,false negatives in the one-vs-rest reading
+fusion,specificity,InVitro_tau+GSK,0.32,75,
+fusion,pr_auc_ovr,InVitro_tau+GSK,0.890141,75,average precision; curve area by trapezoid over 76 operating points
+fusion,mcc_multiclass,,0.38829,75,
+fusion,brier_multiclass,,0.37303,75,"mean squared distance to the one-hot label (0 perfect, 2 worst)"
+fusion,ece,,0.110489,75,"expected calibration error, 10 equal-width max-probability bins, weighted by bin count"
+fusion,mce,,0.129588,75,maximum calibration error over the same bins
+fusion,roc_auc_ovr,,,75,"undefined here: y should be a 1d array, got an array of shape (75, 2) instead."
+fusion,precision,InVitro_WT_tau,0.8,75,
+fusion,recall,InVitro_WT_tau,0.32,75,
+fusion,f1-score,InVitro_WT_tau,0.457143,75,
+fusion,precision,InVitro_tau+GSK,0.738462,75,
+fusion,recall,InVitro_tau+GSK,0.96,75,
+fusion,f1-score,InVitro_tau+GSK,0.834783,75,
+fusion,cohens_kappa,,0.329412,75,
+fusion,precision_macro,,0.769231,75,
+fusion,recall_macro,,0.64,75,
+fusion,f1-score_macro,,0.645963,75,
+fusion,precision_weighted,,0.758974,75,
+fusion,recall_weighted,,0.746667,75,
+fusion,f1-score_weighted,,0.708903,75,
+fusion,precision_micro,,0.746667,75,multiclass micro averages equal accuracy
+fusion,recall_micro,,0.746667,75,multiclass micro averages equal accuracy
+fusion,f1-score_micro,,0.746667,75,multiclass micro averages equal accuracy
+hybrid,support,InVitro_WT_tau,56,135,
+hybrid,errors,InVitro_WT_tau,12,135,false negatives in the one-vs-rest reading
+hybrid,specificity,InVitro_WT_tau,0.949367,135,
+hybrid,pr_auc_ovr,InVitro_WT_tau,0.952589,135,average precision; curve area by trapezoid over 136 operating points
+hybrid,support,InVitro_tau+GSK,79,135,
+hybrid,errors,InVitro_tau+GSK,4,135,false negatives in the one-vs-rest reading
+hybrid,specificity,InVitro_tau+GSK,0.785714,135,
+hybrid,pr_auc_ovr,InVitro_tau+GSK,0.978151,135,average precision; curve area by trapezoid over 136 operating points
+hybrid,mcc_multiclass,,0.756594,135,
+hybrid,brier_multiclass,,0.186357,135,"mean squared distance to the one-hot label (0 perfect, 2 worst)"
+hybrid,ece,,0.130451,135,"expected calibration error, 10 equal-width max-probability bins, weighted by bin count"
+hybrid,mce,,0.190178,135,maximum calibration error over the same bins
+hybrid,roc_auc_ovr,,,135,"undefined here: y should be a 1d array, got an array of shape (135, 2) instead."
+hybrid,precision,InVitro_WT_tau,0.916667,135,
+hybrid,recall,InVitro_WT_tau,0.785714,135,
+hybrid,f1-score,InVitro_WT_tau,0.846154,135,
+hybrid,precision,InVitro_tau+GSK,0.862069,135,
+hybrid,recall,InVitro_tau+GSK,0.949367,135,
+hybrid,f1-score,InVitro_tau+GSK,0.903614,135,
+hybrid,cohens_kappa,,0.750693,135,
+hybrid,precision_macro,,0.889368,135,
+hybrid,recall_macro,,0.867541,135,
+hybrid,f1-score_macro,,0.874884,135,
+hybrid,precision_weighted,,0.884717,135,
+hybrid,recall_weighted,,0.881481,135,
+hybrid,f1-score_weighted,,0.879779,135,
+hybrid,precision_micro,,0.881481,135,multiclass micro averages equal accuracy
+hybrid,recall_micro,,0.881481,135,multiclass micro averages equal accuracy
+hybrid,f1-score_micro,,0.881481,135,multiclass micro averages equal accuracy

@@ -1,0 +1,31 @@
+{
+  "basis": [
+    "collection cost measured on 2 real file(s) on this machine",
+    "Model A CV timed on a synthetic 135x30 matrix, scaled to the configured repeats and permutations"
+  ],
+  "caveat": "measured on this machine and this configuration; actual time varies with early stopping, window count, and CPU load",
+  "deep_estimate": {
+    "basis": "one timed forward+backward batch at the resolved window length, scaled by batches x epochs x folds; early stopping usually makes the real cost lower",
+    "epochs": 40,
+    "estimated_batches_per_epoch": 1,
+    "estimated_minutes": 18.7,
+    "estimated_windows": 0,
+    "folds": 25,
+    "n_parameters": 31682,
+    "seconds_per_batch_measured": 0.9779,
+    "status": "estimate",
+    "window_length_samples": 707,
+    "window_ms": 70.711,
+    "window_ms_source": "auto:no-events-fallback",
+    "window_rate_hz": 10000.0
+  },
+  "estimated_collection_minutes": 4.1,
+  "estimated_model_a_minutes": 0.3,
+  "estimated_permutation_null_minutes": 16.6,
+  "estimated_total_minutes": 39.6,
+  "events_per_file_measured": 0.0,
+  "n_files_discovered": 135,
+  "n_probe_files": 2,
+  "seconds_per_file_measured": 1.809,
+  "status": "estimate"
+}

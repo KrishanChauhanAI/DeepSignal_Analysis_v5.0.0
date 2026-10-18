@@ -1,0 +1,7 @@
+class,signal,sample_entropy,perm_entropy3
+InVitro_WT_tau,0,0.1889,0.9894
+InVitro_WT_tau,1,0.1975,0.9925
+InVitro_WT_tau,2,0.2107,0.9886
+InVitro_tau+GSK,0,0.2031,0.9873
+InVitro_tau+GSK,1,0.2221,0.9914
+InVitro_tau+GSK,2,0.1871,0.9919
