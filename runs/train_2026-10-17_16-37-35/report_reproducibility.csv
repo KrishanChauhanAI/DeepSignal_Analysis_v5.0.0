@@ -1,0 +1,11 @@
+key,value
+trapsig_version,0.1.0
+config_fingerprint,7da5ffdaffc35258976d4a0af199792ece7d2b2cfe3701f764724491f941c176
+seed,42
+model_set,hybrid
+n_repeats,5
+n_splits,5
+analysis_rate_hz,10000.0
+filter_mode,none
+deep,"{""window_ms"": 10.0, ""window_ms_source"": ""auto"", ""window_rate_hz"": 10000.0, ""window_length_samples"": 100, ""aggregation"": ""mean_proba"", ""n_windows"": 868, ""architecture"": ""stem(strided conv) -> residual dilated conv blocks -> GAP -> linear"", ""n_parameters"": 31682, ""select_metric"": ""macro_f1"", ""temperature_mean"": 2.3001795325297745, ""total_train_seconds"": 62.6}"
+environment,"{""timestamp_local"": ""2026-10-17T16:57:40"", ""python"": ""3.11.17"", ""python_executable"": ""/data/envs1/bin/python3"", ""platform"": ""Linux-5.15.0-173-generic-x86_64-with-glibc2.39"", ""machine"": ""x86_64"", ""cpu_count"": 128, ""memory_total_bytes"": 540598108160, ""memory_available_bytes"": 512537116672, ""packages"": {""numpy"": ""2.4.6"", ""scipy"": ""1.17.1"", ""scikit-learn"": ""1.9.1"", ""pandas"": ""3.0.6"", ""PyYAML"": ""6.0.3"", ""matplotlib"": ""3.11.2"", ""trapsig"": ""0.1.0""}, ""gpu"": {""nvidia_smi"": true, ""torch_installed"": true}, ""git"": {""available"": false, ""reason"": ""not a git repository""}}"

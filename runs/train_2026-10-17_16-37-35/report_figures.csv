@@ -1,0 +1,62 @@
+figure,file
+signal_c4de5f492bc76186 (class InVitro_WT_tau),signal_c4de5f492bc76186.png
+signal_ece1386140d9feb3 (class InVitro_WT_tau),signal_ece1386140d9feb3.png
+signal_be509f6ad0d449aa (class InVitro_WT_tau),signal_be509f6ad0d449aa.png
+signal_87faede677b3fe14 (class InVitro_tau+GSK),signal_87faede677b3fe14.png
+signal_fd4cddbd17124fc5 (class InVitro_tau+GSK),signal_fd4cddbd17124fc5.png
+signal_178d697a32a19393 (class InVitro_tau+GSK),signal_178d697a32a19393.png
+class_mean_event_window,class_mean_event_window.png
+psd_by_class,psd_by_class.png
+dataset_composition,dataset_composition.png
+feature_distributions,feature_distributions.png
+missing_values,missing_values.png
+feature_correlation,feature_correlation.png
+learning_curves,learning_curves.png
+confusion_dummy_majority,confusion_dummy_majority.png
+roc_dummy_majority,roc_dummy_majority.png
+calibration_dummy_majority,calibration_dummy_majority.png
+pr_dummy_majority,pr_dummy_majority.png
+error_analysis_dummy_majority,error_analysis_dummy_majority.png
+confusion_logreg,confusion_logreg.png
+roc_logreg,roc_logreg.png
+calibration_logreg,calibration_logreg.png
+pr_logreg,pr_logreg.png
+error_analysis_logreg,error_analysis_logreg.png
+confusion_rf,confusion_rf.png
+roc_rf,roc_rf.png
+calibration_rf,calibration_rf.png
+pr_rf,pr_rf.png
+error_analysis_rf,error_analysis_rf.png
+confusion_hgb,confusion_hgb.png
+roc_hgb,roc_hgb.png
+calibration_hgb,calibration_hgb.png
+pr_hgb,pr_hgb.png
+error_analysis_hgb,error_analysis_hgb.png
+confusion_cnn1d,confusion_cnn1d.png
+roc_cnn1d,roc_cnn1d.png
+calibration_cnn1d,calibration_cnn1d.png
+pr_cnn1d,pr_cnn1d.png
+error_analysis_cnn1d,error_analysis_cnn1d.png
+confusion_proto_cnn,confusion_proto_cnn.png
+roc_proto_cnn,roc_proto_cnn.png
+calibration_proto_cnn,calibration_proto_cnn.png
+pr_proto_cnn,pr_proto_cnn.png
+error_analysis_proto_cnn,error_analysis_proto_cnn.png
+confusion_fusion,confusion_fusion.png
+roc_fusion,roc_fusion.png
+calibration_fusion,calibration_fusion.png
+pr_fusion,pr_fusion.png
+error_analysis_fusion,error_analysis_fusion.png
+confusion_hybrid,confusion_hybrid.png
+roc_hybrid,roc_hybrid.png
+calibration_hybrid,calibration_hybrid.png
+pr_hybrid,pr_hybrid.png
+error_analysis_hybrid,error_analysis_hybrid.png
+model_comparison_with_bootstrap_intervals,model_comparison_with_bootstrap_intervals.png
+out_of_fold_embedding_pca,embedding_pca.png
+attribution_window_367,attribution_window_367.png
+attribution_window_116,attribution_window_116.png
+attribution_window_155,attribution_window_155.png
+attribution_window_82,attribution_window_82.png
+model_a_feature_importance,model_a_feature_importance.png
+ablation_feature_domains,ablation_feature_domains.png

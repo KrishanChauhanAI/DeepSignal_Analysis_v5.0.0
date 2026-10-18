@@ -1,0 +1,17 @@
+section_item,value
+files_in_pool,135
+files_used,135
+files_skipped_or_failed,0
+class_countsInVitro_WT_tau,56
+class_countsInVitro_tau+GSK,79
+imbalance_ratio,1.4107142857142858
+class_weight_rule_applied,
+analysis_rate_hz,10000.0
+filter_mode,none
+deep.n_windows,868
+deep.window_ms,10.0
+deep.window_ms_source,auto
+deep.window_rate_hz,10000.0
+deep.window_length_samples,100
+deep.n_files_without_windows,60
+deep.n_events_edge_excluded,1

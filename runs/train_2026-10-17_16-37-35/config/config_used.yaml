@@ -1,0 +1,1083 @@
+# ============================================================================
+# trapsig configuration for YOUR .dat recordings
+# ----------------------------------------------------------------------------
+# HOW TO READ THIS FILE
+#   Every key lists:  type | options | default | example | rules
+#   "RULE" lines state dependencies between keys: when one option is chosen,
+#   another key must (or must not) be set. Violating a rule makes
+#   `trapsig run --dry-run` fail with an ERROR that names both keys.
+#
+# THE PIPELINE IN ONE COMMAND
+#   trapsig run --config configs/custom_dat.yaml --dry-run   # check + runtime estimate only
+#   trapsig run --config configs/custom_dat.yaml             # everything
+#   trapsig run --config configs/custom_dat.yaml --quick     # minutes-long smoke test
+#
+# Every run writes metadata.csv + metadata.json into its own runs/<task>/ folder,
+# recording THIS run's train/test fold membership (the split is re-randomised per run).
+# ============================================================================
+
+run:
+  # str | any label you like | default "trapsig" | example: tau_gsk_2026
+  name: custom_dat
+  # int | any integer | default 42 | example: 7
+  # RULE: the SAME seed + config reproduces the SAME folds and the SAME model.
+  # Changing the seed re-randomises every repeat; metadata.csv records which split you got.
+  seed: 42
+
+data:                                    # ---- where your .dat files are, and how they are labelled ----
+  # Path | an existing directory | NO default (required) | example: /data/dataset
+  # This folder must contain the class folders; nothing else is assumed about it.
+  source_dir: /data/dataset        # TODO: your folder that contains the class subfolders
+
+  # str | any shell glob | default "*.csv" | example: "*.dat"
+  # RULE: only files matching this glob enter the pipeline. Everything else under source_dir
+  # is listed in runs/*/data/manifests/ignored_files.csv (your .png plots, extensionless files).
+  file_glob: "*.dat"
+
+  # str (enum) | file | event | unknown | default "unknown" | example: file
+  #   file  = one label per recording (YOUR case: one 20 s recording per file)
+  #   event = one label per detected event (needs per-event ground truth; you do not have it)
+  #   unknown = refuse to guess (preflight ERROR if you then try to train)
+  # RULE: "file" requires label_from to be folder or metadata (not none).
+  label_level: file
+
+  # str (enum) | folder | metadata | none | default "none" | example: folder
+  #   folder   = class = name of the TOP-LEVEL folder containing the file (YOUR case).
+  #              Folder names are never hardcoded: whatever names exist become the classes.
+  #   metadata = class comes from a column in metadata_csv (see metadata_csv below).
+  #   none     = no labels at all; only inspection stages can run.
+  # RULE: folder => metadata_csv must stay null.
+  # RULE: metadata => metadata_csv MUST be set and label_level should be file or event.
+  label_from: folder
+
+  # Path | a CSV with header file,class[,replicate_id,session_id] | default null
+  # example: /data/dataset/metadata.csv
+  # RULE: required ONLY when label_from = metadata; must stay null when label_from = folder.
+  metadata_csv: null
+
+  # bool | true | false | default false | example: true
+  # true  = each file is its own split group (needed when no replicate/session IDs exist).
+  # false = groups come from replicate_id/session_id; files of one group never split apart.
+  # RULE: true is an OPT-IN because file-level estimates are optimistic under session effects;
+  #       every output repeats the caveat. Set false the moment metadata_csv provides IDs.
+  # RULE: false without usable replicate/session IDs => preflight ERROR (no groups).
+  allow_file_level_fallback: true   # YOUR dataset has no replicate information
+
+  # float | seconds | default 20.0 | example: 20.0
+  # Expected recording length. Files outside the tolerance are flagged, not silently dropped.
+  expected_duration_s: 20.0         # 20 s confirmed on your files
+
+  # float | seconds | default 0.01 | example: 0.05
+  # How far a file may deviate from expected_duration_s before it is flagged.
+  duration_tolerance_s: 0.01
+
+  dat:                                   # ---- the layout of ONE .dat file ----
+    # str (enum) | binary | text | default "binary" | example: binary
+    #   binary = raw samples of `dtype` (YOUR case)   text = one row per sample
+    # RULE: binary uses header_bytes and IGNORES header_lines (setting both is an ERROR).
+    # RULE: text   uses header_lines and IGNORES header_bytes (setting both is an ERROR).
+    encoding: binary
+
+    # str (enum) | int8 uint8 int16 uint16 int32 uint32 float32 float64 | default float32
+    # example: float32   CONFIRMED on your files with `trapsig inspect-dat`.
+    dtype: float32
+
+    # str (enum) | little | big | default little | example: little   CONFIRMED on your files.
+    byteorder: little
+
+    # int | bytes of binary header to skip | default 0 | example: 0   CONFIRMED 0 on your files.
+    header_bytes: 0
+
+    # int | text header lines to skip | default 0 | example: 2
+    # RULE: ignored (and an ERROR if non-zero) when encoding = binary.
+    header_lines: 0
+
+    # int | interleaved columns per sample | default 1 | example: 1   CONFIRMED 1 on your files.
+    n_columns: 1
+
+    # int | which column is the signal, 0-based | default 0 | example: 1
+    # RULE: must be < n_columns.
+    column: 0
+
+    # float | multiplier applied to raw values | default 1.0 | example: 1e-9
+    # RULE: must not be 0. Use e.g. 1e-9 only if a calibration factor (counts -> amperes) is known;
+    #       yours is unknown, so keep 1.0 and treat units as raw.
+    scale: 1.0
+
+    # str | free text naming the unit | default "raw" | example: "A" or "pA"
+    # RULE: must not be blank. Yours is raw ADC counts / arbitrary units (confirmed), so "raw".
+    units: raw
+
+sampling:                                # ---- rates: what you recorded at, what you analyse at ----
+  # float | Hz of the instrument | default 1e6 | example: 1000000
+  # CONFIRMED 1 MHz on your files. Preflight records that the rate came from configuration.
+  original_hz: 1000000
+
+  # list[float] | Hz, descending | default [50000,10000,1000,100,10,2] | example: [10000, 1000]
+  # RULE: every rate must be an INTEGER divisor of original_hz (staged decimation needs it)
+  #       and <= original_hz. The analysis itself uses training.analysis_rate_hz.
+  target_rates_hz: [50000, 10000, 1000, 100, 10, 2]
+
+  # list[float] | the supported ANALYSIS-rate menu in Hz | default [1e6,5e4,2.5e4,1e4,1e3,100,10,2]
+  # The menu separates acquisition from analysis: original_hz is what the instrument wrote; any
+  # menu entry may become training.analysis_rate_hz. Down-conversion always passes staged
+  # decimation with an anti-alias filter, so nothing above the new Nyquist limit (rate/2) folds
+  # back into the band. Up-conversion only interpolates and adds no information; it exists as a
+  # display convenience and every artifact that uses it says so.
+  # example: [1000000, 10000, 100]
+  rate_menu_hz: [1000000, 50000, 25000, 10000, 1000, 100, 10, 2]
+
+  # bool | accept analysis rates outside the menu | default true | options: true | false
+  # RULE: when false, training.analysis_rate_hz must equal original_hz or appear in rate_menu_hz,
+  #       otherwise configuration validation fails before anything runs (an off-menu rate is then
+  #       an error, not a warning). When true (default) the menu is advisory and every previously
+  #       valid configuration stays valid.
+  # example: false (strict menu enforcement)
+  allow_off_menu_rates: true
+
+filters:                                 # ---- filter mode (the options are mutually exclusive) ----
+  # str (enum) | none | lpf | gaussian | lpf+gaussian | default "none" | example: lpf
+  #   none         = no extra smoothing after decimation (CURRENT DECISION for your data)
+  #   lpf          = Butterworth low-pass only
+  #   gaussian     = Gaussian smoothing only
+  #   lpf+gaussian = both, in that order
+  # RULE: lpf or lpf+gaussian => lpf_cutoff_hz MUST be non-null.
+  # RULE: gaussian or lpf+gaussian => gaussian_sigma_s MUST be non-null.
+  # RULE: none => lpf_cutoff_hz AND gaussian_sigma_s MUST both be null (else ERROR:
+  #       "does not use it"), because a set-but-ignored parameter is a silent experiment change.
+  mode: none
+
+  # float | Hz | default null | example: 2000.0
+  # RULE: required iff mode uses an LPF; must be < original_hz/2; should stay above the
+  #       highest event frequency you care about and below the analysis Nyquist.
+  lpf_cutoff_hz: null
+
+  # int | filter order | default 4 | example: 6   (used only when mode uses an LPF)
+  lpf_order: 4
+
+  # float | seconds, Gaussian sigma | default null | example: 0.0005
+  # RULE: required iff mode uses a Gaussian; must be > 0.
+  gaussian_sigma_s: null
+
+  # float | truncation in sigmas | default 4.0 | example: 4.0  (Gaussian kernel half-width)
+  gaussian_truncate: 4.0
+
+  # list[float] | Hz mains frequencies to notch OUT BEFORE any decimation | default []
+  # example: [50]   India mains is 50 Hz; notching pre-decimation stops it aliasing to DC.
+  # RULE: each value must be in (0, original_hz/2).
+  notch_hz: [50]                     # TODO: confirm your mains frequency
+
+  # float | notch quality factor | default 30.0 | example: 30.0
+  # RULE: required > 0 whenever notch_hz is non-empty.
+  notch_q: 30.0
+
+events:                                  # ---- event detection, baseline, detrending ----
+  # float | seconds, rolling-median baseline window | default 1.0 | example: 0.1
+  # Shorter tracks slow drift less smoothly; longer smears closely spaced events.
+  baseline_window_s: 0.1
+
+  # float | sigma multiples to ENTER an event | default 5.0 | example: 4.0
+  # Lower = more, smaller events (and more false positives). Raise it if the noise audit says so.
+  threshold_sigma: 5.0
+
+  # float | sigma multiples to EXIT an event | default 3.0 | example: 2.0
+  # RULE: must be BELOW threshold_sigma (hysteresis), else ERROR.
+  exit_sigma: 3.0
+
+  # float | seconds, shortest accepted event | default 1e-3 | example: 2e-3
+  min_duration_s: 0.001
+
+  # float | seconds, minimum gap between two events | default 1e-3 | example: 2e-3
+  min_separation_s: 0.001
+
+  # float | seconds of pre-event context kept with each event | default 0.1 | example: 0.05
+  pre_event_window_s: 0.02
+
+  # float | seconds; onsets this close to the start are excluded (filter/baseline edge) | default 0.01
+  # example: 0.005 (tighter) | 0.05 (more conservative)   RULE: >= 0.
+  edge_guard_s: 0.01
+
+splitting:                               # ---- leakage-safe repeated grouped K-fold ----
+  # int | folds per repeat (K) | default 5 | example: 5
+  # RULE: >= 2. Each class needs at least this many usable files (see min_groups_per_class).
+  n_splits: 5
+
+  # int | how many times the K-fold is re-randomised | default 5 | example: 3
+  # More repeats = tighter mean+SD, linearly more compute. `--quick` forces 2.
+  # RULE: >= 1. CHANGING THIS INVALIDATES OLD PREPARE RUNS: `trapsig train` refuses a prepared
+  #       run whose repeat count differs and tells you to re-prepare.
+  n_repeats: 5
+
+  # int | minimum usable files per class | default 5 | example: 5
+  # RULE: must be >= n_splits so every test fold can hold at least one file per class.
+  min_groups_per_class: 5
+
+training:                                  # ---- Model A (conventional ML on features) ----
+  # float | Hz the signal is analysed at | default 10000 | example: 10000
+  # RULE: <= original_hz. CURRENT DECISION: 10 kHz, decimated from 1 MHz.
+  analysis_rate_hz: 10000.0
+
+  # list[[float,float]] | Hz bands (lo,hi) for Welch band power | default 5 bands
+  # example: [[1,10],[10,100]]   RULE: 0 <= lo < hi and hi <= analysis_rate_hz/2.
+  # The 45-55 Hz band exists to watch mains residue, keep it.
+  psd_bands_hz: [[1, 10], [10, 100], [100, 1000], [1000, 5000], [45, 55]]
+
+  # list[float] | ms lags for residual autocorrelation | default [0.1,1,10] | example: [1,10]
+  # RULE: every value > 0.
+  acf_lags_ms: [0.1, 1, 10]
+
+  # list[str] | subset/repeats of logreg | rf | hgb | default all three | example: [logreg]
+  #   logreg = logistic regression, C tuned by inner grouped CV (interpretable, cheap)
+  #   rf     = random forest           hgb = histogram gradient boosting
+  # RULE: at least one; duplicates are an ERROR; unknown names are an ERROR.
+  models: [logreg, rf, hgb]
+
+  # list[float] | candidate L2 inverse strengths for logreg | default [0.01,0.1,1,10]
+  # RULE: all > 0, non-empty. Tuned INSIDE each training fold only (never on test folds).
+  # example: [0.1, 1] (a shorter search) | [0.001, 0.01, 0.1, 1, 10, 100]
+  lr_c_grid: [0.01, 0.1, 1, 10]
+
+  # int | inner CV folds for the C search | default 3 | example: 3   RULE: >= 2.
+  inner_splits: 3
+
+  # str (enum) | none | random | halving | default "none" | example: random
+  #   Model A hyperparameter search, NESTED inside each outer training fold: it sees only that
+  #   fold's files and is scored on grouped inner splits of those same files.
+  #   none    = logreg keeps its exact grid over lr_c_grid; rf/hgb keep the declared settings.
+  #   random  = uniform draws without replacement from optimize.search_space (per model!).
+  #   halving = successive halving (eta=3): trials start on a file subsample, best third promoted.
+  # RULE: random|halving REQUIRE inner_splits >= 2 (the inner splits are the search's validation).
+  # RULE: --quick forces "none" (a smoke test must not spend a search budget).
+  # RULE: halving falls back to random, with the reason recorded, when a fold holds < 6 files.
+  # RULE: permutation nulls inherit the same search, so the p-value is not biased by tuning.
+  hpo: none
+
+  # str (enum) | balanced_accuracy | macro_f1 | roc_auc_ovr | log_loss | default "balanced_accuracy"
+  #   The search objective. Direction is always "higher is better": log_loss is negated internally.
+  # RULE: roc_auc_ovr on an inner split where it is undefined marks that TRIAL failed (with a
+  #       reason) - it is never scored 0.5; a fold with no scored trial reports status failed.
+  # example: macro_f1 when the per-class trade-off matters more than the balanced mean.
+  hpo_metric: balanced_accuracy
+
+  # int | trials per (model, repeat, fold) search | default 12 | example: 4
+  # Total cost = hpo_n_iter x n_repeats x n_splits x len(models) inner CVs; halving reuses trials
+  # across rungs, so its wall time grows slower than its trial count.
+  # RULE: >= 1.
+  hpo_n_iter: 12
+
+  # int | added to the fold seed to draw the search | default 991 | example: 7
+  # Changing it re-draws the search WITHOUT moving the CV folds or the model seeds.
+  hpo_seed_offset: 991
+
+  # bool | save every fitted Model A fold pipeline into models/ with a JSON sidecar | default true
+  #   The sidecar names feature columns, classes, hyperparameters, trapsig version and the config
+  #   fingerprint; `trapsig predict` loads models only through it (stale versions refused unless
+  #   --allow-stale). example: false when disk matters more than reuse.
+  save_models: true
+
+  # int | trees in the random forest | default 500 | example: 100  (lower = faster smoke tests)
+  rf_n_estimators: 500
+
+  # int | boosting iterations | default 200 | example: 50
+  hgb_max_iter: 200
+
+  # int | label-shuffle permutations per Model A model | default 20 | example: 0
+  # Each permutation re-runs the whole Model A CV; this usually dominates runtime.
+  # Smallest attainable p = 1/(n+1) = 0.048 at 20. RULE: >= 0; 0 reports "not run" with a reason.
+  n_permutations: 20
+
+  # int | bootstrap resamples for the CI | default 1000 | example: 200   RULE: >= 0.
+  bootstrap_resamples: 1000
+
+  # ---- which features are computed, and how their contribution is measured ----
+  # list[str] | feature groups to compute and model | default [all] | example: [noise, event, spec]
+  # options: all (= every group below) | noise | time | amp | event | ctx | spec | tf | acf |
+  #          shape | morph
+  #   noise  robust residual sigma, raw level and spread
+  #   time   temporal pattern: zero crossings, Hjorth, line length, Teager energy, permutation
+  #          entropy, segment variability, drift
+  #   amp    amplitude domain: RMS, peak, peak-to-peak, crest factor, percentiles, dynamic range
+  #   event  event statistics: count, rate, duration, dip depth, amplitude
+  #   ctx    context: inter-event intervals, burstiness, onset distribution, rate drift,
+  #          amplitude-duration coupling, baseline stability, reference level
+  #   spec   frequency domain: Welch band powers, slope, peak, centroid, spread, entropy,
+  #          roll-off, harmonicity
+  #   tf     time-frequency: STFT flux, per-band energy drift, frame entropy, db2 wavelet levels
+  #   acf    normalised autocorrelation of the residual at the lags in acf_lags_ms
+  #   shape  distribution shape: skewness, excess kurtosis, tail fraction
+  #   morph  morphology: turning points, event rise/fall, area-to-peak, sharpness, self-similarity
+  #          to this recording's mean event waveform
+  # Pick groups from the signal, not from habit: a trapping recording carries its information in
+  # event/ctx/amp; a purely oscillatory one in spec/tf/acf.
+  # RULE: an empty list is an ERROR. RULE: an unknown name is an ERROR that lists the known groups.
+  # RULE: a group you do not list is NOT COMPUTED, so its columns are absent from features.csv
+  #       (absent, not NaN): the ablation can only measure groups that were computed.
+  # RULE: every column carries its group's prefix, so group ownership is unambiguous; the count
+  #       per group is reported in summary.json (features.computed) and in PDF section 10.1.
+  # example: [noise, event, ctx, spec] for a fast first look at a new signal type
+  feature_groups: [all]
+
+  # str (enum) | feature-group ablation | default both
+  # options: none | groups | leave_one_out | both
+  #   none           do not run it; PDF section 10.2 and summary.json say so, with the reason
+  #   groups         the all-groups baseline plus one refit per group ("only:<group>")
+  #   leave_one_out  the all-groups baseline plus one refit per group removed ("without:<group>")
+  #   both           all of the above: 1 + 2 x (number of computed groups) refits
+  # Every refit uses the SAME folds, the SAME files and the SAME model settings as the main
+  # cross-validation, so the differences are paired comparisons. "only:<g>" asks whether a group
+  # carries the signal on its own; "without:<g>" asks whether it adds anything to the rest.
+  # RULE: any other value is an ERROR. RULE: the ablation never changes the headline result - the
+  #       models are scored on the full declared feature set, and no column is selected or dropped
+  #       on the strength of it (that would fit the feature set on test-fold information).
+  # RULE: no p-value is claimed; the table is evidence about groups, not a significance test.
+  # example: none (what --quick sets, to keep a smoke test fast) | groups
+  ablation: both
+
+  # str | which of training.models the ablation refits | default logreg | example: rf
+  # RULE: must be one of the names in training.models, else ERROR: an ablation model this run does
+  #       not otherwise fit could not be compared with the headline number.
+  # RULE: with ablation: none this key is ignored (and not validated against training.models).
+  # The cheapest model is the right choice - the ablation is about feature subsets, not tuning.
+  ablation_model: logreg
+
+  # float | |Spearman| at or above which two features are reported as redundant | default 0.98
+  # example: 0.95 (report more pairs) | 1.0 (only exact rank duplicates)   RULE: in (0, 1].
+  # Computed on the pooled per-file feature matrix, on the files where BOTH features are finite;
+  # a pair with fewer than 5 such files is left out rather than reported as uncorrelated.
+  # RULE: flagged pairs are written to feature_redundancy.csv and reported in PDF section 10.3,
+  #       and are NEVER DROPPED. Dropping a column on the pooled matrix would use information from
+  #       every file, including the test folds; the decision is left to you, with the evidence.
+  redundancy_threshold: 0.98
+
+  # int | report top-k accuracy | default 0 (off) | example: 2 | 3
+  # RULE: >= 0 and only computed when 1 < k <= number of classes; written per model to
+  #       metrics_extended.csv (top<k>_accuracy) and shown in PDF section 12. 0 disables it.
+  report_top_k: 0
+
+  # int | equal-width bins for the ECE/MCE calibration error | default 10 | example: 15
+  # RULE: in [2, 100]. The formulae are printed in PDF section 12 and stored under
+  #       summary.json evaluation.definitions, so no number is reported unexplained.
+  calibration_bins: 10
+
+  # bool | compute one-vs-rest precision-recall curves and PR-AUC | default true | options: true | false
+  # RULE: false omits the pr_auc_ovr rows of metrics_extended.csv and skips the pr_<model>.png
+  #       figures; every other metric and artifact is unchanged. PR-AUC for a class absent from
+  #       (or universal in) the evaluated subset is recorded as undefined with the reason, never
+  #       silently imputed.
+  # example: false
+  pr_curves: true
+
+deep:                                      # ---- Model B (1D CNN) + the hybrid blend ----
+  # bool | true | false | default true
+  # RULE: false => model_set MUST be "features" (else ERROR), and explain.grad_cam_1d /
+  #       integrated_gradients / occlusion and advanced.* that need the encoder become ERRORs.
+  # false also means: no torch needed, and the run reports Model A only.
+  # example: false on a machine without PyTorch, together with model_set: features
+  enabled: true
+
+  # str (enum) | features | deep | hybrid | default "hybrid"
+  #   features = Model A only      deep = CNN only      hybrid = both + the fixed blend
+  # RULE: "features" with enabled=true is an ERROR (use enabled: false instead).
+  # RULE: deep/hybrid need PyTorch; without it the run CONTINUES with Model A and says why.
+  # example: features (fastest) | deep (CNN only) | hybrid (the full comparison)
+  model_set: hybrid
+
+  # int | Model B hyperparameter trials per fold | default 0 | example: 2
+  #   Each trial is a FULL train_fold on the outer training windows, scored on the same inner
+  #   validation files that early stopping uses; the winner is then retrained once, so exactly one
+  #   checkpoint per fold survives. Trials run with run_dir=None and leave no artifact.
+  # RULE: 0 disables the search and the run records the reason in summary["hpo"].
+  # RULE: --quick forces 0.
+  hpo_trials: 0
+
+  # list[float] | candidate learning rates | default [0.001, 0.003, 0.01] | example: [0.003]
+  # RULE: non-empty, all > 0.
+  hpo_space_learning_rate: [0.001, 0.003, 0.01]
+
+  # list[float] | candidate dropout probabilities | default [0.1, 0.2, 0.3] | example: [0.2]
+  # RULE: non-empty, all in [0, 1).
+  hpo_space_dropout: [0.1, 0.2, 0.3]
+
+  # list[float] | candidate weight decays | default [0.0, 0.01, 0.03] | example: [0.01]
+  # RULE: non-empty, all >= 0.
+  # NOTE (deliberate absence): channels, n_blocks, kernel_size and the window length are NOT
+  #   searchable. The embedding width is the representation contract shared by the prototype head,
+  #   the fusion head, few-shot, novelty and clustering; it is declared before the run, not tuned
+  #   per fold. summary["hpo"].per_model.cnn1d.not_searched repeats this in every run.
+  hpo_space_weight_decay: [0.0, 0.01, 0.03]
+
+  # float | null | Hz at which windows are cut | default null (= training.analysis_rate_hz)
+  # example: 1000  RULE: if set, must be > 0 and <= training.analysis_rate_hz.
+  window_rate_hz: null
+
+  # float | "auto" | window length in ms | default "auto" | example: 50.0
+  #   auto = median event duration x window_ms_auto_multiplier, clamped to [min, max].
+  # RULE: a number must give >= 16 samples at the window rate, else ERROR.
+  # RULE: "auto" with zero events in the pool falls back to sqrt(min*max) and SAYS SO.
+  window_ms: auto
+  # float | multiplier on the median event duration when window_ms: auto | default 4.0
+  # example: 2.0 (tight windows) | 8.0 (wide context)   RULE: > 0.
+  # resolved window = clamp(median_event_duration_ms x multiplier, window_ms_min, window_ms_max).
+  window_ms_auto_multiplier: 4.0
+
+  # float | ms | lower clamp for the auto window length | default 10.0 | example: 5.0
+  # RULE: > 0 and <= window_ms_max.
+  window_ms_min: 10.0
+
+  # float | ms | upper clamp for the auto window length | default 500.0 | example: 200.0
+  # RULE: > 0 and >= window_ms_min. A window longer than the recording produces no windows.
+  window_ms_max: 500.0
+
+  # float | fraction of the window placed BEFORE the event onset | default 0.25 | example: 0.5
+  # options: any value in [0, 1). 0 = the window starts exactly at the onset (no baseline
+  # context); 0.5 = the event is centred.   RULE: in [0, 1).
+  pre_event_fraction: 0.25
+
+  # int | cap on windows taken per file | default 40 | example: 20
+  # RULE: >= 1. Fixed BEFORE any fitting, so it can never depend on labels. Files with more
+  #       events keep the first N; the count kept is in windows.csv and metadata.csv (n_windows).
+  max_windows_per_file: 40
+
+  # str (enum) | mean_proba | majority_vote | default mean_proba
+  #   mean_proba    = average the window probabilities, then take the argmax (uses confidence)
+  #   majority_vote = take the most common window prediction (ignores confidence)
+  # RULE: fixed before evaluation; it is part of the method, never tuned on test folds.
+  # Windows no model could score stay NaN and are excluded rather than counted as a vote.
+  # example: majority_vote
+  aggregation: mean_proba
+
+  # ---- architecture (target 1e4-1e5 parameters; the run logs the actual count) ----
+  # int | feature maps per convolutional layer | default 32 | example: 16 (faster) | 64 (bigger)
+  # RULE: >= 1. Doubling channels roughly quadruples parameters and compute.
+  channels: 32
+
+  # int | residual dilated blocks (dilations 1, 2, 4, ...) | default 3 | example: 2 | 4
+  # RULE: >= 1. More blocks = a larger receptive field (logged as receptive_field_samples).
+  n_blocks: 3
+
+  # int | convolution kernel width in samples | default 5 | example: 3 | 7
+  # RULE: ODD and >= 3. An even kernel is an ERROR (no symmetric centre for Grad-CAM).
+  kernel_size: 5
+
+  # int | stride of the first (stem) convolution | default 4 | example: 2 | 8
+  # RULE: >= 1. Bigger = far faster on CPU but coarser temporal detail; the receptive field in
+  #       milliseconds is logged so you can see what the model can actually resolve.
+  stem_stride: 4
+
+  # float | dropout probability inside the blocks | default 0.2 | example: 0.0 (off) | 0.4
+  # RULE: in [0, 1). Applied during training only.
+  dropout: 0.2
+
+  # ---- training protocol ----
+  # int | maximum epochs | default 40 | example: 8 (a smoke test) | 100
+  # RULE: >= 1. A hard cap; early stopping usually ends training sooner, and the best epoch is
+  #       recorded per fold in logs/deep_training_log.jsonl and in the checkpoint filenames.
+  epochs: 40
+
+  # int | windows per gradient step | default 32 | example: 8 | 64
+  # RULE: >= 1. With few windows per fold the effective batch is smaller; a trailing batch of a
+  #       single window is dropped.
+  batch_size: 32
+
+  # float | peak learning rate after warmup | default 0.003 | example: 0.001 | 0.01
+  # RULE: > 0. AdamW with linear warmup then cosine decay to 0.
+  learning_rate: 0.003
+
+  # float | AdamW weight decay | default 0.01 | example: 0.0 | 0.05
+  # RULE: >= 0. Fixed before running; not tuned on test folds.
+  weight_decay: 0.01
+
+  # int | epochs of linear LR warmup | default 2 | example: 0 (no warmup) | 5
+  # RULE: in [0, epochs).
+  warmup_epochs: 2
+
+  # int | epochs without gain on the VALIDATION split before stopping | default 8 | example: 3
+  # RULE: >= 1. The validation split is carved from the OUTER TRAINING fold by file group, so the
+  #       test fold is never touched; which files it took is in metadata.csv (cnn_inner_val_rN).
+  early_stopping_patience: 8
+
+  # float | a gain smaller than this counts as no gain | default 0.0001 | example: 0.001
+  # RULE: >= 0.
+  early_stopping_min_delta: 0.0001
+
+  # str (enum) | macro_f1 | balanced_accuracy | log_loss | default macro_f1
+  # Metric used to pick the best epoch and the checkpoint.
+  # RULE: fixed before running; never chosen by looking at test folds.
+  # example: balanced_accuracy | log_loss
+  select_metric: macro_f1
+
+  # float | maximum gradient norm | default 1.0 | example: 0.5 | 0 (disables clipping)
+  # RULE: >= 0.
+  gradient_clip: 1.0
+
+  # float | fraction of the outer training fold reserved for early stopping | default 0.2
+  # example: 0.1 | 0.3   RULE: in (0, 1). Chosen by FILE GROUP, never by window, so windows of
+  #       one file cannot end up on both sides. With few files per fold this can leave one class
+  #       out of the validation split, which is logged as a note rather than silently accepted.
+  validation_fraction: 0.2
+
+  # int | label-shuffle permutations for Model B | default 0 | example: 10
+  # RULE: >= 0. Each permutation costs a FULL repeated CNN cross-validation, so the default is 0
+  #       and the report then says "not run" with that reason. Model A's null
+  #       (training.n_permutations) is far cheaper and is the one normally run.
+  n_permutations: 0
+
+  # bool | scale logits by one temperature fitted on the validation split | default true
+  # options: true | false   RULE: fitted on validation data ONLY and applied to the test fold;
+  #       the fitted value is logged per fold. false leaves probabilities uncalibrated.
+  # example: false (report the raw softmax probabilities)
+  temperature_scaling: true
+
+  # int | PyTorch CPU threads | default 0 (= let PyTorch choose) | example: 2 | 4
+  # RULE: >= 0. Set this to keep a shared machine responsive; the determinism note is logged.
+  threads: 0
+
+  # ---- representation and metric learning on the SAME encoder ----
+  # One encoder is fitted per outer fold and its global-average-pooled embedding is the single
+  # learned representation of the run. The softmax head (cnn1d), the prototype head (proto_cnn),
+  # the fusion head (fusion), the blend (hybrid), few-shot, semi-supervised pseudo-labelling,
+  # novelty detection and clustering all read that one embedding; none of them learns another.
+  # The auxiliary loss below is therefore what shapes the representation every strategy uses.
+  #
+  # str (enum) | auxiliary loss added to the cross-entropy | default supcon
+  # options: none | supcon | prototypical
+  #   none          classification loss only; the embedding is whatever the head happens to need
+  #   supcon        supervised contrastive (Khosla et al. 2020): same-class embeddings pull
+  #                 together, other classes push apart - what a distance classifier needs
+  #   prototypical  batch-prototype loss: every embedding must be closest to its own class
+  #                 prototype, computed from the same batch
+  # RULE: any other value is an ERROR at load time.
+  # RULE: metric_loss_weight: 0 together with metric_loss != none is an ERROR - write
+  #       metric_loss: none to disable the term instead of weighting it to zero.
+  # RULE: the term is skipped, not NaN, for a batch with no usable pair (one window; or a supcon
+  #       batch where no window has a same-class partner; or a prototypical batch with one class).
+  #       The per-epoch value is logged as train_metric_loss in logs/deep_training_log.jsonl.
+  # example: none (a plain classifier, for comparison) | prototypical
+  metric_loss: supcon
+
+  # float | weight of the auxiliary term relative to the cross-entropy | default 0.2
+  # example: 0.5 | 1.0   RULE: in [0, 10]. RULE: 0 requires metric_loss: none (see above).
+  metric_loss_weight: 0.2
+
+  # float | temperature of the contrastive / prototype softmax | default 0.1
+  # example: 0.05 (sharper, harder positives dominate) | 0.5 (softer)
+  # RULE: must be > 0 when metric_loss != none, and ALSO when prototypical_head: true, because the
+  #       prototype head is a softmax over negative distances at this same temperature.
+  metric_temperature: 0.1
+
+  # bool | nearest-prototype classifier on the frozen embedding | default true
+  # options: true | false
+  # true adds the model "proto_cnn" to every result table (metrics.csv, model_comparison.csv,
+  # predictions.csv, PDF section 3). Prototypes are the mean L2-normalised embedding per class,
+  # built from the INNER-VALIDATION files of each outer fold: the encoder was early-stopped on
+  # those files but never trained on them, and the test fold contributes nothing.
+  # RULE: false => no proto_cnn row anywhere; the encoder, the fusion head, few-shot, novelty and
+  #       clustering are unaffected (they use the embedding, not this head).
+  # RULE: a fold whose validation split is empty reports "no prototypes" with the reason instead of
+  #       guessing, and its test files are excluded from the proto_cnn metrics (never averaged in).
+  # RULE: a file counts as prototyped only where EVERY repeat scored it; partially scored files are
+  #       excluded and the exclusion is reported.
+  # example: false
+  prototypical_head: true
+
+  # str (enum) | distance used by the prototype head | default cosine | options: cosine | euclidean
+  # cosine compares direction on the L2-normalised embedding (what supcon optimises); euclidean
+  # compares raw GAP vectors. RULE: any other value is an ERROR at load time.
+  proto_distance: cosine
+
+  # ---- how Model A (handcrafted features) and Model B (learned representation) combine ----
+  # str (enum) | fusion rule | default both | options: none | blend | stack | both
+  #   blend = fixed convex blend of file-level probabilities, weight model_a_weight below; no free
+  #           parameters, so nothing is fitted on test data. Produces the model "hybrid".
+  #   stack = a fusion head on [robust-standardised handcrafted features, mean file-level
+  #           embedding], fitted on the INNER-VALIDATION FILES of each outer fold and applied to
+  #           that fold's test files. Produces the model "fusion". Costs one logistic regression
+  #           per (repeat, fold), because the embeddings already exist - no extra CNN training.
+  #   both  = report both, pre-declared; the comparison framework and gate G7 are unchanged, and
+  #           the reader sees which combination this dataset supports.
+  #   none  = no fusion: Model A and Model B are reported separately only.
+  # RULE: any other value is an ERROR at load time.
+  # RULE: deep.model_set: hybrid with deep.fusion: none is an ERROR (nothing would be combined);
+  #       use model_set: deep for two separate models, or pick a fusion rule.
+  # RULE: "blend" needs Model A probabilities, so with model_set: deep the blend is not computed
+  #       and summary.json (deep.fusion_note) says why; the stacked head still runs.
+  # RULE: the stacked head needs deep.enabled: true; with deep.enabled: false there is no embedding
+  #       to fuse, and model_set must be "features" anyway (see deep.enabled).
+  # RULE: a file is scored by the fusion head only where EVERY repeat fitted a head for its fold;
+  #       partially fused files are excluded and reported, never averaged into the metrics.
+  # example: stack (only the handcrafted + learned head) | none
+  fusion: both
+
+  # str (enum) | equal_weight | default equal_weight (the ONLY option)
+  # This governs the BLEND only: the weight is declared here and is therefore part of the method,
+  # not a result of it. The learned combination is deep.fusion: stack above, which is fitted on
+  # inner-validation files and so needs no nested CV of both models.
+  # example: equal_weight (the only accepted value)
+  combine: equal_weight
+
+  # float | Model A's share of the blend; Model B gets 1 - this | default 0.5
+  # example: 0.3 (trust the CNN more) | 0.7   RULE: in [0, 1].
+  # RULE: files Model B cannot score (no usable event window) use Model A alone and are FLAGGED
+  #       in predictions.csv as hybrid_source = model_a_only and in metadata.csv as
+  #       model_b_scored = False. Gate G7 compares the models only on the matched subset.
+  model_a_weight: 0.5
+
+advanced:                                  # ---- conditional analyses, ALL off by default ----
+  # Section: extra analyses that are only meaningful under stated conditions. Each one is off by
+  # default and, when off, the report says SKIPPED with the reason instead of showing an empty
+  # table. RULE: every flag below requires deep.enabled: true, because they all use the frozen
+  # out-of-fold encoder from Model B; with deep.enabled: false each is an ERROR, not a silent skip.
+
+  # bool | prototypical few-shot over the frozen encoder | default false | options: true | false
+  # RULE: true requires deep.enabled: true.
+  # example: true (adds few-shot rows to section 6 of the report)
+  few_shot: false
+
+  # list[int] | episode K values (shots per class) | default [1, 2, 5, 10] | example: [1, 5]
+  # RULE: every value >= 1. A K that a class cannot supply is reported SKIPPED with that reason,
+  #       so an infeasible K never becomes a silent zero.
+  few_shot_k: [1, 2, 5, 10]
+
+  # int | episodes sampled per K | default 200 | example: 50 | 1000
+  # RULE: >= 1. Episodes reuse files, so the interval is bootstrapped over FILES, not episodes.
+  few_shot_episodes: 200
+
+  # str (enum) | cosine | euclidean | default cosine
+  # Distance used to match a query window to its class prototype.
+  # example: euclidean
+  few_shot_distance: cosine
+
+  # bool | confidence-aware pseudo-labelling on hidden labels of TRAINING files | default false
+  # options: true | false   RULE: true requires deep.enabled: true. Inductive only: the pool of
+  #       unlabelled windows comes from the training folds, never from a test fold.
+  # example: true
+  semi_supervised: false
+
+  # float | minimum max-probability to accept a pseudo-label | default 0.95 | example: 0.9 | 0.99
+  # RULE: in (0, 1]. Lower accepts more and risks confirming the model's own mistakes.
+  pseudo_confidence_tau: 0.95
+
+  # float | minimum top1 - top2 margin to accept a pseudo-label | default 0.2 | example: 0.1
+  # RULE: in [0, 1). Both thresholds must pass; a class-skew check can still reject a round.
+  pseudo_margin_delta: 0.2
+
+  # int | pseudo-labelling rounds | default 2 | example: 1 | 3
+  # RULE: >= 1. Each round RETRAINS from scratch (never fine-tunes on its own pseudo-labels) and
+  #       the accepted/rejected counts are reported per round.
+  pseudo_rounds: 2
+
+  # bool | unknown-class rejection | default false | options: true | false
+  # RULE: true requires deep.enabled: true. Without an unknown class in the data this reports
+  #       "not evaluable" plus a labelled leave-one-class-out diagnostic; it never invents an
+  #       AUROC. Close the gap by recording a third condition or buffer-only controls.
+  # example: true (still reports "not evaluable" without an unknown class)
+  novelty: false
+
+  # float | required retention on known data when setting the novelty threshold | default 0.95
+  # example: 0.9 | 0.99   RULE: in (0, 1). The threshold is set on VALIDATION known data only.
+  novelty_known_retention: 0.95
+
+  # bool | exploratory clustering of the embeddings | default false | options: true | false
+  # Diagnostic only: ARI/NMI against the labels are reported with bootstrap Jaccard stability and
+  # are never used to select a model or a cluster count.
+  # example: true
+  clustering: false
+
+  # list[int] | cluster counts to try | default [2, 3, 4] | example: [2] | [2, 3, 4, 5, 6]
+  # RULE: every value >= 2 and < the number of pooled files.
+  clustering_k: [2, 3, 4]
+
+explain:                                   # ---- runs AFTER the model is frozen; never selects it ----
+  # Section: explanation of the already-frozen models. Nothing here may influence model selection,
+  # so these stages run only after training and validation are complete.
+
+  # bool | run the explainability stage at all | default true | options: true | false
+  # RULE: false (or `trapsig run --no-explain`, or `--quick`) skips section 5 of the report, which
+  #       then says SKIPPED with the reason; no attribution files are written.
+  # example: false, which is what `trapsig run --no-explain` and `--quick` do
+  enabled: true
+
+  # bool | feature-level SHAP values | default true | options: true | false
+  #   logreg gets EXACT linear SHAP (the binary single-coefficient row is expanded exactly).
+  #   Trees get TreeSHAP ONLY if `pip install shap` was done; otherwise the entry reports
+  #   not_applicable with that reason and NO substitute number is invented.
+  # example: false (skip feature attributions, keep the temporal ones)
+  shap_features: true
+
+  # int | background rows for TreeSHAP | default 50 | example: 20 | 100
+  # RULE: >= 1. Sampled from the training rows of each fold only.
+  shap_background: 50
+
+  # bool | Grad-CAM on the CNN | default true | options: true | false
+  # RULE: true requires deep.enabled: true (else ERROR). Valid here because the head is
+  #       conv -> global average pooling -> linear, which is the condition Grad-CAM assumes.
+  # example: false
+  grad_cam_1d: true
+
+  # bool | integrated gradients from a zero baseline | default true | options: true | false
+  # RULE: with deep.enabled: false this must be false (else ERROR).
+  # example: false
+  integrated_gradients: true
+
+  # int | interpolation steps along the straight path | default 32 | example: 16 | 64
+  # RULE: >= 1. More steps = a smoother attribution, linearly more compute.
+  integrated_gradients_steps: 32
+
+  # bool | occlusion (segment masking against a flat background) | default true
+  # options: true | false   RULE: with deep.enabled: false this must be false (else ERROR).
+  # example: false
+  occlusion: true
+
+  # int | occlusion segments per window | default 20 | example: 10 | 40
+  # RULE: >= 2. Each segment costs one forward pass per explained window.
+  occlusion_segments: 20
+
+  # bool | MANDATORY shortcut probes | default true | options: true | false
+  #   (1) baseline-only classifier: if the pre-event baseline alone predicts the class, the label
+  #       is carried by acquisition structure rather than by events. (2) time-shift null: shifting
+  #       the window away from the event must degrade the attribution.
+  # RULE: leave this true; the report prints both outcomes and interprets them either way.
+  # example: false is accepted but NOT recommended - the probes are mandatory by design
+  shortcut_probes: true
+
+  # int | windows that receive temporal attribution | default 20 | example: 5 | 50
+  # RULE: >= 1. Written as attributions.npz plus the segment-level attributions_summary.csv.
+  n_explained_windows: 20
+
+segmentation:                            # ---- windows for the four-branch encoder (quad) ----
+  # Section: how a recording is cut into fixed-length windows for the quad model ONLY. Model B
+  # keeps using its event windows (deep.window_ms); this block never touches Model A or Model B.
+
+  # float | null | window length in seconds | default null | example: 0.5 | 2.0
+  # RULE: null means ONE window per recording (the whole analysed file) - the honest default for
+  #       20 s files, because no segment boundaries are invented. A number > 0 cuts fixed windows
+  #       of window_s * training.analysis_rate_hz samples (rounded, >= 8 enforced).
+  window_s: null
+
+  # float | overlap fraction between consecutive windows | default 0.5 | example: 0.25 | 0.75
+  # RULE: in [0, 0.95]. stride = window * (1 - overlap) unless stride_s is set, which WINS:
+  #       setting stride_s makes overlap a no-op (both true at once is allowed but stride_s
+  #       takes precedence; the validator says so when both are set).
+  overlap: 0.5
+
+  # float | null | explicit stride in seconds | default null | example: 0.25
+  # RULE: null = derive from overlap. A number > 0 overrides overlap (see the RULE above).
+  stride_s: null
+
+  # str | per-window amplitude normalization | default robust | options: none | zscore | robust
+  # none = raw amplitudes; zscore = subtract mean, divide by sd (sd 0 -> left as centred);
+  # robust = subtract median, divide by IQR (IQR 0 -> falls back to sd, then to centred).
+  # example: zscore
+  normalize: robust
+
+  # str | per-window detrending | default none | options: none | constant | linear
+  # constant = subtract the mean; linear = remove a least-squares straight line.
+  # example: linear
+  detrend: none
+
+  # str | how a short tail is padded to a full window | default reflect | options: reflect | zero | edge
+  # RULE: padding only ever happens at the END of a recording; a tail shorter than the window is
+  #       padded, never dropped, so no samples are silently lost.
+  # example: zero
+  pad_mode: reflect
+
+  # int | cap on windows taken from one file | default 64 | example: 16 | 256
+  # RULE: >= 1. Long recordings keep their FIRST max_windows_per_file windows; the cap exists so
+  #       one huge file cannot dominate training. The number actually used is in summary.json.
+  max_windows_per_file: 64
+
+quad:                                    # ---- the four-branch deep architecture (additive) ----
+  # Section: Branch A learned temporal (dilated residual CNN + attention + transformer),
+  # Branch B learned spectral (FIXED STFT front end + learned conv stack + frequency attention),
+  # Branch C self-supervised pretraining (NT-Xent contrastive + masked-span reconstruction on
+  # TRAINING-FOLD WINDOWS ONLY), Branch D engineered window features (registry in
+  # docs/QUAD_ARCHITECTURE.md), fused by cross-branch attention with learned gate weights, then
+  # Head A supervised softmax and Head B prototypical metric learning with episodic few-shot
+  # evaluation. It is an ADDITIONAL scored model (plus optional ablation variants); it never
+  # replaces or changes Model A, Model B, the hybrid, or any existing artifact.
+
+  # bool | train the four-branch model | default false | options: true | false
+  # RULE: false keeps every existing behaviour bit-identical and this whole section is ignored.
+  #       true requires torch (the same dependency Model B already needs); without torch the run
+  #       reports the quad model as not evaluated with the install hint, and still finishes.
+  # example: true
+  enabled: false
+
+  # int | shared embedding dimension of the fusion | default 64 | example: 32 | 128
+  # RULE: >= 4 and divisible by fusion_nhead (transformer head constraint).
+  embed_dim: 64
+
+  # bool | Branch A on/off | default true | options: true | false
+  # RULE: use_temporal false FORCES the self-supervised stage to be skipped (pretraining trains
+  #       the temporal encoder; use_selfsup is then a no-op and the run says so).
+  use_temporal: true
+
+  # bool | Branch B on/off | default true | options: true | false
+  use_spectral: true
+
+  # bool | Branch D on/off | default true | options: true | false
+  # RULE: at least one of use_temporal / use_spectral / use_engineered must be true; with all
+  #       three false the model has no input and configuration validation fails.
+  use_engineered: true
+
+  # bool | Branch C (SSL pretraining) on/off | default true | options: true | false
+  # RULE: only has an effect when use_temporal is true AND pretrain_epochs > 0. Pretraining sees
+  #       the fold's training windows minus the inner-validation split; held-out test windows
+  #       never enter a contrastive pair or a reconstruction target.
+  use_selfsup: true
+
+  # list[str] | branches to ablate, each producing an extra scored model | default [] | example: ["temporal"]
+  # RULE: entries must be among temporal | spectral | engineered. Each name X adds the model
+  #       quad_minus_X, trained with that branch token removed from the fusion, on the SAME folds
+  #       and files, so the comparison is paired. Ablating every enabled branch at once is an
+  #       error (the model would have no input).
+  branch_ablation: []
+
+  # list[int] | Branch A channel widths, one residual block per entry | default [16, 32, 64] | example: [8, 16]
+  # RULE: >= 1 entries, each >= 2. Each stage also halves the time resolution (stride 2).
+  t_channels: [16, 32, 64]
+
+  # list[int] | dilations inside each residual block | default [1, 4, 8] | example: [1, 2]
+  # RULE: same length as t_channels or length 1 (broadcast); each >= 1. The receptive field of
+  #       the whole branch is computed from these numbers and printed in summary.json
+  #       (quad.receptive_field_samples) - it is measured, not assumed.
+  t_dilations: [1, 4, 8]
+
+  # int | Branch A convolution kernel size | default 7 | example: 5 | 11
+  # RULE: odd and >= 3 (symmetric causal padding).
+  t_kernel: 7
+
+  # int | transformer encoder layers on top of Branch A | default 1 | example: 0 | 2
+  # RULE: >= 0; 0 disables the transformer stage (attention pooling still applies).
+  t_transformer_layers: 1
+
+  # int | attention heads in the Branch A transformer | default 4 | example: 2
+  # RULE: >= 1 and divides embed_dim.
+  t_nhead: 4
+
+  # int | Branch B STFT size in samples | default 256 | example: 128 | 512
+  # RULE: >= 16. The STFT is a FIXED transform (Hann window, not learned); everything after it
+  #       (the conv stack, the frequency attention) is learned. Frequency resolution =
+  #       analysis_rate_hz / s_nfft; time resolution = s_hop / analysis_rate_hz.
+  s_nfft: 256
+
+  # int | Branch B STFT hop in samples | default 64 | example: 32 | 128
+  # RULE: >= 1 and <= s_nfft.
+  s_hop: 64
+
+  # list[int] | Branch B conv channel widths (stride 2 each) | default [16, 32] | example: [8, 16]
+  # RULE: >= 1 entries, each >= 2.
+  s_channels: [16, 32]
+
+  # int | self-supervised pretraining epochs per fold | default 6 | example: 2 | 0 (disables stage 2)
+  # RULE: >= 0. 0 skips pretraining entirely; the supervised stages then start from random
+  #       weights and the run records pretrain.epochs_run = 0.
+  pretrain_epochs: 6
+
+  # float | weight of the NT-Xent contrastive term | default 1.0 | example: 0.5
+  # RULE: >= 0. Augmentations are semantics-preserving only (amplitude scale 0.8-1.2, 2% noise,
+  #       span masking); time reversal and warping are deliberately NOT used because they can
+  #       change what a trapping event means.
+  pretrain_contrastive_weight: 1.0
+
+  # float | weight of the masked-span reconstruction term | default 0.5 | example: 0.25
+  # RULE: >= 0.
+  pretrain_recon_weight: 0.5
+
+  # float | fraction of each window masked for reconstruction | default 0.15 | example: 0.25
+  # RULE: in (0, 0.9).
+  pretrain_mask_fraction: 0.15
+
+  # float | NT-Xent temperature | default 0.1 | example: 0.2
+  # RULE: > 0.
+  pretrain_temperature: 0.1
+
+  # int | supervised epochs per fold (stages 3-4) | default 12 | example: 4
+  # RULE: >= 1.
+  epochs: 12
+
+  # float | Adam learning rate | default 0.003 | example: 0.001
+  # RULE: > 0.
+  learning_rate: 0.003
+
+  # float | Adam weight decay | default 0.01 | example: 0.0
+  # RULE: >= 0.
+  weight_decay: 0.01
+
+  # float | dropout in encoders, fusion and heads | default 0.1 | example: 0.2
+  # RULE: in [0, 0.9).
+  dropout: 0.1
+
+  # int | mini-batch size in windows | default 32 | example: 16
+  # RULE: >= 2.
+  batch_size: 32
+
+  # int | epochs where only heads and fusion train (encoders frozen) | default 1 | example: 0
+  # RULE: >= 0 and < epochs. This is stage 3; the remaining epochs are the joint stage 4.
+  warmup_epochs: 1
+
+  # float | focal loss gamma | default 0.0 | example: 2.0
+  # RULE: >= 0. 0 = plain cross-entropy. Use > 0 only when the run reports imbalance; the value
+  #       used and the reason are recorded in summary.json.
+  focal_gamma: 0.0
+
+  # str | class weighting in the supervised loss | default none | options: none | balanced
+  # RULE: balanced computes weights from the TRAINING FOLD ONLY, never from the pooled labels.
+  class_weight: none
+
+  # int | transformer layers in the cross-branch fusion | default 1 | example: 2
+  # RULE: >= 0. The fusion input is one token per enabled branch (+ a CLS token); the learned
+  #       gate weights are the attention-derived softmax over branch tokens and are reported per
+  #       run (summary.json quad.gate_mean and the quad_fusion_gates figure).
+  fusion_layers: 1
+
+  # int | attention heads in the fusion transformer | default 4 | example: 2
+  # RULE: >= 1 and divides embed_dim.
+  fusion_nhead: 4
+
+  # str | metric used to pick the best checkpoint | default balanced_accuracy | example: macro_f1
+  # RULE: one of the metrics deep.select_value understands. Selection uses the INNER-VALIDATION
+  #       windows of the training fold only; test windows never influence it.
+  select_metric: balanced_accuracy
+
+  # int | few-shot episodes evaluated per fold per shot | default 40 | example: 10
+  # RULE: >= 0. Episodes are drawn from held-out fold-test FILE embeddings; support and query
+  #       files are disjoint within an episode; evaluation is CLOSED-SET (every query class
+  #       appears in the support). Rows land in fewshot_episodes.csv.
+  episodes: 40
+
+  # list[int] | support shots evaluated | default [1, 5] | example: [1, 2, 5]
+  # RULE: each >= 1 and <= files per class in the smallest fold-test side, else the shot is
+  #       skipped with a recorded reason instead of failing.
+  shots: [1, 5]
+
+  # int | query files per class per episode | default 3 | example: 2
+  # RULE: >= 1.
+  queries_per_class: 3
+
+  # float | prototype-logit temperature (Head B) | default 0.1 | example: 0.05
+  # RULE: > 0. Distance is cosine on L2-normalised embeddings; the scale is a learned parameter
+  #       initialised at 1 / metric_temperature.
+  metric_temperature: 0.1
+
+  # float | weight of the supervised-contrastive auxiliary term in stages 3-4 | default 0.2 | example: 0.0
+  # RULE: >= 0. 0 disables SupCon; the prototype head still trains episodically in stage 5.
+  supcon_weight: 0.2
+
+  # bool | mixed precision | default false | options: true | false
+  # RULE: CPU runs ignore it safely; on CUDA it halves memory and can change results slightly -
+  #       reproducibility claims in the report then say "amp on".
+  amp: false
+
+  # int | added to the run seed for quad streams | default 4242 | example: 7
+  # RULE: any int. Keeping it fixed means quad results are deterministic for a fixed run seed,
+  #       and changing it does not perturb Model A or Model B streams at all.
+  seed_offset: 4242
+
+  # list[int] | Branch D feature-registry tiers | default [1, 2] | example: [1] | [1, 2, 3]
+  # RULE: non-empty subset of [1, 2, 3]. Tier 1 = mandatory core (time stats, energy/amplitude,
+  #       RMS, ZCR, spectral centroid/bandwidth/entropy, band powers, envelope stats, dynamics);
+  #       tier 2 = recommended (wavelet / wavelet-packet / filter-bank energies, MFCC, relative
+  #       band ratios, change-point & event counts, sample/permutation entropy, AR + cepstral,
+  #       quality flags); tier 3 = experimental (DFA, Higuchi / Katz / Petrosian fractal
+  #       dimensions, RQA measures, largest-Lyapunov estimate, multiscale entropy, Lempel-Ziv
+  #       complexity, Hurst via R/S). Every run writes the FULL selected registry to
+  #       feature_registry.csv (id, family, family description, tier, description, unit,
+  #       parameters) and recording-level summaries to recording_feature_summary.csv.
+  #       Changing tiers changes the Branch D input width, so retraining happens automatically;
+  #       nothing else in the pipeline is affected.
+  feature_tiers: [1, 2]
+
+  # list[str] | feature-family allow-list | default [] (meaning ALL families) |
+  #       example: ["time_stats", "entropy_nonlinear"]
+  # RULE: subset of [time_stats, energy, envelope, dynamics, peaks_events, quality, spectral,
+  #       time_frequency, entropy_nonlinear, ar_cepstral, decomposition]; an unknown name is a
+  #       config error and
+  #       the run refuses to start. Combined with feature_tiers by intersection. Bands listed
+  #       under training.psd_bands_hz drive the band-power ids (sampling-rate aware: a band is
+  #       clamped to the Nyquist frequency of the analysis rate before use).
+  feature_families: []
+
+  # str | training-fold-only engineered-column filter | default "variance" | options: variance | none
+  # RULE: "variance" drops columns that are all-NaN or constant ACROSS THE TRAINING WINDOWS OF
+  #       THAT FOLD/REPEAT ONLY - the test fold never votes, so selection cannot leak. The kept /
+  #       dropped counts are recorded in the fold notes and the run log. "none" keeps every
+  #       column. Selection surviving is NOT evidence that a feature helps: use the section 13
+  #       branch-ablation results and the redundancy report for that.
+  feature_select: variance
+
+  # float | batch-hard triplet-loss weight added to the stage 3-4 objective | default 0.0 (off) |
+  #       example: 0.3
+  # RULE: >= 0. Only batches where some class has >= 2 examples contribute; anchors without a
+  #       same-class partner are skipped. Head B (prototype metric learning, stage 5) is always
+  #       on and unchanged by this knob.
+  triplet_weight: 0.0
+
+  # str | learning-rate schedule for the supervised quad epochs | default "none" |
+  #       options: none | cosine | step
+  # RULE: cosine = CosineAnnealingLR across quad.epochs; step = halve every
+  #       max(1, epochs // 3) epochs. Applied per fold/repeat; the self-supervised pretraining
+  #       (stage 2) keeps its own constant rate.
+  lr_schedule: none
+
+  # int | early-stopping patience in epochs on the inner-validation checkpoint score
+  #       | default 0 (off) | example: 3
+  # RULE: >= 0. Best-checkpoint selection on inner-validation balanced accuracy ALWAYS applies
+  #       (that is the leakage-safe model pick); early stopping only stops training once the
+  #       score has not improved for `early_stopping_patience` consecutive epochs. Each stop is
+  #       recorded in the fold training history JSON.
+  early_stopping_patience: 0
+
+  # float | null | max-softmax-probability threshold for the unknown-class DIAGNOSTIC
+  #       | default null (off) | example: 0.4
+  # RULE: null or in (0, 1]. When set, every test file gets one MSP score (mean of its window
+  #       probabilities across repeats, then max over classes); files below the threshold are
+  #       flagged in quad_open_set_flags.csv and counted in summary.json under
+  #       quad.open_set. This is a diagnostic ONLY: genuine open-set recognition needs held-out
+  #       unknown classes, and no claim about unknown-class accuracy is made without them.
+  open_set_msp_threshold: null
+
+report:                                  # ---- figures, the PDF, and its per-section CSV twins ----
+  # Section: what the reporting stage produces. RULE: everything is written into the SAME run
+  # directory and nothing is ever overwritten (an existing file is an error, not a silent replace).
+
+  # bool | write figures into runs/*/figures/ | default true | options: true | false
+  # RULE: false (or `--quick`) means section 4 of the PDF lists no figures and says why.
+  # example: false
+  plots: true
+
+  # bool | write report.pdf | default true | options: true | false
+  # RULE: needs `pip install reportlab`; without it the step reports skipped with the install
+  #       command, and the CSVs and figures are still written. `--no-pdf` / `--quick` set it false.
+  # Tables have fixed column widths and wrapping cells: sections 7 and 8 use 52 + 60 + 60 mm, so
+  # long text continues on the next line inside its own cell and tall rows continue on the next
+  # page instead of being cut.
+  # example: false, which is what `trapsig run --no-pdf` does
+  pdf: true
+
+  # bool | write the CSV twins of the PDF sections | default true | options: true | false
+  # One CSV per section, same content, same order: report_data_landscape.csv (1),
+  # report_methods.csv (2), report_results.csv (3), report_figures.csv (4),
+  # report_explainability.csv (5), report_advanced.csv (6), report_limitations.csv (7),
+  # report_information_gaps.csv (8), report_reproducibility.csv (9), plus report_models.csv.
+  # CSV cells keep the full un-wrapped text of what wraps across lines on the page.
+  # example: false (not recommended: these CSVs are the machine-readable copy of the PDF)
+  csv: true
+
+  # int | figure resolution in DPI | default 150 | example: 100 | 300
+  # RULE: in [50, 1200]. Higher DPI means larger PNGs and a larger PDF.
+  dpi: 150
+
+  # int | example trace plots per class | default 3 | example: 1 | 0 (disables them)
+  # RULE: >= 0. Files are chosen by manifest order, not by their label quality.
+  max_plots_per_class: 3
+
+output:                                  # ---- where run folders are written ----
+  # Section: where everything is written.
+
+  # Path | where run folders are created | default "runs" | example: /data/trapsig_runs
+  # RULE: relative paths are resolved from the current working directory. Each run gets
+  #       runs/<stage>_<timestamp>/ containing metadata.csv + metadata.json (this run's split
+  #       record), the manifests and symlinks under data/, and the report files. No file is ever
+  #       overwritten, and two runs in the same second get a numeric suffix.
+  runs_dir: runs

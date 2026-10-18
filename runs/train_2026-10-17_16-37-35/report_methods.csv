@@ -1,0 +1,28 @@
+section_item,value
+split_unit,file (each file is its own group; no replicate or session metadata)
+holdout,none (no replicates to hold out)
+tuning,logreg C chosen by inner grouped CV within each outer training fold; the CNN early-stops and temperature-scales on a validation split carved from the outer training fold by file group
+imputation,"median, fitted within each training fold"
+window_scaling,robust median/IQR fitted on each fold's training windows only
+aggregation,"window -> file by mean_proba, declared before evaluation"
+bootstrap,file-level only; a hierarchical bootstrap needs replicate groups
+class_weighting,none (imbalance below the design threshold of 1.5)
+hybrid_combination,"fixed convex blend, Model A weight 0.5"
+fusion_rule,both
+fusion_note,fitted per repeat and fold
+representation_flow,"one 1D ConvNet encoder is fitted per outer fold; its global-average-pooled embedding is the single learned representation of the run and is consumed by (1) the softmax head -> cnn1d, (2) the nearest-prototype head -> proto_cnn, (3) the per-fold linear fusion head on handcrafted features + mean embedding -> fusion, (4) the probability blend with the best Model A -> hybrid, and (5) the conditional analyses: few-shot prototypes, semi-supervised pseudo-labels, novelty detection, clustering, and the file-level explanation map. Nothing downstream re-learns a representation, and no strategy is evaluated on files that contributed to the encoder, the prototypes, the fusion head, or the scaler."
+matched_subset,not applicable
+deep.architecture,stem(strided conv) -> residual dilated conv blocks -> GAP -> linear
+deep.n_parameters,31682
+deep.receptive_field_samples,231
+deep.receptive_field_ms,23.1
+deep.select_metric,macro_f1
+deep.temperature_mean,2.3001795325297745
+deep.total_train_seconds,62.6
+features.requested_groups,"[""all""]"
+features.n_features_used,90
+features.per_group,"{""noise"": 3, ""time"": 9, ""amp"": 9, ""event"": 15, ""ctx"": 16, ""spec"": 13, ""tf"": 12, ""acf"": 3, ""shape"": 3, ""morph"": 7}"
+features.selection_rule,"groups are declared in training.feature_groups and their contribution is measured by the ablation in section 10; no column is dropped on the pooled matrix, because that would use test-fold information"
+features.dropped_all_nan,[]
+ablation.mode,both
+ablation.model,logreg

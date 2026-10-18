@@ -1,0 +1,68 @@
+section_item,value
+definition.cohens_kappa,chance-corrected agreement (sklearn cohen_kappa_score); empty when the prediction set is degenerate
+definition.precision_micro/recall_micro/f1_micro,multiclass micro averages; identical to accuracy
+definition.precision_macro/recall_macro/f1_macro,unweighted mean of the per-class scores
+definition.precision_weighted/recall_weighted/f1_weighted,per-class scores weighted by support
+definition.specificity,TN/(TN+FP) one-vs-rest; None when the subset holds no negative file
+definition.mcc_multiclass,Matthews correlation from the multiclass confusion matrix
+definition.brier_multiclass,mean over files of sum_c (p_c - 1[y=c])^2
+definition.ece,sum_b (n_b/n)|acc_b - conf_b| over equal-width bins of the max probability
+definition.mce,max_b |acc_b - conf_b| over the same bins
+definition.pr_auc_ovr,one-vs-rest average precision; None when the class is absent or universal
+definition.topk_accuracy,fraction of files whose true label is among the k largest probabilities
+dummy_majority.n_files,135
+dummy_majority.status,computed
+dummy_majority.cohens_kappa,0.0
+dummy_majority.brier,0.485712
+dummy_majority.ece,0.0
+dummy_majority.mce,0.0
+dummy_majority.mcc,0.0
+logreg.n_files,135
+logreg.status,computed
+logreg.cohens_kappa,0.515681
+logreg.brier,0.369224
+logreg.ece,0.115778
+logreg.mce,0.201923
+logreg.mcc,0.520856
+rf.n_files,135
+rf.status,computed
+rf.cohens_kappa,0.749362
+rf.brier,0.158409
+rf.ece,0.057173
+rf.mce,0.1638
+rf.mcc,0.758729
+hgb.n_files,135
+hgb.status,computed
+hgb.cohens_kappa,0.831728
+hgb.brier,0.117539
+hgb.ece,0.04692
+hgb.mce,0.257505
+hgb.mcc,0.831825
+cnn1d.n_files,75
+cnn1d.status,computed
+cnn1d.cohens_kappa,0.266667
+cnn1d.brier,0.35043
+cnn1d.ece,0.062414
+cnn1d.mce,0.083432
+cnn1d.mcc,0.282843
+proto_cnn.n_files,75
+proto_cnn.status,computed
+proto_cnn.cohens_kappa,0.423077
+proto_cnn.brier,0.373338
+proto_cnn.ece,0.145733
+proto_cnn.mce,0.244012
+proto_cnn.mcc,0.425922
+fusion.n_files,75
+fusion.status,computed
+fusion.cohens_kappa,0.329412
+fusion.brier,0.37303
+fusion.ece,0.110489
+fusion.mce,0.129588
+fusion.mcc,0.38829
+hybrid.n_files,135
+hybrid.status,computed
+hybrid.cohens_kappa,0.750693
+hybrid.brier,0.186357
+hybrid.ece,0.130451
+hybrid.mce,0.190178
+hybrid.mcc,0.756594

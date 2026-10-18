@@ -1,0 +1,182 @@
+{
+  "checks": [
+    {
+      "fix": "",
+      "id": "P01",
+      "message": "all cross-field rules satisfied",
+      "name": "configuration consistency",
+      "status": "PASS"
+    },
+    {
+      "fix": "",
+      "id": "P02",
+      "message": "numpy, scipy, scikit-learn, PyYAML present",
+      "name": "required Python packages",
+      "status": "PASS"
+    },
+    {
+      "fix": "Install only when the corresponding module is implemented.",
+      "id": "P03",
+      "message": "not installed and not used by this release: ['pyarrow', 'umap', 'pacmap', 'lightgbm', 'statsmodels']",
+      "name": "optional packages (deferred modules)",
+      "status": "SKIPPED"
+    },
+    {
+      "fix": "",
+      "id": "P04",
+      "message": "no model training in this release; GPU not required",
+      "name": "GPU configuration",
+      "status": "NOT APPLICABLE"
+    },
+    {
+      "fix": "",
+      "id": "P05",
+      "message": "/data/dataset",
+      "name": "source directory",
+      "status": "PASS"
+    },
+    {
+      "fix": "",
+      "id": "P06",
+      "message": "135 file(s); not matched by file_glob (listed in ignored_files.csv): (none)=5, .png=141",
+      "name": "data files discovered",
+      "status": "PASS"
+    },
+    {
+      "fix": "",
+      "id": "P07",
+      "message": "label_level=file",
+      "name": "label level declared",
+      "status": "PASS"
+    },
+    {
+      "fix": "",
+      "id": "P08",
+      "message": "all files labelled via folder",
+      "name": "label coverage",
+      "status": "PASS"
+    },
+    {
+      "fix": "",
+      "id": "P10",
+      "message": "135 file(s) readable",
+      "name": "file readability",
+      "status": "PASS"
+    },
+    {
+      "fix": "Confirm the acquisition rate; store it in the file header.",
+      "id": "P11",
+      "message": "135 file(s) have no rate in the file; configured 1e+06 Hz is used",
+      "name": "sampling rate source",
+      "status": "WARNING"
+    },
+    {
+      "fix": "",
+      "id": "P12",
+      "message": "all within 20 \u00b1 0.01 s",
+      "name": "recording duration",
+      "status": "PASS"
+    },
+    {
+      "fix": "",
+      "id": "P13",
+      "message": "no byte-identical files",
+      "name": "exact duplicate files",
+      "status": "PASS"
+    },
+    {
+      "fix": "Provide replicate_id and session_id.",
+      "id": "P14",
+      "message": "grouping by file only; estimates are optimistic under session effects",
+      "name": "replicate/session grouping",
+      "status": "WARNING"
+    },
+    {
+      "fix": "",
+      "id": "P15",
+      "message": "file counts InVitro_WT_tau=56, InVitro_tau+GSK=79",
+      "name": "class balance",
+      "status": "PASS"
+    },
+    {
+      "fix": "",
+      "id": "P16",
+      "message": "5 x 5-fold grouped stratified; group disjointness verified (shape (5, 135))",
+      "name": "cross-validation feasibility",
+      "status": "PASS"
+    },
+    {
+      "fix": "",
+      "id": "P17",
+      "message": "no session metadata",
+      "name": "class-session confounding",
+      "status": "NOT APPLICABLE"
+    },
+    {
+      "fix": "",
+      "id": "P18",
+      "message": "no LPF configured",
+      "name": "LPF cutoff",
+      "status": "NOT APPLICABLE"
+    },
+    {
+      "fix": "Restrict event analysis to rates that resolve events (design Section 3.3).",
+      "id": "P19",
+      "message": "min_duration 1 ms is below 2 samples at: 1000 Hz (period 1 ms), 100 Hz (period 10 ms), 10 Hz (period 100 ms), 2 Hz (period 500 ms)",
+      "name": "event resolution by rate",
+      "status": "WARNING"
+    },
+    {
+      "fix": "",
+      "id": "P20",
+      "message": "~610.4 MiB per file vs 491.43 GiB available",
+      "name": "memory budget",
+      "status": "PASS"
+    },
+    {
+      "fix": "",
+      "id": "P21",
+      "message": "symbolic links supported",
+      "name": "symlink capability",
+      "status": "PASS"
+    },
+    {
+      "fix": "",
+      "id": "P22",
+      "message": "/data/programs/5/trapsig/runs",
+      "name": "output directory writable",
+      "status": "PASS"
+    },
+    {
+      "fix": "",
+      "id": "P23",
+      "message": "seed=42",
+      "name": "random seed recorded",
+      "status": "PASS"
+    },
+    {
+      "fix": "",
+      "id": "P24",
+      "message": "recorded at run time if a repository exists",
+      "name": "git state",
+      "status": "NOT APPLICABLE"
+    },
+    {
+      "fix": "",
+      "id": "P26",
+      "message": "[50.0] Hz applied before any decimation",
+      "name": "mains notch frequencies",
+      "status": "PASS"
+    }
+  ],
+  "config_fingerprint": "7da5ffdaffc35258976d4a0af199792ece7d2b2cfe3701f764724491f941c176",
+  "exit_code": 0,
+  "summary": {
+    "ERROR": 0,
+    "NOT APPLICABLE": 4,
+    "PASS": 16,
+    "SKIPPED": 1,
+    "WARNING": 3
+  },
+  "trapsig_version": "0.1.0"
+}

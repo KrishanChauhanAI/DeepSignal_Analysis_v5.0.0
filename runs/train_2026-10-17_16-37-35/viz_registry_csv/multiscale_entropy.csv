@@ -1,0 +1,11 @@
+class,scale,mse
+InVitro_WT_tau,1,0.1932
+InVitro_WT_tau,2,0.2312
+InVitro_WT_tau,4,0.2177
+InVitro_WT_tau,8,0.2234
+InVitro_WT_tau,16,0.2143
+InVitro_tau+GSK,1,0.2126
+InVitro_tau+GSK,2,0.2282
+InVitro_tau+GSK,4,0.2078
+InVitro_tau+GSK,8,0.1744
+InVitro_tau+GSK,16,0.1335
