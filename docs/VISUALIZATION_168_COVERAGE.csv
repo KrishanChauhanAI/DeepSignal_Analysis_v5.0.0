@@ -1,0 +1,169 @@
+spec_no,registry_entry_or_artifact,coverage_status,notes
+1,raw per-file figure writer,covered or conditional,generated when source readable
+2,r3_zoomed_segments,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+3,r3_baseline_noise_band,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+4,r3_filter_overlays,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+5,r3_filter_overlays,covered or conditional,included in combined raw-vs-LPF/Gaussian figure
+6,r3_rolling_median_windows,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+7,r3_multirate_lpf,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+8,r3_multirate_gaussian,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+9,r3_filter_bode,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+10,r3_filter_bode,covered or conditional,anti-alias/LPF frequency response
+11,r3_edge_artifacts,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+12,r3_transient_preservation,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+13,r3_filter_validation_composite,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+14,r3_filter_qc_compliance,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+15,r3_detrend_constant,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+16,r3_detrend_linear,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+17,r3_detrend_rolling,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+18,r3_detrend_metrics,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+19,r3_qc_dashboard,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+20,r3_nonfinite_summary,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+21,r3_clipping_outliers,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+22,r3_drift_quality,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+23,r3_quality_by_class,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+24,r3_flagged_files,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+25,r3_snr_noise,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+26,r3_event_density,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+27,r3_class_counts,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+28,r3_window_counts,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+29,r3_event_counts,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+30,r3_split_availability,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+31,r3_window_timeline,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+32,r3_split_feature_drift,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+33,r3_group_overlap,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+34,r3_temporal_split,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+35,r3_duplicate_audit,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+36,r3_leakage_dashboard,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+37,welch_psd / psd_periodogram,covered or conditional,existing registry entries
+38,r3_psd_multirate,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+39,r3_classwise_psd_ci,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+40,r3_dark_1khz_psd,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+41,r3_spectral_feature_summary,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+42,wavelet_scalogram,covered or conditional,existing registry entry
+43,r3_acf_decay,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+44,r3_acf_characteristics,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+45,r3_acf_model,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+46,r3_phase_space,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+47,r3_phase_space,covered or conditional,combined delayed-current/derivative diagnostic
+48,r3_temporal_trend,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+49,r3_event_overview,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+50,r3_annotated_event,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+51,r3_event_change_point,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+52,r3_event_noise_context,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+53,r3_event_score_noise,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+54,r3_event_sensitivity_composite,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+55,r3_dwell_distribution,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+56,r3_dwell_distribution,covered or conditional,amplitude-duration inset
+57,r3_dwell_distribution,covered or conditional,same event duration measure; one dedicated density figure
+58,r3_toff_distribution,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+59,r3_on_off_trace,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+60,r3_event_amplitude_duration,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+61,r3_event_snr_duration,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+62,r3_event_amplitude_snr,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+63,r3_detector_sensitivity,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+64,r3_detection_parameter_heatmap,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+65,r3_borderline_event_robustness,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+66,r3_truth_onset,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+67,r3_truth_offset,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+68,r3_truth_duration_error,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+69,r3_truth_pr_curve,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+70,r3_amplitude_pdf_rates,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+71,r3_ecdf,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+72,amplitude_histogram + r3_ecdf,covered or conditional,PDF and ECDF remain separate figures
+73,r3_delta_i_distributions,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+74,r3_delta_i_distributions,covered or conditional,normalized event DeltaI/I0
+75,r3_rms_distributions,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+76,r3_rms_distributions,covered or conditional,baseline-normalized RMS definition documented in plot
+77,r3_rms_trajectory,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+78,r3_feature_violins,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+79,r3_feature_raincloud,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+80,r3_feature_beeswarm,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+81,r3_feature_boxplots,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+82,r3_feature_histograms,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+83,r3_group_stats,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+84,feature_correlation_matrix,covered or conditional,existing registry entry
+85,r3_concentration,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+86,r3_molecular_volume,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+87,r3_pca,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+88,not implemented,covered or conditional,optional 3-D PCA view
+89,r3_tsne,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+90,not implemented,covered or conditional,optional 3-D t-SNE view
+91,r3_umap,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+92,not implemented,covered or conditional,optional 3-D UMAP view
+93,r3_pacmap,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+94,not implemented,covered or conditional,optional 3-D PaCMAP view
+95,embedding_umap_tsne + embedding_pca,covered or conditional,existing registry entries when learned embeddings available
+96,not implemented,covered or conditional,requires matched augmentation/seed embedding artifacts
+97,r3_embedding_distances,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+98,fewshot_episode_curve,covered or conditional,existing few-shot episode plot; explicit support/query neighborhood panel not implemented
+99,not implemented,covered or conditional,requires a paired Euclidean-vs-cosine prototype experiment
+100,r3_kmeans,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+101,not implemented,covered or conditional,requires density-clustering results
+102,r3_dendrogram,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+103,not implemented,covered or conditional,cluster-label contingency matrix not yet emitted
+104,r3_outlier_waveforms,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+105,r3_learning_curves,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+106,metric_curves,covered or conditional,existing registry entry when epoch metrics exist
+107,r3_lr_schedule,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+108,r3_runtime,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+109,confusion_matrix,covered or conditional,existing registry entry; counts available
+110,confusion_matrix,covered or conditional,existing normalized confusion matrix
+111,r3_metric_comparison,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+112,r3_label_trace,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+113,r3_error_waveforms,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+114,r3_model_error_overlap,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+115,r3_probability_uncertainty,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+116,r3_roc,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+117,r3_precision_recall,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+118,r3_calibration,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+119,not implemented,covered or conditional,probability entropy summary is covered by spec 115 extension; separate histograms not emitted
+120,r3_repeat_stability,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+121,r3_repeat_stability,covered or conditional,repeat-level uncertainty from summary when available
+122,not implemented,covered or conditional,requires group-aware bootstrap replicates
+123,not implemented,covered or conditional,requires multiple predeclared holdout regimes
+124,not implemented,covered or conditional,requires session/subject/time metadata and stratified evaluation
+125,not implemented,covered or conditional,requires device/session labels and independent probe evaluation
+126,not implemented,covered or conditional,requires label-permutation experiment artifact
+127,r3_ablation,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+128,branch_ablation / ablation.csv,covered or conditional,existing ablation outputs where configured; expanded feature-family chart not separate
+129,not implemented,covered or conditional,requires processing-component ablation runs
+130,not implemented,covered or conditional,requires identical-split multi-rate retraining
+131,not implemented,covered or conditional,requires the eight controlled SSL variants
+132,r3_model_leaderboard,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+133,not implemented,covered or conditional,TabPFN is not part of this run/model set
+134,not implemented,covered or conditional,requires separately tagged real-corpus and development runs
+135,not implemented,covered or conditional,requires controlled noise perturbation experiment
+136,shot_performance,covered or conditional,existing label-efficiency curve where multi-shot evaluations exist
+137,r3_fewshot_episode_distribution,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+138,not implemented,covered or conditional,requires matched random/supervised/SSL representation benchmarks
+139,not implemented,covered or conditional,requires unlabeled-pool fraction sweep
+140,not implemented,covered or conditional,pseudo-labeling is not run by this pipeline
+141,not implemented,covered or conditional,pseudo-label threshold sweep not run
+142,not implemented,covered or conditional,augmentation consistency artifacts not emitted
+143,not implemented,covered or conditional,iterative self-training not run
+144,quad_open_set_flags.csv,covered or conditional,MSP diagnostic only; no unknown-class prototype validation
+145,not implemented,covered or conditional,requires held-out unknown classes
+146,r3_feature_importance,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+147,not implemented,covered or conditional,requires per-fold aligned feature importance artifacts
+148,r3_shap_global,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+149,r3_shap_beeswarm,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+150,r3_shap_dependence,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+151,r3_temporal_attribution,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+152,conditional / not emitted,covered or conditional,requires Grad-CAM-compatible convolutional attribution arrays
+153,conditional / not emitted,covered or conditional,requires saved attention maps
+154,not implemented,covered or conditional,requires attribution arrays aligned to correctness/confidence strata
+155,r3_attribution_stability,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+156,not implemented,covered or conditional,VAE reconstruction not part of this pipeline
+157,not implemented,covered or conditional,VAE reconstruction errors not available
+158,not implemented,covered or conditional,VAE latents not available
+159,not implemented,covered or conditional,requires calibrated instrument transfer function
+160,not implemented,covered or conditional,requires validated equilibrium coordinate and temperature
+161,not implemented,covered or conditional,requires two validated physical coordinates
+162,not implemented,covered or conditional,requires instrument geometry/material/solver configuration
+163,not implemented,covered or conditional,requires independent structure/calibration metadata
+164,r3_scaling_curve,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+165,not implemented,covered or conditional,requires causal streaming instrumentation/telemetry
+166,r3_lineage_diagram,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.
+167,docs/QUAD_ARCHITECTURE.md,covered or conditional,architecture documentation exists; generated layer artwork is not emitted
+168,r3_kpi_dashboard,registered in round-3 registry,Runtime status/prerequisite is recorded in viz_registry_index.csv.

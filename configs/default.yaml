@@ -1,0 +1,49 @@
+# trapsig default configuration
+#
+# This file encodes the parameters stated in the project brief. Values marked
+# TODO are NOT known yet and must be set from the data audit, not guessed.
+# `trapsig dry-run --config configs/default.yaml` is expected to report ERRORs
+# until the dataset location and labelling protocol are provided.
+
+run:
+  name: trapping_v1
+  seed: 42
+
+data:
+  source_dir: null                 # TODO: path to raw recordings (not yet provided)
+  file_glob: "*.csv"               # TODO: set after format audit (.csv/.txt/.npy supported)
+  label_level: unknown             # TODO: file | event   (preflight P07 blocks "unknown")
+  label_from: none                 # TODO: metadata | folder
+  metadata_csv: null               # TODO: columns file,class,replicate_id,session_id
+  allow_file_level_fallback: false # true only if replicate/session IDs cannot be obtained
+  expected_duration_s: 20.0        # from brief
+  duration_tolerance_s: 0.01
+
+sampling:
+  original_hz: 1000000             # from brief; assumption A3 (verify in header)
+  target_rates_hz: [50000, 10000, 1000, 100, 10, 2]
+
+filters:
+  mode: none                       # none | lpf | gaussian | lpf+gaussian (exactly one)
+  lpf_cutoff_hz: null              # TODO: chosen on validation data only
+  lpf_order: 4
+  gaussian_sigma_s: null           # TODO: standard deviation in seconds
+  gaussian_truncate: 4.0
+  notch_hz: [50]                   # assumption A4: nominal 50 Hz mains (India); verify
+  notch_q: 30.0
+
+events:
+  baseline_window_s: 1.0           # TODO: set from event-duration distribution
+  threshold_sigma: 5.0             # TODO: justify after noise audit
+  exit_sigma: 3.0
+  min_duration_s: 0.001            # TODO: set from noise and sampling rate
+  min_separation_s: 0.001
+  pre_event_window_s: 0.1
+
+splitting:
+  n_splits: 5
+  n_repeats: 5
+  min_groups_per_class: 5          # heuristic; see docs/METHODS.md
+
+output:
+  runs_dir: runs
