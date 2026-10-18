@@ -1,0 +1,148 @@
+# Demonstration of the FOUR-BRANCH architecture (quad) on the synthetic .dat demo.
+# Additive by design: the same pipeline as configs/demo_custom_dat.yaml, with quad.enabled true
+# and deliberately tiny budgets so the whole run finishes in minutes on 2 CPUs.
+#
+#   trapsig run --config configs/demo_quad.yaml
+#
+# Results on synthetic data are illustrative of the plumbing, NOT of real performance.
+# Every key is documented in configs/custom_dat.yaml; the design contract is in
+# docs/QUAD_ARCHITECTURE.md.
+
+run:
+  name: quad_demo
+  seed: 42
+
+data:
+  source_dir: data/CUSTOM_demo
+  file_glob: "*.dat"
+  label_level: file
+  label_from: folder
+  metadata_csv: null
+  allow_file_level_fallback: true
+  expected_duration_s: 0.5
+  duration_tolerance_s: 0.001
+  dat:
+    encoding: binary
+    dtype: float32
+    byteorder: little
+    header_bytes: 0
+    n_columns: 1
+    column: 0
+    scale: 1.0
+    units: A
+
+sampling:
+  original_hz: 100000
+  target_rates_hz: [10000, 1000, 100, 10]
+  rate_menu_hz: [100000, 50000, 25000, 10000, 1000, 100, 10, 2]
+  allow_off_menu_rates: true
+
+filters:
+  mode: lpf
+  lpf_cutoff_hz: 200.0
+  lpf_order: 4
+  notch_hz: [50]
+  notch_q: 30.0
+
+events:
+  baseline_window_s: 0.1
+  threshold_sigma: 5.0
+  exit_sigma: 3.0
+  min_duration_s: 0.001
+  min_separation_s: 0.001
+  pre_event_window_s: 0.02
+
+splitting:
+  n_splits: 2                # 2 folds so each held-out side keeps >= 3 files per class,
+  n_repeats: 1               # the minimum for closed-set few-shot episodes (2 + queries)
+  min_groups_per_class: 3
+
+training:
+  analysis_rate_hz: 10000.0
+  hpo: none
+  report_top_k: 2
+  calibration_bins: 10
+  pr_curves: true
+
+segmentation:
+  window_s: null            # one window per 0.5 s demo file
+  overlap: 0.5
+  normalize: robust
+  detrend: linear
+  pad_mode: reflect
+  max_windows_per_file: 8
+
+quad:
+  enabled: true
+  embed_dim: 8
+  use_temporal: true
+  use_spectral: true
+  use_engineered: true
+  use_selfsup: true
+  branch_ablation: ["temporal"]
+  t_channels: [8]
+  t_dilations: [1]
+  t_kernel: 5
+  t_transformer_layers: 1
+  t_nhead: 2
+  s_nfft: 64
+  s_hop: 32
+  s_channels: [8]
+  pretrain_epochs: 1
+  epochs: 2
+  batch_size: 4
+  warmup_epochs: 1
+  fusion_layers: 1
+  fusion_nhead: 2
+  episodes: 8
+  shots: [1]
+  queries_per_class: 1
+  seed_offset: 4242
+  # round-2 registry / robustness knobs exercised by the demo
+  feature_tiers: [1, 2]
+  feature_families: []
+  feature_select: variance
+  triplet_weight: 0.1
+  lr_schedule: cosine
+  early_stopping_patience: 0
+  open_set_msp_threshold: 0.35
+
+deep:
+  enabled: true
+  model_set: hybrid
+  window_ms: auto
+  window_ms_min: 10.0
+  window_ms_max: 200.0
+  channels: 8
+  n_blocks: 1
+  stem_stride: 2
+  epochs: 3
+  batch_size: 8
+  early_stopping_patience: 3
+  n_permutations: 0
+  hpo_trials: 0
+
+advanced:
+  few_shot: true
+  few_shot_k: [1]
+  few_shot_episodes: 6
+  novelty: true
+  clustering: true
+  clustering_k: [2]
+
+explain:
+  enabled: true
+  shap_background: 4
+  integrated_gradients_steps: 8
+  occlusion_segments: 5
+  n_explained_windows: 2
+
+report:
+  plots: true
+  pdf: true
+  csv: true
+  dpi: 90
+  max_plots_per_class: 1
+
+output:
+  runs_dir: runs

@@ -1,0 +1,110 @@
+# Demonstration of the .dat path on SYNTHETIC data written as class folders.
+# This is NOT your data. It exists so the whole .dat pipeline can be run end-to-end.
+#
+# Every configuration key - its type, all allowed options, the default, an example, and the rules
+# that tie keys together - is documented in configs/custom_dat.yaml. This file keeps only the
+# settings the synthetic demo needs; read that one when you change anything here.
+#
+# One command does everything (check, prepare, train, validate, explain, plot, report):
+#   trapsig run --config configs/demo_custom_dat.yaml            # full run
+#   trapsig run --config configs/demo_custom_dat.yaml --quick    # fast smoke test
+#   trapsig run --config configs/demo_custom_dat.yaml --dry-run  # checks + measured budget only
+# Each of those writes metadata.csv + metadata.json into its own run folder: the split record of
+# that run, because the folds are re-randomised every time.
+#
+# The individual stages, if you want them one at a time:
+#   python -m trapsig.synthetic_cli --out data/CUSTOM_demo --format dat --class-folders \
+#       --duration-s 0.5 --fs-hz 100000
+#   trapsig inspect-dat --file data/CUSTOM_demo/A/SYN_A_R00_F0.dat --rate-hz 100000 --duration-s 0.5
+#   trapsig dry-run --config configs/demo_custom_dat.yaml
+#   trapsig prepare --config configs/demo_custom_dat.yaml
+#   trapsig events  --config configs/demo_custom_dat.yaml --rate-hz 1000
+#
+# allow_file_level_fallback is true here ONLY because the synthetic files carry no replicate
+# IDs. Results are optimistic and must not be read as performance on real data.
+
+run:
+  name: custom_dat_demo
+  seed: 42
+
+data:
+  source_dir: data/CUSTOM_demo
+  file_glob: "*.dat"
+  label_level: file
+  label_from: folder
+  metadata_csv: null
+  allow_file_level_fallback: true
+  expected_duration_s: 0.5
+  duration_tolerance_s: 0.001
+  dat:
+    encoding: binary
+    dtype: float32
+    byteorder: little
+    header_bytes: 0
+    n_columns: 1
+    column: 0
+    scale: 1.0
+    units: A
+
+sampling:
+  original_hz: 100000
+  target_rates_hz: [10000, 1000, 100, 10]
+
+filters:
+  mode: lpf
+  lpf_cutoff_hz: 200.0
+  lpf_order: 4
+  notch_hz: [50]
+  notch_q: 30.0
+
+events:
+  baseline_window_s: 0.1
+  threshold_sigma: 5.0
+  exit_sigma: 3.0
+  min_duration_s: 0.001
+  min_separation_s: 0.001
+  pre_event_window_s: 0.02
+
+splitting:
+  n_splits: 5
+  n_repeats: 3
+  min_groups_per_class: 5
+
+deep:
+  enabled: true
+  model_set: hybrid
+  window_ms: auto
+  window_ms_min: 10.0
+  window_ms_max: 200.0
+  channels: 16
+  n_blocks: 2
+  stem_stride: 2
+  epochs: 10
+  batch_size: 8
+  early_stopping_patience: 4
+  n_permutations: 0
+
+advanced:
+  few_shot: true
+  few_shot_k: [1, 2]
+  few_shot_episodes: 20
+  novelty: true
+  clustering: true
+  clustering_k: [2]
+
+explain:
+  enabled: true
+  shap_background: 8
+  integrated_gradients_steps: 16
+  occlusion_segments: 10
+  n_explained_windows: 4
+
+report:
+  plots: true
+  pdf: true
+  csv: true
+  dpi: 110
+  max_plots_per_class: 1
+
+output:
+  runs_dir: runs

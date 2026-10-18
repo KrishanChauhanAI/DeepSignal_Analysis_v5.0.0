@@ -1,0 +1,51 @@
+# Demonstration configuration for the SYNTHETIC dataset.
+#
+# Generate the data first:
+#   python -m trapsig.synthetic_cli --out data/SYNTHETIC_demo
+# Then:
+#   trapsig dry-run --config configs/demo_synthetic.yaml
+#   trapsig prepare --config configs/demo_synthetic.yaml
+#   trapsig events  --config configs/demo_synthetic.yaml --rate-hz 1000
+#
+# Nothing here describes a real experiment.
+
+run:
+  name: synthetic_demo
+  seed: 42
+
+data:
+  source_dir: data/SYNTHETIC_demo
+  file_glob: "*.csv"
+  label_level: file
+  label_from: metadata
+  metadata_csv: data/SYNTHETIC_demo_metadata.csv
+  allow_file_level_fallback: false
+  expected_duration_s: 0.5
+  duration_tolerance_s: 0.001
+
+sampling:
+  original_hz: 100000
+  target_rates_hz: [10000, 1000, 100, 10]
+
+filters:
+  mode: lpf
+  lpf_cutoff_hz: 200.0
+  lpf_order: 4
+  notch_hz: [50]
+  notch_q: 30.0
+
+events:
+  baseline_window_s: 0.1
+  threshold_sigma: 5.0
+  exit_sigma: 3.0
+  min_duration_s: 0.001
+  min_separation_s: 0.001
+  pre_event_window_s: 0.02
+
+splitting:
+  n_splits: 5
+  n_repeats: 3
+  min_groups_per_class: 5
+
+output:
+  runs_dir: runs
