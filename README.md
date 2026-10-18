@@ -398,4 +398,4 @@ make check      # ruff + mypy + pytest
 
 ## License
 
-Not yet decided. The project owner must choose a license before any external distribution.
+MIT Licence. The project owner must choose a license before any external distribution.
