@@ -1,0 +1,28 @@
+# trapsig — pinned to the environment the shipped runs and tests were executed in.
+# Python 3.13 (tested on 3.13.16). Install with:  pip install -r requirements.txt
+#
+# Core: every stage of `trapsig run` (ingest, prepare, train, evaluate, figures, CSV) works with
+# these alone. The PDF report, the deep encoder and the SHAP attributions degrade gracefully when
+# their optional packages are absent, and say so in the run report instead of failing.
+numpy==2.3.5
+scipy==1.17.1
+scikit-learn==1.6.1
+pandas==2.2.3
+matplotlib==3.10.9
+PyYAML==6.0.3
+joblib==1.5.3
+
+# Optional, but required by specific stages (the run records their absence in
+# environment/environment.json and in summary.json, and refuses only what truly needs them):
+#   reportlab  -> report.pdf            (without it: CSV twins only)
+#   torch      -> deep encoder / Model B (without it: deep.enabled must stay false)
+#   shap       -> SHAP feature attributions (without it: permutation importance is used)
+# Uncomment to install them, or use environment.yml which lists them explicitly:
+# reportlab==5.0.1
+# torch==2.14.1+cpu        # CPU wheel: pip install torch --index-url https://download.pytorch.org/whl/cpu
+# shap==0.53.0
+
+# Development / verification (Phase X):
+# pytest==9.0.3
+# ruff==0.17.0
+# mypy==2.4.0

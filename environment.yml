@@ -1,0 +1,33 @@
+# trapsig environment (Phase XI). Create with:
+#   conda env create -f environment.yml && conda activate trapsig
+# then install the package itself:  pip install -e .
+#
+# Nothing here is upgraded beyond what the shipped runs and the test suite were executed with;
+# the pins mirror requirements.txt and every run's environment/environment.json, so a run produced
+# in this environment can be reproduced from its own recorded snapshot.
+name: trapsig
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.13
+  - numpy=2.3.5
+  - scipy=1.17.1
+  - scikit-learn=1.6.1
+  - pandas=2.2.3
+  - matplotlib=3.10.9
+  - pyyaml=6.0.3
+  - joblib=1.5.3
+  - pip
+  - pip:
+      - -e .
+      # optional stages (PDF, deep encoder, SHAP) - see comments in requirements.txt;
+      # reportlab ships on PyPI only at this version, hence the pip section
+      - reportlab==5.0.1
+      # CPU-only wheel; for CUDA builds replace with the matching torch from pytorch.org
+      - torch==2.14.1+cpu ; sys_platform == 'linux'
+      - shap==0.53.0
+      # verification tooling
+      - pytest==9.0.3
+      - ruff==0.17.0
+      - mypy==2.4.0
