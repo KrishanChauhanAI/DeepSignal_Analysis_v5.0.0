@@ -1,0 +1,21 @@
+{
+  "class_counts": {
+    "InVitro_WT_tau": 56,
+    "InVitro_tau+GSK": 79
+  },
+  "config_fingerprint": "7da5ffdaffc35258976d4a0af199792ece7d2b2cfe3701f764724491f941c176",
+  "grouping_level": "file",
+  "grouping_note": "no replicate or session metadata exists, so each file is its own group; cross-validated estimates are optimistic under session effects",
+  "holdout": "none (no replicate groups exist to hold out)",
+  "n_cv_pool": 135,
+  "n_ignored_by_glob": 146,
+  "n_repeats": 5,
+  "n_source_files": 135,
+  "n_splits": 5,
+  "role_convention": "fold_rN is the fold the file belongs to in repeat N; role_rN=test means the file is the held-out test file when that fold is evaluated, and trains_in_folds_rN lists the folds of repeat N whose training set it belongs to (K-fold: every pool file is tested exactly once per repeat). cnn_inner_val_rN lists the folds of repeat N whose inner validation split (carved from the outer training set at train time, used for early stopping and temperature scaling) this file was drawn into; per-epoch detail is in logs/deep_training_log.jsonl",
+  "run_dir": "runs/train_2026-10-17_16-37-35/training_2026-10-17_16-37-35",
+  "seed": 42,
+  "split_randomisation": "folds are re-randomised on every run from seed + repeat; this file is the authoritative record of THIS run's split and is rewritten into every run directory",
+  "stage": "prepare",
+  "written_at_utc": "2026-10-17T16:37:42+00:00"
+}

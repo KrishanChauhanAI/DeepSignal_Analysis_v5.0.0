@@ -1,0 +1,16 @@
+{
+  "config_fingerprint": "7da5ffdaffc35258976d4a0af199792ece7d2b2cfe3701f764724491f941c176",
+  "holdout": "not created (no replicate or session metadata exists to hold out)",
+  "link_status_counts": {
+    "linked": 135
+  },
+  "n_cv_pool": 135,
+  "n_ignored_non_matching": 146,
+  "n_repeats": 5,
+  "n_source_files": 135,
+  "n_splits": 5,
+  "n_unassigned": 0,
+  "prepared_dir": "runs/train_2026-10-17_16-37-35/training_2026-10-17_16-37-35",
+  "run_dir": "runs/train_2026-10-17_16-37-35",
+  "trapsig_version": "0.1.0"
+}

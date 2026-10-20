@@ -1,0 +1,136 @@
+sample_id,class,group_id,fold_r0,fold_r1,fold_r2,fold_r3,fold_r4
+c4de5f492bc76186,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@14_39_46.dat,3,4,1,4,4
+ece1386140d9feb3,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@14_40_06.dat,4,1,0,3,2
+be509f6ad0d449aa,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@14_40_26.dat,2,2,2,4,3
+125fc18f2674160e,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@14_40_46 - trap.dat,3,3,0,0,2
+d59e9742ecc9dcd8,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@14_41_06 - reduced to 300 mA.dat,3,4,3,1,1
+f5e629363ad49fec,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@14_41_26.dat,4,2,4,1,2
+6f6a249c5fcfa156,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@14_41_46.dat,3,2,1,2,4
+37bf1fee0024ac5c,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@14_42_06.dat,4,4,3,4,1
+f89dc9a4a1f77678,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@14_42_26.dat,0,0,3,3,4
+64045edbcb88d489,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@14_42_46.dat,4,3,2,2,3
+f7b27b055a97fad8,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@14_43_06.dat,2,4,1,1,2
+d118db7ebf1c9329,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@14_43_26.dat,4,0,0,0,3
+4a5ed48019a22fac,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@14_43_46.dat,0,2,3,2,3
+5da7f2eb696bc7f7,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@14_44_06.dat,1,1,2,3,0
+4cadbca1041fb651,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@14_44_26.dat,0,1,4,0,2
+a148c195e8b1e6ae,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@14_44_46.dat,2,3,4,1,4
+86c1d65d9fdf8a48,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@14_45_06.dat,1,4,0,0,0
+95453f8f827e3c52,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@14_45_26.dat,4,0,2,1,0
+7c8c07baabe5f5f2,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@14_45_46.dat,3,0,1,0,2
+bb039e11622e90c1,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@14_46_06.dat,3,3,1,1,4
+43b90a737e82a08b,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@14_46_26.dat,4,2,2,3,0
+1d6b6e80e40d28c3,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@14_46_46.dat,1,3,3,3,4
+7c039fcc86f69ada,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@14_47_06 - released.dat,3,4,2,4,0
+19b9368be4bc9ad7,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@14_47_26 - increased to 340 mA.dat,3,4,2,2,0
+d534f7d53d8aa0de,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@14_47_46 - alignment.dat,0,3,4,3,1
+c7ed30aa9cd5df55,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@14_48_06.dat,3,0,0,2,1
+deeee1d9d11af35b,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@14_48_26.dat,4,1,0,4,3
+bd7edb8f1d801c4f,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@14_48_46.dat,0,4,2,3,0
+cfa45efd22c50a7e,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@14_49_06.dat,0,0,4,1,1
+8db7d85f212684b6,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@15_15_26.dat,2,3,4,2,1
+a96790267e3a3f08,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@15_15_46.dat,2,2,1,4,1
+f2cd85d05ceb436e,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@15_16_06.dat,1,0,4,4,3
+c8786844a4eeafbd,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@15_16_26.dat,0,4,3,0,4
+d1f2c7049723e153,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@15_16_46 - trap.dat,1,3,2,2,1
+2dc012d46be8da0b,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@15_17_06 - Decrease power to 300 mA.dat,2,1,2,0,2
+ba4508f93f6534a0,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@15_17_26.dat,1,2,4,2,3
+be003c20d628cc95,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@15_17_46.dat,1,3,1,3,1
+284d7c9d2d541d9b,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@15_18_06.dat,1,0,0,0,4
+fadd3cc381365099,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@15_18_26.dat,2,4,4,4,2
+4c8170f133e08f95,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@15_18_46.dat,1,2,4,0,3
+4dd3945bf8625186,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@15_19_06.dat,2,1,2,0,1
+318e0c3ed5219a1f,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@15_19_26.dat,4,1,3,2,3
+8062ccda5f385755,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@15_19_46.dat,4,4,0,1,2
+a798a7dfca8ea252,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@15_20_06.dat,3,1,0,1,4
+10796bb2a755220c,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@15_20_26.dat,1,0,4,3,0
+9011e45dd7344db9,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@15_20_46.dat,0,0,1,1,1
+d0338d01486b97c5,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@15_21_06.dat,0,2,1,4,4
+a7f747285bf26c49,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@15_21_26.dat,0,1,1,0,0
+e6256b4258d11179,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@15_21_46.dat,3,3,3,3,4
+dbc9a6ad2220698c,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@15_22_06.dat,0,1,0,2,2
+74ffce0af3371f6b,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@15_22_26.dat,2,0,2,3,0
+115b007440d836c2,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@15_22_46.dat,2,1,3,4,3
+7daa1fc220b718b5,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@15_23_06 - release.dat,0,2,3,0,1
+650506c012c7b0f3,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@15_23_26 - increase to 340 mA.dat,2,2,0,2,0
+ffad8347f71290ca,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@15_23_46 - alignment.dat,1,1,1,1,3
+90809aab820fc12c,InVitro_WT_tau,file:InVitro_WT_tau/Ntau_XL07_A2_2_BTP_SZ_04_01_2025@15_24_06.dat,4,3,3,4,2
+87faede677b3fe14,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK-3B_S29_Structure1.1_BTP_SZ_18_10_2023@13_30_14.dat,1,4,1,2,1
+fd4cddbd17124fc5,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK-3B_S29_Structure1.1_BTP_SZ_18_10_2023@13_30_34.dat,2,3,1,1,0
+178d697a32a19393,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK-3B_S29_Structure1.1_BTP_SZ_18_10_2023@13_30_54 - Trap.dat,2,0,2,4,4
+dd9620ef151d8a2f,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK-3B_S29_Structure1.1_BTP_SZ_18_10_2023@13_31_14.dat,1,3,1,2,3
+3d40db0e5d548154,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK-3B_S29_Structure1.1_BTP_SZ_18_10_2023@13_31_34.dat,3,3,1,3,3
+6b0a8eed68ccb7b4,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK-3B_S29_Structure1.1_BTP_SZ_18_10_2023@13_31_54.dat,2,3,0,0,4
+6ab8205552961ea8,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK-3B_S29_Structure1.1_BTP_SZ_18_10_2023@13_32_14.dat,3,3,1,1,1
+4d40614a0e538666,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK-3B_S29_Structure1.1_BTP_SZ_18_10_2023@13_32_34.dat,2,0,4,0,4
+859a43361deeaf92,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK-3B_S29_Structure1.1_BTP_SZ_18_10_2023@13_32_54.dat,2,2,1,1,0
+c7def898533c1f4a,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK-3B_S29_Structure1.1_BTP_SZ_18_10_2023@13_33_14.dat,4,1,0,2,0
+6306d6dd2f4690e3,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK-3B_S29_Structure1.1_BTP_SZ_18_10_2023@13_33_34.dat,0,4,4,4,2
+2a26fcb0d594cc91,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK-3B_S29_Structure1.1_BTP_SZ_18_10_2023@13_33_54.dat,1,3,0,0,4
+3b67c6bc506091e4,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK-3B_S29_Structure1.1_BTP_SZ_18_10_2023@13_34_14.dat,4,4,4,3,3
+7ab27696d5e95649,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK-3B_S29_Structure1.1_BTP_SZ_18_10_2023@13_34_34.dat,1,4,3,4,2
+fb16e4802c2ded40,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK-3B_S29_Structure1.1_BTP_SZ_18_10_2023@13_34_54.dat,0,0,4,1,0
+b092182dfadee04c,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK-3B_S29_Structure1.1_BTP_SZ_18_10_2023@13_35_14.dat,3,4,3,3,1
+f93aad966b035236,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK-3B_S29_Structure1.1_BTP_SZ_18_10_2023@13_35_34.dat,0,1,3,4,1
+ca5642b1ded13ef2,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK-3B_S29_Structure1.1_BTP_SZ_18_10_2023@13_35_54.dat,3,2,2,0,0
+edc30c0515d69113,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK-3B_S29_Structure1.1_BTP_SZ_18_10_2023@13_36_14.dat,4,1,0,2,0
+22dc8bd6bfed110d,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK-3B_S29_Structure1.1_BTP_SZ_18_10_2023@13_36_34 - Release.dat,4,4,0,1,4
+07854fc16aff75b1,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK-3B_S29_Structure1.1_BTP_SZ_18_10_2023@13_36_54.dat,4,2,3,2,3
+7dbc433649a1dd8c,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK-3B_S29_Structure1.1_BTP_SZ_18_10_2023@13_37_14.dat,1,1,2,3,0
+f47d6001e9a928d1,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_14_06.dat,1,2,0,1,0
+aa3d2eb24d45df63,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_14_26.dat,4,0,0,4,2
+004da412c3ca4785,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_14_46.dat,3,1,3,0,3
+ddf37cd5ade9b1f7,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_15_06.dat,4,2,0,3,3
+b152b4209cd4cfd9,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_15_26 - Trap.dat,1,0,2,0,3
+f0b2f97070295526,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_15_46 - Reduce to 300 mA.dat,0,0,2,3,3
+0adae22d16d1396b,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_16_06 - 2 state fluctuations.dat,0,1,3,4,3
+b5d2fb47e19ee3ae,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_16_26 - 2 state fluctuations.dat,0,3,3,0,2
+0d56bcd9e775d0a2,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_16_46.dat,0,0,3,3,2
+dfd2ab34b41408bf,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_17_06.dat,2,1,3,3,1
+e50dcf1ddee4ae6a,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_17_26.dat,0,0,4,2,0
+03975f09cfaf563a,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_17_46 - 2 state fluctuations.dat,0,3,1,0,4
+58b6e2d3d6ac8385,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_18_06 - 2 state fluctuations.dat,3,4,0,3,3
+bfe4d8534b78e235,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_18_26 - 2 state fluctuations.dat,1,2,0,0,3
+63560c4f9ad4c54c,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_18_46.dat,1,3,1,2,2
+f6ecfdb875035168,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_19_06.dat,3,2,0,0,4
+d1b73cae9a2a1010,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_19_26.dat,1,1,4,2,0
+f87d742d03d57641,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_19_46.dat,2,3,3,4,0
+affbf40e5a12a074,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_20_06.dat,4,1,4,2,3
+a9c3fb9b4da49b02,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_20_26.dat,4,1,1,1,2
+d8db0e55ff717412,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_20_46 - Release.dat,0,1,1,1,4
+86fe969f1255cf49,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_21_06 - Increase to 340 mA.dat,0,3,4,1,0
+0d33a75f24c6eb7f,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_21_26.dat,3,2,2,0,2
+817db29a16aeda68,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_21_46 - Realignment.dat,4,4,2,2,2
+d1bf221d57ff29c5,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_22_06.dat,2,2,1,0,1
+64eb4ee3af8f0be9,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_22_26.dat,4,0,2,3,4
+5410827ca196e961,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_22_46.dat,2,4,4,1,1
+20d283eaba1c987c,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_57_26.dat,2,0,4,2,1
+a9b1525ab0df746d,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_57_46.dat,4,4,3,0,2
+45bb82d501c2d5b5,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_58_06.dat,0,4,1,3,2
+ea278d536736876b,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_58_26.dat,0,4,2,3,2
+754975a09b5cb88f,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_58_46.dat,2,2,0,4,4
+ff265010aa5401fb,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_59_06 - Trap.dat,4,3,3,2,1
+01694380be949c0d,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_59_27 - Decrease to 300 mA.dat,1,2,2,0,2
+a5a2898412947e80,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@16_59_46.dat,0,1,3,3,1
+8f1fa354979d166c,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@17_00_06.dat,3,0,1,1,3
+abf4a19b2df21c2b,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@17_00_26.dat,4,1,1,4,4
+afa3a0ae4d09eecb,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@17_00_46.dat,4,4,0,3,4
+622d3adb7a3c52b4,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@17_01_06.dat,1,2,2,2,0
+f86488de4ca60e3b,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@17_01_26.dat,3,0,3,4,4
+400711ed46f2d460,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@17_01_46.dat,2,3,3,0,1
+85e721a5052c4748,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@17_02_06.dat,4,0,4,3,3
+1625c79c587a7663,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@17_02_26.dat,3,2,4,3,1
+797eb879fb6b2eab,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@17_02_46.dat,2,3,4,4,2
+f562520a9e045ce7,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@17_03_06.dat,3,2,2,4,4
+033385a86341b01b,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@17_03_26.dat,2,4,4,1,1
+2cca632db099251f,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@17_03_46.dat,3,4,0,1,0
+e51cf2d579a5e21b,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@17_04_06.dat,1,1,2,1,2
+6ae2162fffc5704d,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@17_04_26.dat,0,0,4,4,3
+09cdeb7f70de10ec,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@17_04_46.dat,1,4,3,2,3
+6ebcf4bf1bb1f651,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@17_05_06 - Release - possibly partially stuck.dat,2,0,2,1,1
+7f5d8364157fcbc9,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@17_05_27 - Increase to 340 mA.dat,3,2,4,4,0
+e0c7db233b58e626,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@17_05_46 - Realignment.dat,2,3,1,4,4
+564fd959d6897c31,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@17_06_06 - Release.dat,1,2,0,2,4
+3d9d258716332695,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@17_06_26.dat,3,3,1,2,1
+9a1674127e2fee07,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@17_06_46.dat,1,0,0,1,0
+4e94d2deb4c1b613,InVitro_tau+GSK,file:InVitro_tau+GSK/GSK3Btau_XL07_A2_2_BTP_SZ_04_01_2025@17_07_06.dat,3,1,2,4,2
